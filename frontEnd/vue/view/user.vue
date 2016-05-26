@@ -3,25 +3,25 @@
 		<h1 class="page-header">设备统计图</h1>
 		<div class="row placeholders">
 			<div class="col-xs-6 col-sm-6">
-								<div class="flex1">
-									<div class="form-group">
-										<div class='input-group date' id='loginDate'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-								</div>
-								<div id="loginData" class="flex3" style="height:300px"></div>
+				<div class="flex1">
+					<div class="form-group">
+						<div class='input-group date' id='loginDate'>
+							<input type='text' class="form-control" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div id="loginData" class="flex3" style="height:300px"></div>
 			</div>
 			<div class="col-xs-6 col-sm-6" >
-								<div class="flex1">
-									<div class="form-group">
-										<div id="wordCloud" class="flex3" style="height:100px"></div>	
-										<div id="deviceType" class="flex3" style="height:200px"></div>
-									</div>
-								</div>
+				<div class="flex1">
+					<div class="form-group">
+						<div id="wordCloud" class="flex3" style="height:100px"></div>	
+						<div id="deviceType" class="flex3" style="height:200px"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

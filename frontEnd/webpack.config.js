@@ -3,8 +3,7 @@ var webpack = require('webpack');
 var vue = require('vue-loader');
 module.exports = {
 	entry: {
-		router: './vue/router.js',
-		vendor : './vue/vendor.js',
+		router: './vue/router.js'
 	},
 	output: {
 		path: './dist',
