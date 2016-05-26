@@ -52,7 +52,7 @@ require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
-var host='http://http://localhost:8080/statistic/';
+var host='http://http://localhost:8888/statistic/';
 var dates=[],errorDate=[],errorData=[],bookingData=[],replyData=[],cbaData=[];
 
 var optionerror = {
@@ -153,7 +153,7 @@ var renderChart=function(type,startDate,endDate,chart){
 	var bookingurl=host+'getSucessSaveHistory/'+startDate+'/'+endDate;
 	var failedurl=host+'getFailureInfoCount/'+startDate+'/'+endDate;
 	var url=type===1?bookingurl:failedurl;
-	url = 'http://http://localhost:8080/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
+	url = 'http://http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
 	var result = fetch(url)
 	result.then(function(response) {
 		return response.json();

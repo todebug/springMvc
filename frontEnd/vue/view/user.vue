@@ -37,7 +37,7 @@ require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
-var host='http://http://localhost:8080/statistic/';
+var host='http://http://localhost:8888/statistic/';
 var deviceLoginDate=[],deviceLoginData=[],androidCount=0,iosCount=0,everyDayLoginData=[],deviceTotal=0;
 
 var optionLoginInfo = {
@@ -148,7 +148,7 @@ var fetchData=function(startDate,endDate){
 	});
 	var urlType = 'getSucessSaveHistory/';
 	var url=host+urlType+startDate+'/'+endDate;
-	url = 'http://localhost:8080/statistic/getSucessSaveHistory/2016-05-23/2016-05-27'
+	url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27'
 	var result = fetch(url);
 	result.then(function(response) {
 		return response.json();
