@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>移动货运-统计</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="components/lib/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="components/lib/css/dashboard.css" rel="stylesheet">
+    <link href="components/lib/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+	body
+	{
+		font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";
+	}
+	.long-word{
+    overflow: hidden;
+     word-wrap: normal;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    white-space:nowrap;
+	}
+	</style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">移动货运统计</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row" id="app">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li id="firstPage" onclick="choose(this);" class="active"><a v-link="{ path: '/index' }">首页<span class="sr-only">(current)</span></a></li>
+            <li id="userPage" onclick="choose(this);"  class=""><a v-link="{ path: '/user' }">用户</a></li>
+          </ul>
+        </div>
+        <router-view></router-view>
+        <div>
+    </div>
+
+	<script type="text/template" class="template">
+			 <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-xs-1 col-sm-1">#</th>
+				          <th class="col-xs-3 col-sm-3">请求地址</th>
+                  <th class="col-xs-2 col-sm-2">参数</th>
+                  <th class="col-xs-2 col-sm-2">时间</th>
+                  <th class="col-xs-2 col-sm-2">用户名/设备码</th>
+                  <th class="col-xs-2 col-sm-2">错误信息</th>
+                </tr>
+              </thead>
+              <tbody>
+      			  	<% _.each( rc.pageResultList, function( listItem ){ %>
+      					<tr>
+      					  <td class=" col-xs-1 col-sm-1"><%- listItem.id %></td>
+      					  <td  class=" long-word col-xs-3 col-sm-3 "><%- listItem.url %></td>
+      					  <td  class=" long-word col-xs-2 col-sm-2"><%- listItem.param %></td>
+      					  <td class=" long-word col-xs-2 col-sm-2"><%- listItem.createTime %></td>
+      					  <td class=" long-word col-xs-2 col-sm-2"><%- listItem.tokenNo %></td>
+      					  <td class=" long-word col-xs-2 col-sm-2"><%- listItem.msg %></td>
+      					</tr>
+      				<% }); %>
+              </tbody>
+            </table>
+	</script>
+	<script>
+	function choose(e){
+
+		if(e.id=="firstPage"){
+				if($('#userPage').attr('class')=="active"){
+					$('#userPage').removeClass("active");
+					$('#firstPage').addClass("active");
+				}
+		}else if(e.id=="userPage"){
+			if($('#firstPage').attr('class')=="active"){
+				$('#firstPage').removeClass("active");
+				$('#userPage').addClass("active");
+			}
+		}
+	}
+	</script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dist/router.js"></script>
+    <script src="components\lib\js\moment-with-locales.min.js"></script>components\lib\tools
+	<script>
+	</script>
+  </body>
+</html>
