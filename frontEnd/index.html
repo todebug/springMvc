@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>上汽保险-数据统计</title>
-
     <!-- Bootstrap core CSS -->
     <link href="components/lib/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="components/lib/css/dashboard.css" rel="stylesheet">
     <link href="components/lib/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="components/lib/css/index.css" rel="stylesheet">
@@ -19,41 +15,77 @@
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid" style="background-image: url('components/lib/image/top2.jpg');">
+    <div class="container-fluid" style="background-image: url('components/lib/image/top2.jpg');">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="components/lib/image/logo-insaic.png" height="30" width="97"></a>
+            <button class="navbar-toggle collapsed" data-target="#defaultNavbar1" data-toggle="collapse" type="button">
+                <span class="sr-only">
+                    Toggle navigation
+                </span>
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img height="30" src="components/lib/image/logo-insaic.png" width="97"/>
+            </a>
         </div>
-        <div class="collapse navbar-collapse" id="defaultNavbar1" >
+        <div class="collapse navbar-collapse" id="defaultNavbar1">
             <ul class="navbar-right nav navbar-nav">
-                <li><a href="javascript:void(0)"><font size="3"><i class="fa fa-home" aria-hidden="true"></i></font>首页</a></li>
-                <li><a href="javascript:void(0)" onclick="editUserPwd()" plain="true" icon="icon-edit">
-                <i class="fa fa-pencil" aria-hidden="true"></i> 修改密码</a></li>
                 <li>
-                   <a href="javascript:void(0)"><i class="fa fa-television" aria-hidden="true"></i>登出</a>
+                    <a href="javascript:void(0)">
+                        <font size="3">
+                            <i aria-hidden="true" class="fa fa-home">
+                            </i>
+                        </font>
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" icon="icon-edit" onclick="editUserPwd()" plain="true">
+                        <i aria-hidden="true" class="fa fa-pencil">
+                        </i>
+                        修改密码
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <i aria-hidden="true" class="fa fa-television">
+                        </i>
+                        登出
+                    </a>
                 </li>
             </ul>
-          </div>
-      </div>
-    </nav>
-
-
-               <div class="container-fluid">
-      <div class="row" id="app">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li id="firstPage" onclick="choose(this);" class="active"><a v-link="{ path: '/index' }">首页<span class="sr-only">(current)</span></a></li>
-            <li id="userPage" onclick="choose(this);"  class=""><a v-link="{ path: '/user' }">用户</a></li>
-          </ul>
         </div>
-        <router-view></router-view>
-        <div>
     </div>
+</nav>
+<div class="container-fluid">
+    <div class="row" id="app">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active" id="firstPage" onclick="choose(this);">
+                    <a v-link="{ path: '/index' }">
+                        首页
+                        <span class="sr-only">
+                            (current)
+                        </span>
+                    </a>
+                </li>
+                <li class="" id="userPage" onclick="choose(this);">
+                    <a v-link="{ path: '/user' }">
+                        用户
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <router-view>
+        </router-view>
+        <div>
+        </div>
+    </div>
+</div>
  
 
     
