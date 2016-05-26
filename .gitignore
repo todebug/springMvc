@@ -3,4 +3,10 @@ C:/
 C/
 .idea/
 target/
+encoding.xml
+vcs.xml
+workspace.xml
+springMVC.war
+MANIFEST.MF
+.gitignore.swp
 
