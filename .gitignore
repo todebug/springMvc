@@ -13,3 +13,5 @@ MANIFEST.MF
 springMVC.iml
 !.gitignore
 .*
+target/springMVC.war
+
