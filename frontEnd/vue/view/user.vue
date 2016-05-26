@@ -18,7 +18,6 @@
 			<div class="col-xs-6 col-sm-6" >
 				<div class="flex1">
 					<div class="form-group">
-						<div id="wordCloud" class="flex3" style="height:100px"></div>	
 						<div id="deviceType" class="flex3" style="height:200px"></div>
 					</div>
 				</div>
@@ -29,14 +28,11 @@
 <script>
 var echarts = require("echarts");
 var moment=require("moment");
-var $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
-console.log($);
+// var $ = require('jquery');
+// window.jQuery = $;
+// window.$ = $;
+// console.log($);
 var _=require("lodash"),deviceTotal=0;
-require('echarts/lib/chart/funnel');
-require('echarts/lib/chart/pie');
-require('echarts/lib/chart/bar');
 require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
 var today=moment().format('YYYY-MM-DD');

@@ -13,30 +13,30 @@
 					</div>
 				</div>
 			</div>
-	<div id="booking" class="flex3" style="height:300px">
+		<div id="booking" class="flex3" style="height:300px">
 	</div>
-			</div>
-			<div class="col-xs-6 col-sm-6" >
-				<div class="flex1">
-					<div class="form-group">
-						<div class='input-group date' id='errordate'>
-							<input type='text' class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div id="error" class="flex3" style="height:300px">
+	</div>
+	<div class="col-xs-6 col-sm-6" >
+		<div class="flex1">
+			<div class="form-group">
+				<div class='input-group date' id='errordate'>
+					<input type='text' class="form-control" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
 				</div>
 			</div>
 		</div>
-		<h2 class="sub-header">{{msg}}</h2>
-		<div style="width:100%">
-			<table class="table table-striped ">
+		<div id="error" class="flex3" style="height:300px">
+		</div>
+	</div>
+	</div>
+	<h2 class="sub-header">{{msg}}</h2>
+	<div style="width:100%">
+		<table class="table table-striped ">
 
-			</table>
-		</div>
+		</table>
+	</div>
 	</div>
 </template>
 
@@ -44,15 +44,10 @@
 'use strict';
 var echarts = require('echarts');
 var moment=require('moment');
- var $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
+//  var $ = require('jquery');
+// window.jQuery = $;
+// window.$ = $;
 var _=require("lodash");
-///console.log(host123);
-require('echarts/lib/chart/line');
-require('echarts/lib/chart/bar');
-require('echarts/lib/chart/line');
-require('echarts/lib/chart/bar');
 require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
 var today=moment().format('YYYY-MM-DD');
@@ -230,7 +225,7 @@ module.exports= {
 		$('#bookingdate').datetimepicker(options);
 		$('#errordate').datetimepicker(options);
 		$("#bookingdate").on("dp.change", function (e) {
-			var changedate=$('#bookingdate').data();
+			var changedate=$('#bookingdate').data();console.log(changedate);
 			var todays=changedate.date;
 			var weeksbfores=moment(todays).subtract(7, 'days').format('YYYY-MM-DD');
 			renderChart(1,weeksbfores,todays,myChart);
