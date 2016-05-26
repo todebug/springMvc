@@ -153,7 +153,7 @@ var renderChart=function(type,startDate,endDate,chart){
 	var bookingurl=host+'getSucessSaveHistory/'+startDate+'/'+endDate;
 	var failedurl=host+'getFailureInfoCount/'+startDate+'/'+endDate;
 	var url=type===1?bookingurl:failedurl;
-	url = 'http://http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
+	url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
 	var result = fetch(url)
 	result.then(function(response) {
 		return response.json();
