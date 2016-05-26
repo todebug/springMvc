@@ -155,7 +155,7 @@ var fetchData=function(startDate,endDate){
 	url = 'http://10.118.10.138:8070/statistic/getSucessSaveHistory/2016-05-23/2016-05-27'
 	var result = fetch(url);
 	result.then(function(response) {
-		return 0;//response.json();
+		return response.json();
 	}).then(function(j) {
 		renderChart(1,j,barChart);
 		renderChart(2,j,pieChart);
@@ -168,9 +168,9 @@ var renderChart=function(type,j,chart){
 	if(type===1){
 				//deviceLoginDate=j.newDeviceLoginDate;
 				//deviceLoginDate=j.dateTime;
-				deviceLoginDate = ['2016-05-23','2016-05-24','2016-05-25','2016-05-26','2016-05-27'];
-				deviceLoginData=9;//j.newDeviceLoginCount;
-				everyDayLoginData=10;//j.deviceCount;
+				deviceLoginDate = ['2016-05-21','2016-05-22','2016-05-23','2016-05-24','2016-05-25','2016-05-26','2016-05-27'];
+				deviceLoginData=[2,5,6,9,3,5,2];//j.newDeviceLoginCount;
+				everyDayLoginData=[4,5,8,2,6,7,2];//j.deviceCount;
 				optionLoginInfo.xAxis=[{
 					type: 'category',
 					data:  deviceLoginDate
