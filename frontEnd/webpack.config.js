@@ -3,7 +3,8 @@ var webpack = require('webpack');
 var vue = require('vue-loader');
 module.exports = {
 	entry: {
-		router: './vue/router.js'
+		router: './vue/router.js',
+		vendor : './vue/vendor.js',
 	},
 	output: {
 		path: './dist',
@@ -22,10 +23,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.ProvidePlugin({
-			'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
-			$: 'jquery',
-			jQuery: 'jquery',
-			'window.jQuery': 'jquery'
+			'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
 		})
 	]
 }

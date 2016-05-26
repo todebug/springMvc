@@ -44,10 +44,11 @@
 'use strict';
 var echarts = require('echarts');
 var moment=require('moment');
-var $ = require('jquery');
+ var $ = require('jquery');
 window.jQuery = $;
 window.$ = $;
 var _=require("lodash");
+///console.log(host123);
 require('echarts/lib/chart/line');
 require('echarts/lib/chart/bar');
 require('echarts/lib/chart/line');

@@ -141,16 +141,6 @@ var  optionDeviceType = {
 	    ]
 	};
 
-var optionDeviceTotalInfo = {
-	    series: [{
-	       name: '历史登录设备',
-			type: 'wordCloud',
-			size: ['80%', '80%'],
-			textRotation : [0, 0],
-			textPadding: 0,
-	        data: []
-	}]
-};
 var fetchData=function(startDate,endDate){
 	var charList=[barChart,pieChart];
 	_.each(charList,function(chart){
