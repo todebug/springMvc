@@ -11,4 +11,5 @@ MANIFEST.MF
 .gitignore.swp
 3mtnlsgh.gno.txt
 springMVC.iml
-
+!.gitignore
+.*
