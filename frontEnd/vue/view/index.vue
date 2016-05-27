@@ -223,8 +223,8 @@ module.exports= {
 		$('#bookingdate').datetimepicker(options);
 		$('#errordate').datetimepicker(options);
 		$("#bookingdate").on("dp.change", function (e) {
-			var changedate=$('#bookingdate').data();console.log(changedate);
-			var todays=changedate.date;
+			var changedate=$('#bookingdate').data();
+			var todays=changedate.date;alert(todays);
 			var weeksbfores=moment(todays).subtract(7, 'days').format('YYYY-MM-DD');
 			renderChart(1,weeksbfores,todays,myChart);
 		});
