@@ -21,13 +21,8 @@ module.exports = {
             },
             { test: /\.css$/, loader: "style!css" },
             { test: /\.(png|jpg)$/, loader: "url-loader?limit=8192" },
-            { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
             { test: /\.(html|tpl)$/, loader: 'html-loader' },
         ]
-    },
-    babel: {
-        presets: ['es2015'],
-        plugins: ['transform-runtime']
     },
     resolve: {
         extensions: ['', '.js', '.vue']
