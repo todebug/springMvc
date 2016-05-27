@@ -14,4 +14,5 @@ springMVC.iml
 !.gitignore
 .*
 target/springMVC.war
+npm-debug.log
 
