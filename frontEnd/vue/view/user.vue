@@ -1,24 +1,24 @@
 <template>
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<h1 class="page-header">设备统计图</h1>
-		<div class="row placeholders">
-			<div class="col-xs-6 col-sm-6">
-				<div class="flex1">
-					<div class="form-group">
-						<div class='input-group date' id='loginDate'>
-							<input type='text' class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
+	<div>
+		<h1>设备统计图</h1>
+		<div>
+			<div>
+				<div>
+					<div>
+						<div id='loginDate'>
+							<input type='text' />
+							<span>
+								<span></span>
 							</span>
 						</div>
 					</div>
 				</div>
-				<div id="loginData" class="flex3" style="height:300px"></div>
+				<div id="loginData" style="height:300px"></div>
 			</div>
-			<div class="col-xs-6 col-sm-6" >
-				<div class="flex1">
-					<div class="form-group">
-						<div id="deviceType" class="flex3" style="height:200px"></div>
+			<div>
+				<div>
+					<div>
+						<div id="deviceType" style="height:200px"></div>
 					</div>
 				</div>
 			</div>

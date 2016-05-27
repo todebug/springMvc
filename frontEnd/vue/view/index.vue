@@ -1,39 +1,39 @@
 <template>
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<h1 class="page-header">统计图</h1>
-		<div class="row placeholders">
-			<div class="col-xs-6 col-sm-6">
-			<div class="flex1">
-				<div class="form-group">
-					<div class='input-group date' id='bookingdate'>
-						<input type='text' class="form-control" />
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
+	<div>
+		<h1>统计图</h1>
+		<div>
+			<div>
+			<div>
+				<div>
+					<div id='bookingdate'>
+						<input type='text' />
+						<span>
+							<span></span>
 						</span>
 					</div>
 				</div>
 			</div>
-		<div id="booking" class="flex3" style="height:300px">
+		<div id="booking"style="height:300px">
 	</div>
 	</div>
-	<div class="col-xs-6 col-sm-6" >
-		<div class="flex1">
-			<div class="form-group">
-				<div class='input-group date' id='errordate'>
-					<input type='text' class="form-control" />
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
+	<div >
+		<div>
+			<div>
+				<div id='errordate'>
+					<input type='text'/>
+					<span>
+						<span></span>
 					</span>
 				</div>
 			</div>
 		</div>
-		<div id="error" class="flex3" style="height:300px">
+		<div id="error" style="height:300px">
 		</div>
 	</div>
 	</div>
-	<h2 class="sub-header">{{msg}}</h2>
+	<h2>{{msg}}</h2>
 	<div style="width:100%">
-		<table class="table table-striped ">
+		<table>
 
 		</table>
 	</div>
