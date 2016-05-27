@@ -26,6 +26,7 @@
 	</div>
 </template>
 <script>
+'use strict';
 var echarts = require("echarts");
 var moment=require("moment");
 // var $ = require('jquery');

@@ -1,115 +1,147 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>上汽保险-数据统计</title>
-    <!-- Bootstrap core CSS -->
-    <link href="components/lib/css/bootstrap.min.css" rel="stylesheet">
-    <link href="components/lib/css/dashboard.css" rel="stylesheet">
-    <link href="components/lib/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="components/lib/css/index.css" rel="stylesheet">
-  </head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>上汽保险-数据统计</title>
 
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid" style="background-image: url('components/lib/image/top2.jpg');">
-        <div class="navbar-header">
-            <button class="navbar-toggle collapsed" data-target="#defaultNavbar1" data-toggle="collapse" type="button">
-                <span class="sr-only">
-                    Toggle navigation
-                </span>
-                <span class="icon-bar">
-                </span>
-                <span class="icon-bar">
-                </span>
-                <span class="icon-bar">
-                </span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img height="30" src="components/lib/image/logo-insaic.png" width="97"/>
-            </a>
-        </div>
-        <div class="collapse navbar-collapse" id="defaultNavbar1">
-            <ul class="navbar-right nav navbar-nav">
-                <li>
-                    <a href="javascript:void(0)">
-                        <font size="3">
-                            <i aria-hidden="true" class="fa fa-home">
-                            </i>
-                        </font>
-                        首页
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" icon="icon-edit" onclick="editUserPwd()" plain="true">
-                        <i aria-hidden="true" class="fa fa-pencil">
-                        </i>
-                        修改密码
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <i aria-hidden="true" class="fa fa-television">
-                        </i>
-                        登出
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="row" id="app">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active" id="firstPage" onclick="choose(this);">
-                    <a v-link="{ path: '/index' }">
-                        首页
-                        <span class="sr-only">
-                            (current)
-                        </span>
-                    </a>
-                </li>
-                <li class="" id="userPage" onclick="choose(this);">
-                    <a v-link="{ path: '/user' }">
-                        用户
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <router-view>
-        </router-view>
-        <div>
-        </div>
-    </div>
-</div>
- 
-
-    
-
-  
-  <script>
-  function choose(e){
-    if(e.id=="firstPage"){
-        if($('#userPage').attr('class')=="active"){
-          $('#userPage').removeClass("active");
-          $('#firstPage').addClass("active");
-        }
-    }else if(e.id=="userPage"){
-      if($('#firstPage').attr('class')=="active"){
-        $('#firstPage').removeClass("active");
-        $('#userPage').addClass("active");
-      }
+<head>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
     }
-  }
-  </script>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="dist/router.js"></script>
-    <script src="components\lib\js\jquery.min.js"></script>
-  </body>
+    
+    header {
+        height: 60px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: url("components/lib/image/logo-insaic.png") left center no-repeat #41a1db;
+        background-position: 30 10;
+    }
+    
+    aside {
+        background: white;
+        position: fixed;
+        left: 0;
+        width: 200px;
+        bottom: 0;
+        top: 60px;
+        overflow: auto;
+    }
+    
+    .profile-picture {
+        background: white;
+        position: fixed;
+        left: 0;
+        width: 200px;
+        text-align: center;
+        bottom: 0;
+        top: 60px;
+        height: 200px;
+        background: url("components/lib/image/man.jpg") center no-repeat white;
+        background-position: 50 50;
+        background-size: 80px;
+        border: 0;
+        vertical-align: middle;
+    }
+    
+    .profile-bar {
+        display: block;
+        padding: 50px 10px 30px 10px;
+        background: white;
+        position: fixed;
+        left: 0;
+        width: 200px;
+        bottom: 0;
+        top: 200px;
+    }
+    
+    .profile-bar li a {
+        color: #555;
+        padding-left: 25px;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    
+    .active {
+        color: #f1f1f1;
+        background-color: #41a1db;
+    }
+    
+    .profile-bar li a:hover {
+        color: #337ab7;
+        padding-left: 20px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    
+    .profile-bar>li>a:hover,
+    .profile-bar>li>a:focus {
+        text-decoration: none;
+        background-color: #eee;
+    }
+    
+    section {
+        background: #fafafa;
+        position: absolute;
+        bottom: 0;
+        top: 60px;
+        left: 200px;
+        right: 0;
+        overflow: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+    </header>
+    <div id="app">
+        <aside>
+            <div class="profile-picture">
+            </div>
+            <div class="profile-bar">
+                <ul>
+                    <li class="active" id="firstPage" onclick="choose(this);">
+                        <a v-link="{ path: '/index' }">
+                                首页
+                            </a>
+                    </li>
+                    <li id="userPage" onclick="choose(this);">
+                        <a v-link="{ path: '/user' }">
+                                用户
+                            </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <section>
+            <router-view>
+            </router-view>
+        </section>
+    </div>
+    <script>
+    function choose(e) {
+        if (e.id == "firstPage") {
+            if ($('#userPage').attr('class') == "active") {
+                $('#userPage').removeClass("active");
+                $('#firstPage').addClass("active");
+            }
+        } else if (e.id == "userPage") {
+            if ($('#firstPage').attr('class') == "active") {
+                $('#firstPage').removeClass("active");
+                $('#userPage').addClass("active");
+            }
+        }
+    }
+    </script>
+    <script src="dist/router.js">
+    </script>
+    <script src="components\lib\js\jquery.min.js">
+    </script>
+</body>
+
 </html>

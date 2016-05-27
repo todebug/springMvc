@@ -44,9 +44,7 @@
 'use strict';
 var echarts = require('echarts');
 var moment=require('moment');
-//  var $ = require('jquery');
-// window.jQuery = $;
-// window.$ = $;
+
 var _=require("lodash");
 require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');

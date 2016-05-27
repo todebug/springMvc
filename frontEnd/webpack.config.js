@@ -24,7 +24,8 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
 			$: 'jquery',
-			jQuery: 'jquery'
+			jQuery: 'jquery',
+			"window.jQuery": "jquery"
 		})
 	]
 }
