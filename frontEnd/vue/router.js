@@ -3,7 +3,7 @@ var Vue = require('vue')
 var VueRouter = require('vue-router')
 Vue.config.debug = true;
 Vue.use(VueRouter)
-    //var routerMap = require('./routers')
+var routerMap = require('./routers')
 var detail = require('./view/detail.vue')
 var index = require('./view/index.vue')
 var user = require('./view/user.vue')
@@ -26,19 +26,19 @@ var router = new VueRouter()
 // either be an actual component constructor created via
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
-router.map({
-    '/index': {
-        component: index
-    },
-    '/user': {
-        component: user
-    }
-})
+// router.map({
+//     '/index': {
+//         component: index
+//     },
+//     '/user': {
+//         component: user
+//     }
+// })
 
 
 
 //独立出来的路由
-//routerMap.map(router)
+routerMap.router(router)
 
 router.go('/index')
     // Now we can start the app!
