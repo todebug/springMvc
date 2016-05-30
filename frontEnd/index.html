@@ -100,50 +100,9 @@
     <header>
     </header>
     <div id="app">
-        <aside>
-            <div class="profile-picture">
-            </div>
-            <div class="profile-bar">
-                <ul>
-                    <li class="active" id="firstPage" onclick="choose(this);">
-                        <a v-link="{ path: '/index' }">
-                                首页
-                            </a>
-                    </li>
-                    <li id="userPage" onclick="choose(this);">
-                        <a v-link="{ path: '/user' }">
-                                用户
-                            </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
-        <section>
-            <router-view>
-            </router-view>
-        </section>
     </div>
-    <script>
-    function choose(e) {
-        if (e.id == "firstPage") {
-            if ($('#userPage').attr('class') == "active") {
-                $('#userPage').removeClass("active");
-                $('#firstPage').addClass("active");
-            }
-        } else if (e.id == "userPage") {
-            if ($('#firstPage').attr('class') == "active") {
-                $('#firstPage').removeClass("active");
-                $('#userPage').addClass("active");
-            }
-        }
-    }
-    </script>
-    <script src="dist/router.js">
-    </script>
-    <script src="dist/js/moment-with-locales.min.js">
-    </script>
-    <script src="components\lib\js\jquery.min.js">
-    </script>
 </body>
+<script src="dist/router.js">
+</script>
 
 </html>

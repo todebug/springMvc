@@ -44,12 +44,16 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
 	var Vue = __webpack_require__(3)
 	var VueRouter = __webpack_require__(6)
 	Vue.config.debug = true;
 	Vue.use(VueRouter)
-	var index=__webpack_require__(7)
-	var user=__webpack_require__(469)
+	    //var routerMap = require('./routers')
+	
+	var index = __webpack_require__(7)
+	var user = __webpack_require__(469)
+	
 	// Define some components
 	
 	// The router needs a root component to render.
@@ -73,13 +77,19 @@
 	        component: index
 	    },
 	    '/user': {
-	         component: user
-	     }
+	        component: user
+	    }
 	})
+	
+	
+	
+	//独立出来的路由
+	//routerMap.map(router)
+	
 	router.go('/index')
-	// Now we can start the app!
-	// The router will create an instance of App and mount to
-	// the element matching the selector #app.
+	    // Now we can start the app!
+	    // The router will create an instance of App and mount to
+	    // the element matching the selector #app.
 	router.start(App, '#app')
 
 
@@ -23977,20 +23987,13 @@
 	/* WEBPACK VAR INJECTION */(function(fetch, $) {'use strict';
 	var echarts = __webpack_require__(10);
 	var moment = __webpack_require__(362);
-	// var $ = require('jquery');
-	// window.jQuery = $;
-	// window.$ = $;
+	
 	var _ = __webpack_require__(465);
-	///console.log(host123);
-	__webpack_require__(102);
-	__webpack_require__(138);
-	__webpack_require__(102);
-	__webpack_require__(138);
 	__webpack_require__(466);
 	__webpack_require__(467);
 	var today = moment().format('YYYY-MM-DD');
 	var weeksbfore = moment().subtract(7, 'days').format('YYYY-MM-DD');
-	var host = 'http://10.118.10.138:8070/statistic/';
+	var host = 'http://http://localhost:8888/statistic/';
 	var dates = [],
 	    errorDate = [],
 	    errorData = [],
@@ -24091,7 +24094,7 @@
 		var bookingurl = host + 'getSucessSaveHistory/' + startDate + '/' + endDate;
 		var failedurl = host + 'getFailureInfoCount/' + startDate + '/' + endDate;
 		var url = type === 1 ? bookingurl : failedurl;
-		url = 'http://10.118.10.138:8070/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
+		url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
 		var result = fetch(url);
 		result.then(function (response) {
 			return response.json();
@@ -24164,7 +24167,7 @@
 			$('#errordate').datetimepicker(options);
 			$("#bookingdate").on("dp.change", function (e) {
 				var changedate = $('#bookingdate').data();
-				var todays = changedate.date;
+				var todays = changedate.date;alert(todays);
 				var weeksbfores = moment(todays).subtract(7, 'days').format('YYYY-MM-DD');
 				renderChart(1, weeksbfores, todays, myChart);
 			});
@@ -109251,7 +109254,7 @@
 /* 468 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\">\r\n\t\t<h1 class=\"page-header\">统计图</h1>\r\n\t\t<div class=\"row placeholders\">\r\n\t\t\t<div class=\"col-xs-6 col-sm-6\">\r\n\t\t\t<div class=\"flex1\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class='input-group date' id='bookingdate'>\r\n\t\t\t\t\t\t<input type='text' class=\"form-control\" />\r\n\t\t\t\t\t\t<span class=\"input-group-addon\">\r\n\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-calendar\"></span>\r\n\t\t\t\t\t\t</span>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t<div id=\"booking\" class=\"flex3\" style=\"height:300px\">\r\n\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col-xs-6 col-sm-6\" >\r\n\t\t\t\t<div class=\"flex1\">\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<div class='input-group date' id='errordate'>\r\n\t\t\t\t\t\t\t<input type='text' class=\"form-control\" />\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\">\r\n\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-calendar\"></span>\r\n\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"error\" class=\"flex3\" style=\"height:300px\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<h2 class=\"sub-header\">{{msg}}</h2>\r\n\t\t<div style=\"width:100%\">\r\n\t\t\t<table class=\"table table-striped \">\r\n\r\n\t\t\t</table>\r\n\t\t</div>\r\n\t</div>";
+	module.exports = "<div>\r\n\t\t<h1>统计图</h1>\r\n\t\t<div>\r\n\t\t\t<div>\r\n\t\t\t<div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<div id='bookingdate'>\r\n\t\t\t\t\t\t<input type='text' />\r\n\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t<span></span>\r\n\t\t\t\t\t\t</span>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t<div id=\"booking\"style=\"height:300px\">\r\n\t</div>\r\n\t</div>\r\n\t<div >\r\n\t\t<div>\r\n\t\t\t<div>\r\n\t\t\t\t<div id='errordate'>\r\n\t\t\t\t\t<input type='text'/>\r\n\t\t\t\t\t<span>\r\n\t\t\t\t\t\t<span></span>\r\n\t\t\t\t\t</span>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div id=\"error\" style=\"height:300px\">\r\n\t\t</div>\r\n\t</div>\r\n\t</div>\r\n\t<h2>{{msg}}</h2>\r\n\t<div style=\"width:100%\">\r\n\t\t<table>\r\n\r\n\t\t</table>\r\n\t</div>\r\n\t</div>";
 
 /***/ },
 /* 469 */
@@ -109278,8 +109281,7 @@
 /* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(fetch, $) {"use strict";
-	
+	/* WEBPACK VAR INJECTION */(function(fetch, $) {'use strict';
 	var echarts = __webpack_require__(10);
 	var moment = __webpack_require__(362);
 	// var $ = require('jquery');
@@ -109288,14 +109290,11 @@
 	// console.log($);
 	var _ = __webpack_require__(465),
 	    deviceTotal = 0;
-	__webpack_require__(224);
-	__webpack_require__(143);
-	__webpack_require__(138);
 	__webpack_require__(466);
 	__webpack_require__(467);
 	var today = moment().format('YYYY-MM-DD');
 	var weeksbfore = moment().subtract(7, 'days').format('YYYY-MM-DD');
-	var host = 'http://10.118.10.138:8070/statistic/';
+	var host = 'http://http://localhost:8888/statistic/';
 	var deviceLoginDate = [],
 	    deviceLoginData = [],
 	    androidCount = 0,
@@ -109399,10 +109398,10 @@
 		});
 		var urlType = 'getSucessSaveHistory/';
 		var url = host + urlType + startDate + '/' + endDate;
-		url = 'http://10.118.10.138:8070/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
+		url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
 		var result = fetch(url);
 		result.then(function (response) {
-			return 0; //response.json();
+			return response.json();
 		}).then(function (j) {
 			renderChart(1, j, barChart);
 			renderChart(2, j, pieChart);
@@ -109414,9 +109413,9 @@
 		if (type === 1) {
 			//deviceLoginDate=j.newDeviceLoginDate;
 			//deviceLoginDate=j.dateTime;
-			deviceLoginDate = ['2016-05-23', '2016-05-24', '2016-05-25', '2016-05-26', '2016-05-27'];
-			deviceLoginData = 9; //j.newDeviceLoginCount;
-			everyDayLoginData = 10; //j.deviceCount;
+			deviceLoginDate = ['2016-05-21', '2016-05-22', '2016-05-23', '2016-05-24', '2016-05-25', '2016-05-26', '2016-05-27'];
+			deviceLoginData = [2, 5, 6, 9, 3, 5, 2]; //j.newDeviceLoginCount;
+			everyDayLoginData = [4, 5, 8, 2, 6, 7, 2]; //j.deviceCount;
 			optionLoginInfo.xAxis = [{
 				type: 'category',
 				data: deviceLoginDate
@@ -109474,7 +109473,7 @@
 /* 471 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\">\r\n\t\t<h1 class=\"page-header\">设备统计图</h1>\r\n\t\t<div class=\"row placeholders\">\r\n\t\t\t<div class=\"col-xs-6 col-sm-6\">\r\n\t\t\t\t\t\t\t\t<div class=\"flex1\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t<div class='input-group date' id='loginDate'>\r\n\t\t\t\t\t\t\t\t\t\t\t<input type='text' class=\"form-control\" />\r\n\t\t\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-calendar\"></span>\r\n\t\t\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div id=\"loginData\" class=\"flex3\" style=\"height:300px\"></div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col-xs-6 col-sm-6\" >\r\n\t\t\t\t\t\t\t\t<div class=\"flex1\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t<div id=\"wordCloud\" class=\"flex3\" style=\"height:100px\"></div>\t\r\n\t\t\t\t\t\t\t\t\t\t<div id=\"deviceType\" class=\"flex3\" style=\"height:200px\"></div>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>";
+	module.exports = "<div>\r\n\t\t<h1>设备统计图</h1>\r\n\t\t<div>\r\n\t\t\t<div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div id='loginDate'>\r\n\t\t\t\t\t\t\t<input type='text' />\r\n\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t<span></span>\r\n\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"loginData\" style=\"height:300px\"></div>\r\n\t\t\t</div>\r\n\t\t\t<div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div id=\"deviceType\" style=\"height:200px\"></div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>";
 
 /***/ }
 /******/ ]);

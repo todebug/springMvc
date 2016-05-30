@@ -3,9 +3,12 @@ var Vue = require('vue')
 var VueRouter = require('vue-router')
 Vue.config.debug = true;
 Vue.use(VueRouter)
+    //var routerMap = require('./routers')
+var detail = require('./view/detail.vue')
 var index = require('./view/index.vue')
 var user = require('./view/user.vue')
-    // Define some components
+
+// Define some components
 
 // The router needs a root component to render.
 // For demo purposes, we will just use an empty one
@@ -31,8 +34,14 @@ router.map({
         component: user
     }
 })
+
+
+
+//独立出来的路由
+//routerMap.map(router)
+
 router.go('/index')
     // Now we can start the app!
     // The router will create an instance of App and mount to
     // the element matching the selector #app.
-router.start(App, '#app')
+router.start(detail, '#app')
