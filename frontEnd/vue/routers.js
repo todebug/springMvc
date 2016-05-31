@@ -1,3 +1,4 @@
+'use strict';
 var index = require('./view/index.vue')
 var user = require('./view/user.vue')
 
