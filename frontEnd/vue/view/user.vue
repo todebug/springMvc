@@ -1,45 +1,45 @@
 <template>
-	<div>
-		<h1>设备统计图</h1>
-		<div>
-			<div>
-				<div>
-					<div>
-						<div id='loginDate'>
-							<input type='text' />
-							<span>
-								<span></span>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div id="loginData" style="height:300px"></div>
-			</div>
-			<div>
-				<div>
-					<div>
-						<div id="deviceType" style="height:200px"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-sm-9 col-sm-offset-3  col-md-offset-2 main">
+        <h1 class="page-header">设备统计图</h1>
+        <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6">
+                <div class="flex1">
+                    <div class="form-group">
+                        <div class='input-group date' id='loginDate'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="loginData" class="flex3" style="height:300px"></div>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <div class="flex1">
+                    <div class="form-group">
+                        <div id="wordCloud" class="flex3" style="height:100px"></div>
+                        <div id="deviceType" class="flex3" style="height:200px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 'use strict';
 var echarts = require("echarts");
 var moment=require("moment");
-// var $ = require('jquery');
-// window.jQuery = $;
-// window.$ = $;
-// console.log($);
-var _=require("lodash"),deviceTotal=0;
+var _=require("lodash");
 require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
+//require('imports?$=jquery!../../components/lib/js/bootstrap.js');
+//require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
+//require('imports?$=jquery!../../components/lib/bootstrap-datepicker/js/bootstrap-datetimepicker.js');
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 var host='http://http://localhost:8888/statistic/';
-var deviceLoginDate=[],deviceLoginData=[],androidCount=0,iosCount=0,everyDayLoginData=[],deviceTotal=0;
+var deviceLoginDate=[],deviceLoginData=[],androidCount=0,iosCount=0,everyDayLoginData=[],deviceTotal=0,deviceTotal=0;
 
 var optionLoginInfo = {
 	    title : {

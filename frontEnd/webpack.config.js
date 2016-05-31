@@ -18,6 +18,12 @@ module.exports = {
                 // inside *.vue files.
                 js: 'babel?optional[]=runtime&loose=all'
             })
+        }, {
+            test: /\.css$/,
+            loader: "style!css"
+        }, {
+            test: /\.(png|jpg)$/,
+            loader: "url-loader?limit=8192"
         }]
     },
     resolve: {

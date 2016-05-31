@@ -26,6 +26,7 @@
   </template>
 <head>
 <script>
+'use strict';
 module.exports = {
     methods: {
         'choose': function(event) {
@@ -67,7 +68,7 @@ module.exports = {
         bottom: 0;
         top: 60px;
         height: 200px;
-        background: url("../../components/lib/image/man.jpg") center no-repeat white;
+        background: url('../../components/lib/image/man.jpg') center no-repeat white;
         background-position: 50 50;
         background-size: 80px;
         border: 0;

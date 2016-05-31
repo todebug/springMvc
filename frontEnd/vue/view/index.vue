@@ -1,53 +1,59 @@
 <template>
-	<div>
-		<h1>统计图</h1>
-		<div>
-			<div>
-			<div>
-				<div>
-					<div id='bookingdate'>
-						<input type='text' />
-						<span>
-							<span></span>
-						</span>
-					</div>
-				</div>
-			</div>
-		<div id="booking"style="height:300px">
-	</div>
-	</div>
-	<div >
-		<div>
-			<div>
-				<div id='errordate'>
-					<input type='text'/>
-					<span>
-						<span></span>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div id="error" style="height:300px">
-		</div>
-	</div>
-	</div>
-	<h2>{{msg}}</h2>
-	<div style="width:100%">
-		<table>
-
-		</table>
-	</div>
-	</div>
+    <div class="col-sm-9 col-sm-offset-3  col-md-offset-2 main">
+        <h1 class="page-header">统计图</h1>
+        <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6">
+                <div class="flex1">
+                    <div >
+                        <div class='input-group date' id='bookingdate'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="booking" class="flex3" style="height:300px">
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <div class="flex1">
+                    <div class="form-group">
+                        <div class='input-group date' id='errordate'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="error" class="flex3" style="height:300px">
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 'use strict';
-var echarts = require('echarts');
-var moment=require('moment');
-
-var _=require("lodash");
+// require('imports?$=jquery!../../components/lib/css/bootstrap-datetimepicker.min.css');
+// require('imports?$=jquery!../../components/lib/css/bootstrap.min.css');
+// require('../../components/lib/css/bootstrap-datetimepicker.min.css');
+// require('../../components/lib/css/bootstrap.min.css');
 require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
+// <link href="../../components/lib/css/bootstrap.min.css" rel="stylesheet">
+// <link href="../../components/lib/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+// require('imports?$=jquery!../../dist/js/bootstrap.js');
+// require('imports?$=jquery!../../dist/js/bootstrap-datetimepicker.min.js');
+//../../components/lib/bootstrap-datepicker/css/datetimepicker.css
+//require('../../components/lib/bootstrap-datepicker/css/datetimepicker.css');
+//require('imports?$=jquery!../../components/lib/bootstrap-datepicker/js/bootstrap-datetimepicker.js');
+
+var echarts = require('echarts');
+var moment=require('moment');
+var _=require("lodash");
+
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 var host='http://http://localhost:8888/statistic/';
