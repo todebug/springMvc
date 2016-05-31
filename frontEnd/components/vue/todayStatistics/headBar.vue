@@ -9,14 +9,14 @@
 		<a >时间区间</a>
 	</div>
 	<div>
-		<div class='datePicker input-group date' id='datetimepicker1' readonly="readonly">
-	                            <input type='text' class="form-control" />
-	                            <span class="input-group-addon">
+		<div class='datePicker input-group date' id='dateTimePickerBegin' readonly="readonly" >
+	                            <input type='text' class="form-control" id="dateValueBegin" @blur="notify"/>
+	                            <span class="input-group-addon" >
 	                            	<span class="glyphicon glyphicon-calendar"></span>
 	                            </span>
                         	</div>
-                        	<div class='datePicker input-group date' id='datetimepicker2' readonly="readonly">
-	                            <input type='text' class="form-control" />
+                        	<div class='datePicker input-group date' id='dateTimePickerEnd' readonly="readonly">
+	                            <input type='text' class="form-control" id="dateValueEnd" @blur="notify"/>
 	                            <span class="input-group-addon">
 	                            	<span class="glyphicon glyphicon-calendar"></span>
 	                            </span>
@@ -47,9 +47,20 @@ var options={
 };
 module.exports= {
 	ready:function(){
-		$('#datetimepicker1').datetimepicker(options);
-		$('#datetimepicker2').datetimepicker(options);
+			$('#dateTimePickerBegin').datetimepicker(options);
+			$('#dateTimePickerEnd').datetimepicker(options);
+		},
+	methods: {
+		notify: function() {
+			if ($('#dateValueBegin').val()!=='') {
+			        this.$dispatch('head-bar-date-begin', $('#dateValueBegin').val());
+			 }
+		            if ($('#dateValueEnd').val()!=='') {
+		           	        this.$dispatch('head-bar-date-end', $('#dateValueEnd').val());
+		            }
+		}
 	}
+	
 }
 </script>
 
