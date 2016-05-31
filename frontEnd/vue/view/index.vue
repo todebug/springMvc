@@ -36,24 +36,11 @@
 
 <script>
 'use strict';
-// require('imports?$=jquery!../../components/lib/css/bootstrap-datetimepicker.min.css');
-// require('imports?$=jquery!../../components/lib/css/bootstrap.min.css');
-// require('../../components/lib/css/bootstrap-datetimepicker.min.css');
-// require('../../components/lib/css/bootstrap.min.css');
-require('imports?$=jquery!../../components/lib/js/bootstrap.js');
+require('imports?$=jquery!../../components/lib/js/bootstrap.min.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
-// <link href="../../components/lib/css/bootstrap.min.css" rel="stylesheet">
-// <link href="../../components/lib/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-// require('imports?$=jquery!../../dist/js/bootstrap.js');
-// require('imports?$=jquery!../../dist/js/bootstrap-datetimepicker.min.js');
-//../../components/lib/bootstrap-datepicker/css/datetimepicker.css
-//require('../../components/lib/bootstrap-datepicker/css/datetimepicker.css');
-//require('imports?$=jquery!../../components/lib/bootstrap-datepicker/js/bootstrap-datetimepicker.js');
-
 var echarts = require('echarts');
 var moment=require('moment');
 var _=require("lodash");
-
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 var host='http://http://localhost:8888/statistic/';

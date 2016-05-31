@@ -31,7 +31,7 @@
 var echarts = require("echarts");
 var moment=require("moment");
 var _=require("lodash");
-require('imports?$=jquery!../../components/lib/js/bootstrap.js');
+require('imports?$=jquery!../../components/lib/js/bootstrap.min.js');
 require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');
 //require('imports?$=jquery!../../components/lib/js/bootstrap.js');
 //require('imports?$=jquery!../../components/lib/js/bootstrap-datetimepicker.min.js');

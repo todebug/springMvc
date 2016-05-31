@@ -1,15 +1,15 @@
 'use strict';
-var index = require('./view/index.vue')
-var user = require('./view/user.vue')
-
 module.exports = {
     router: function(router) {
         router.map({
             'index': {
-                component: index
+                component: require('./view/index.vue')
             },
             '/user': {
-                component: user
+                component: require('./view/user.vue')
+            },
+            '/todayStatistics': {
+                component: require('./view/todayStatistics.vue')
             }
         })
         return router;
