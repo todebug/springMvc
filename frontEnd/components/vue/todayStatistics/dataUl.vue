@@ -2,7 +2,7 @@
 	<div>
 		<div class="pcDiv">
 			<div class="cpicDiv">
-				<span class="spanDiv">太保</span>
+				<div class="cpicSpan"></div>
 				<ul class="divUl">
 					<li>
 						<label>总</label>
@@ -24,7 +24,7 @@
 				</ul>
 			</div>
 			<div class="piccDiv">
-				<span class="spanDiv">人保</span>
+				<div class="piccSpan"></div>
 				<ul class="divUl">
 					<li>
 						<label>总</label>
@@ -46,7 +46,7 @@
 				</ul>
 			</div>
 			<div class="gpicDiv">
-				<span class="spanDiv">国寿财</span>
+				<div class="gpicSpan"></div>
 				<ul class="divUl">
 					<li>
 						<label>总</label>
@@ -111,24 +111,28 @@ module.exports= {
 	min-width: 300px;
 }
 
-.spanDiv {
-	font-weight: bold;
-	font-size: 18px;
+.gpicSpan {
+    	height: 80px;
 	text-align: center;
 	vertical-align: middle; 
-	background: url("../../lib/image/cpic.png")
+	background: url("../../lib/image/gpic.png") center no-repeat #FDFFE8;
+    	background-size: 100px;
 }
 
-.gpicSpan {
-
+.piccSpan {
+    	height: 80px;
+	text-align: center;
+	vertical-align: middle; 
+	background: url("../../lib/image/picc.png") center no-repeat #FDFFE8;
+    	background-size: 100px;
 }
 
-.gpicSpan {
-	
-}
-
-.gpicSpan {
-	
+.cpicSpan {
+    	height: 80px;
+	text-align: center;
+	vertical-align: middle; 
+	background: url("../../lib/image/cpic.png") center no-repeat #FDFFE8;
+    	background-size: 100px;
 }
 
 .cpicDiv {
@@ -167,7 +171,7 @@ module.exports= {
 
 .divUl li {
 	display:inline-block;
-	margin: 10px 10px 0px 10px;
+	margin: 5px 5px 0px 5px;
 }
 
 .divUl li span {
