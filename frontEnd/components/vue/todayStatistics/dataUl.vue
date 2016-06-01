@@ -5,20 +5,20 @@
 				<span class="spanDiv">太保</span>
 				<ul class="divUl">
 					<li>
-						<label>总交易数</label>
+						<label>总</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>总失败数</label>
+						<label>大</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<br>
 					<li>
-						<label>最大时效性</label>
+						<label>小</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>最小时效性</label>
+						<label>平</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 				</ul>
@@ -27,20 +27,20 @@
 				<span class="spanDiv">人保</span>
 				<ul class="divUl">
 					<li>
-						<label>总交易数</label>
+						<label>总</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>总失败数</label>
+						<label>大</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<br>
 					<li>
-						<label>最大时效性</label>
+						<label>小</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>最小时效性</label>
+						<label>平</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 				</ul>
@@ -49,20 +49,20 @@
 				<span class="spanDiv">国寿财</span>
 				<ul class="divUl">
 					<li>
-						<label>总交易数</label>
+						<label>总</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>总失败数</label>
+						<label>大</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<br>
 					<li>
-						<label>最大时效性</label>
+						<label>小</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<li>
-						<label>最小时效性</label>
+						<label>平</label>
 						<span>{{xdy.accessCount}}</span>
 					</li>
 				</ul>
@@ -162,8 +162,16 @@ module.exports= {
 
 
 .divUl li label{
-	font-size: 10px;
-	font-weight: normal;
+	background: #e0ecf2;
+	    color: #3685ad;
+	    border-radius: 50%;
+	    font-style: normal;
+	    line-height: 1pc;
+	    width: 1pc;
+	    display: inline-block;
+	    text-align: center;
+	    margin-right: 4px;
+	    font-size: 9pt;
 }
 
 .targetDiv {
