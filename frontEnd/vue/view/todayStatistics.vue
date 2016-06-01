@@ -21,6 +21,7 @@
 </template>
 
 <script>
+'use strict';
 var dateValueBegin,dateValueEnd;
 var dataList = [];
 var data1 = {

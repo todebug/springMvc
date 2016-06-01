@@ -6,8 +6,8 @@ Vue.use(VueRouter)
 
 // Define some components
 var routerMap = require('./routers')
-var index = require('./view/index.vue')
-var user = require('./view/user.vue')
+// var index = require('./view/index.vue')
+// var user = require('./view/user.vue')
 
 // The router needs a root component to render.
 // For demo purposes, we will just use an empty one
