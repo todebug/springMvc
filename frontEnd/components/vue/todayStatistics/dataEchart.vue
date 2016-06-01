@@ -1,8 +1,8 @@
 <template>
-    <div class="col-sm-9 col-sm-offset-3  col-md-offset-2 main">
-        <div class="row placeholders">
-            <div class="col-xs-6 col-sm-6">
-                <div id="booking" class="flex3" style="height:300px">
+    <div>
+        <div>
+            <div>
+                <div id="booking" style="height:300px">
                 </div>
             </div>
         </div>
