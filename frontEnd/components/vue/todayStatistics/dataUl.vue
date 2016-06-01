@@ -57,6 +57,7 @@
 						<span>{{xdy.accessCount}}</span>
 					</li>
 					<br>
+					
 					<li>
 						<label>小</label>
 						<span>{{xdy.accessCount}}</span>
@@ -115,6 +116,19 @@ module.exports= {
 	font-size: 18px;
 	text-align: center;
 	vertical-align: middle; 
+	background: url("../../lib/image/cpic.png")
+}
+
+.gpicSpan {
+
+}
+
+.gpicSpan {
+	
+}
+
+.gpicSpan {
+	
 }
 
 .cpicDiv {
