@@ -1,13 +1,13 @@
 <template>
-<div>
+<div id="detail">
         <aside class="sideBar">
             <div class="profile-picture">
             </div>
             <div class="profile-bar">
-                <ul id="switchToggle" @click="switchToggle()">
+                <ul id="switchToggle" >
                         <li>
-                                <a>趋势分析</a>
-                                <ul id="analyTrendChild" style="display:none">
+                                <a @click="switchToggle">趋势分析</a>
+                                <ul id="analyTrendChild" class="displayClosed">
                                         <li>
                                             <a v-link="{ path: '/index' }">
                                                     数据分析
@@ -21,7 +21,7 @@
                                         </li>
                                 </ul>
                         <li>
-                                <a>数据统计</a>
+                                <a @click="switchToggle">数据统计</a>
                                 <ul id="analyDataChild">
                                         <li class="active">
                                             <a v-link="{ path: '/todayStatistics' }" @click="choose">
@@ -56,20 +56,21 @@ module.exports = {
             })
         },
         switchToggle: function() {
-            // $('li:has(ul)').click(function (event) {
-            //     if (this == event.target) {
-            //         $(this).css('list-style-image', ($(this).children().is(':hidden') ? 'url(minus.gif)' : 'url(plus.gif)'));
-            //         $(this).children().toggle();
-            //     }
-            // })
-            $(document).on('click','#switchToggle li a', function(){
-                console.log(this);
-                //console.log(this.nextElementSibling.id);
-                console.log(this.nextElementSibling);
-                if(null!==this.nextElementSibling){
-                    $('#'+this.nextElementSibling.id).toggle();
+                 //$('#switchToggle li a').click(function(event){
+                 console.log(this);
+                // console.log(this.$$);
+                 console.log(this.$el);
+                 console.log(this.$options);
+                var nextElementSibling= this.nextElementSibling;
+                $('#analyTrendChild').toggle();
+                if(nextElementSibling!=='null'){
+                    //console.log($('#'+nextElementSibling.id));
+                    //var id = $('#'+nextElementSibling.id).selector;
+                    //console.log(id);
+                    //console.log($(id).val());
+                   //$('#'+nextElementSibling.id).toggle();
                 }
-            })
+            //})
         }
     }
 }
@@ -139,6 +140,7 @@ aside {
     width:180px;
     font-weight: bold;
     text-indent: 30px;
+    cursor: pointer;
 }
 
 .active {
@@ -169,12 +171,13 @@ aside {
 }
 
 .profile-bar ul li ul li a {
-     text-indent: 42px;
+    text-indent: 42px;
     display:block;
     color: #757d90;
     text-decoration: none;
     font-size: 14px;
     width:150px;
+    cursor: pointer;
 
 }
 

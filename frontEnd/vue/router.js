@@ -15,6 +15,7 @@ var routerMap = require('./routers')
 // !! Note that the App is not a Vue instance.
 //var App = Vue.extend({})
 var detail = require('./view/detail.vue')
+var App = Vue.extend(detail) 
 
 // Create a router instance.
 // You can pass in additional options here, but let's
@@ -37,9 +38,9 @@ var router = new VueRouter()
 //独立出来的路由
 routerMap.router(router)
 
-router.go('/index')
+router.go('/todayStatistics')
 
 // Now we can start the app!
 // The router will create an instance of App and mount to
 // the element matching the selector #app.
-router.start(detail, '#app')
+router.start(App, '#app')
