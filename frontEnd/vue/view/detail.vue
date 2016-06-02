@@ -4,22 +4,32 @@
             <div class="profile-picture">
             </div>
             <div class="profile-bar">
-                <ul id="chooseStyle">
-                    <li class="active" >
-                        <a v-link="{ path: '/index' }" @click="choose">
-                                首页
-                            </a>
-                    </li>
-                    <li>
-                        <a v-link="{ path: '/user' }" @click="choose">
-                                用户
-                            </a>
-                    </li>
-                    <li>
-                        <a v-link="{ path: '/todayStatistics' }" @click="choose">
-                                今日统计
-                            </a>
-                    </li>
+                <ul id="switchToggle" @click="switchToggle()">
+                        <li>
+                                <a>趋势分析</a>
+                                <ul id="analyTrendChild" style="display:none">
+                                        <li>
+                                            <a v-link="{ path: '/index' }">
+                                                    数据分析
+                                                </a>
+                                        </li>
+                                        <li>
+                                            <a v-link="{ path: '/user' }">
+                                                    用户分析
+                                                </a>
+                                        </li>
+                                        </li>
+                                </ul>
+                        <li>
+                                <a>数据统计</a>
+                                <ul id="analyDataChild">
+                                        <li class="active">
+                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                                    今日统计
+                                                </a>
+                                        </li>
+                                </ul>
+                        </li>
                 </ul>
             </div>
         </aside>
@@ -33,11 +43,32 @@
 <script>
 'use strict';
 module.exports = {
+    ready: function(){
+        //初始化事件
+        this.switchToggle();
+        this.choose();
+    },
     methods: {
         choose: function() {
-            $('#chooseStyle li').click(function(){
-                $('#chooseStyle li').removeClass('active');
+            $('#switchToggle li ul li').click(function(){
+                $('#switchToggle li ul li').removeClass('active');
                 $(this).addClass('active');
+            })
+        },
+        switchToggle: function() {
+            // $('li:has(ul)').click(function (event) {
+            //     if (this == event.target) {
+            //         $(this).css('list-style-image', ($(this).children().is(':hidden') ? 'url(minus.gif)' : 'url(plus.gif)'));
+            //         $(this).children().toggle();
+            //     }
+            // })
+            $(document).on('click','#switchToggle li a', function(){
+                console.log(this);
+                //console.log(this.nextElementSibling.id);
+                console.log(this.nextElementSibling);
+                if(null!==this.nextElementSibling){
+                    $('#'+this.nextElementSibling.id).toggle();
+                }
             })
         }
     }
@@ -81,33 +112,33 @@ aside {
 .profile-bar {
     display: block;
     padding: 50px 10px 30px 10px;
-    background: white;
+    margin-left: 15px;
     position: fixed;
     left: 0;
     width: 180px;
     bottom: 0;
     top: 200px;
-    margin-left: 6px;
+    background: #f8fbfa;
+    border-radius: 5px;
 }
 
 .profile-bar li{
     display:block;
     color: #555;
-    padding-left: 25px;
+    padding-left: 5px;
     text-decoration: none;
     font-size: 16px;
-    text-align: -webkit-match-parent;
     width:180px;
 }
 
 .profile-bar li a {
     display:block;
     color: #555;
-    padding-left: 25px;
     text-decoration: none;
     font-size: 18px;
     width:180px;
     font-weight: bold;
+    text-indent: 30px;
 }
 
 .active {
@@ -118,7 +149,6 @@ aside {
 
 .profile-bar li a:hover {
     color: #5f5570;
-    padding-left: 20px;
     font-weight: bold;
     text-decoration: none;
 }
@@ -127,6 +157,25 @@ aside {
 .profile-bar>li>a:focus {
     text-decoration: none;
     background-color: #eee;
+}
+
+.profile-bar ul li ul li {
+    display:block;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+    width:150px;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.profile-bar ul li ul li a {
+     text-indent: 42px;
+    display:block;
+    color: #757d90;
+    text-decoration: none;
+    font-size: 14px;
+    width:150px;
+
 }
 
 section {
@@ -147,4 +196,13 @@ section {
     border-radius: 5px;
     background: #faf8f8;
 }
+
+.displayOpen {
+    display: block;
+}
+
+.displayClosed {
+    display: none;
+}
+
 </style>

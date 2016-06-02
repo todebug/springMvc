@@ -43,7 +43,7 @@ var options={
         	pickerPosition: "bottom"
 };
 module.exports= {
-	ready:function(){
+	ready: function(){
 			$('#dateTimePickerBegin').datetimepicker(options);
 			$('#dateTimePickerEnd').datetimepicker(options);
 			$('#dateValueBegin').val(today);
