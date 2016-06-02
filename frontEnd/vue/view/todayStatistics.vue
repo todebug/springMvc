@@ -91,10 +91,17 @@ module.exports= {
 <style type="text/css">
 
 .listDiv {
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 5px;
+	height: 26px;
+	border: 1px solid #d6d6d6;
 	background: grey;
+	vertical-align: middle;
 }
 
 .dataList {
+	margin-top: 3px;
 	width: 100%;
 	display:block;
 	text-align: center;

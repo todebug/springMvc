@@ -1,13 +1,8 @@
 <template>
-    <div>
-        <div>
-            <div>
-                <div id="booking" style="height:300px">
+    <div class="dataEchart">
+                <div id="statisticsData" class="statisticsData">
                 </div>
-            </div>
-        </div>
     </div>
-
 </template>
 
 <script>
@@ -92,9 +87,29 @@ var renderChart=function(chart){
 var myChart;
 module.exports= {
 	ready:function(){
-	myChart = echarts.init(document.getElementById('booking'));
+	myChart = echarts.init(document.getElementById('statisticsData'));
 	renderChart(myChart);
   }
 }
 
 </script>
+
+<style type="text/css">
+
+.dataEchart {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
+    	width: 99.3%;
+    	min-width: 1000px;
+}
+
+.statisticsData {
+	width: 95%;
+	height: 400px;
+}
+
+
+</style>

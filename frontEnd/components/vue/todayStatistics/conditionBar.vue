@@ -54,16 +54,27 @@
 <style type="text/css">
 
 .queryBar {
-	padding: 10px 0px 10px 0px;
+	margin: 5px;
+	height: 36px;
 	background: #e2edfb;
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
 	display: block;
 	text-align: center;
 	vertical-align: middle; 
+	font-size: 15px;
+	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
 }
 
 .queryBar ul li {
-	padding: 0px 100px 0px 100px;
+	padding: 6px 100px 0px 100px;
 	display:inline-block;
+}
+
+.queryBar ul li select {
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
+    	background: #f2eeee;
 }
 
 </style>

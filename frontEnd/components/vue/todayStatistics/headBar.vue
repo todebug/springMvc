@@ -1,6 +1,6 @@
 <template>
 <div class="headBar">
-	<div class="durationTarget" id="durationTarget" @click="clickATarget">
+	<div class="durationTarget" id="durationTarget" @click="clickTimeTarget">
 		<a id="time">实时</a>
 		<a class="active" id="today">今天</a>
 		<a id="yesterday">昨天</a>
@@ -19,9 +19,10 @@
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 		</div>
-		&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div class="dataTarget" id="dataTarget" @click="clickDataTarget">
 		<a id="byTime">按时</a>
-		<a id="byDay">按日</a>
+		<a class="active"  id="byDay">按日</a>
 		<a id="byWeek">按周</a>
 		<a id="byMonth">按月</a>
 	</div>
@@ -38,7 +39,8 @@ var today=moment().format('YYYY-MM-DD');
 var options={
 	format: 'yyyy-mm-dd hh:ii',
 	autoclose: true,
-        	todayBtn: true
+        	todayBtn: true,
+        	pickerPosition: "bottom"
 };
 module.exports= {
 	ready:function(){
@@ -47,7 +49,8 @@ module.exports= {
 			$('#dateValueBegin').val(today);
 			$('#dateValueEnd').val(today);
 			//初始化事件
-			this.clickATarget();
+			this.clickTimeTarget();
+			this.clickDataTarget();
 		},
 	methods: {
 		notify: function() {
@@ -59,7 +62,7 @@ module.exports= {
 		           	        this.$dispatch('head-bar-date-end', $('#dateValueEnd').val());
 		            }
 		},
-		clickATarget: function() {
+		clickTimeTarget: function() {
 		            $('#durationTarget a').click(function(){
 		            	       //添加点击样式
 		                    $('#durationTarget a').removeClass('active');
@@ -88,7 +91,14 @@ module.exports= {
 		                    	$('#dateValueEnd').val('');
 		                    }
 		            })
-		 }
+		 },
+		 clickDataTarget: function() {
+		 	$('#dataTarget a').click(function(){
+		            	       //添加点击样式
+		                    $('#dataTarget a').removeClass('active');
+		                    $(this).addClass('active');
+		                })
+		}
 	}
 	
 }
@@ -97,8 +107,11 @@ module.exports= {
 <style type="text/css">
 
 .headBar {
-	padding: 10px 10px 10px 10px;
+	margin: 5px;
+	height: 36px;
 	background: #e2edfb;
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
 }
 
 .displayDiv {
@@ -111,25 +124,60 @@ module.exports= {
 }
 
 .durationTarget {
-	
 	display: inline;
 	min-width: 800px;
 }
 
 .durationTarget a {
+	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
 	display: inline-block;
 	margin: 10px 10px 0px 10px;
 	text-decoration: none;
 	cursor: pointer;
+	font-size: 10px;
 }
 
-.active {
-    color: #f1f1f1;
-    background-color: #41a1db;
+.durationTarget .active {
+    	color: #f1f1f1;
+    	background-color: #41a1db;
+    	border-radius: 5px;
+    	font-weight: bold;
+}
+
+.dataTarget {
+	display: inline;
+	min-width: 400px;
+	height: 50px;
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
+    	margin-left: 180px;
+}
+
+.dataTarget a {
+	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
+	display: inline-block;
+	margin: 10px 10px 0px 10px;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 10px;
+}
+
+.dataTarget .active {
+    	color: #514c4c;
+    	background-color: #faf9f9;
+    	border-radius: 5px;
+    	font-weight: bold;
 }
 
 .datePickerDisplay {
 	display: inline;
+}
+
+.datePicker input {
+	border: 1px solid #d6d6d6;
+    	border-radius: 5px;
+    	text-align: center;
+    	background: #f7f1f1;
 }
 
 
