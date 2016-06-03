@@ -20,10 +20,16 @@ var optionbooking = {
 	legend: {
 		data: ['总笔数', '成功笔数','失败笔数']
 	},
+	grid: {
+	        	left: '3%',
+	        	right: '4%',
+	        	bottom: '3%',
+	        	containLabel: true
+	},
 	toolbox: {
 		show: false,
 		feature: {
-
+			saveAsImage: {}
 		}
 	},
 	xAxis: [{

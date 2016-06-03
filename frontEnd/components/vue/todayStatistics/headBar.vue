@@ -1,6 +1,6 @@
 <template>
-<div class="headBar">
-	<div class="durationTarget" id="durationTarget" @click="clickTimeTarget">
+<div class="headBar" id="headBar">
+	<div class="durationTarget" id="durationTarget" @click="clickTimeValueTarget">
 		<a id="time">实时</a>
 		<a class="active" id="today">今天</a>
 		<a id="yesterday">昨天</a>
@@ -9,18 +9,18 @@
 		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" @blur="notify" readonly="readonly">
+			    <input v-model="dateValueBegin" class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" @blur="notify" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
+			    <input v-model="dateValueEnd" class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 		</div>
 	</div>
-	<div class="dataTarget" id="dataTarget" @click="clickDataTarget">
+	<div class="dataTarget" id="dataTarget" @click="clickTimeTypeTarget">
 		<a id="byTime">按时</a>
 		<a class="active"  id="byDay">按日</a>
 		<a id="byWeek">按周</a>
@@ -42,6 +42,27 @@ var options={
         	todayBtn: true,
         	pickerPosition: "bottom"
 };
+var Vue = require('vue')
+var queryTimeData={
+	dateValueBegin: '',
+            dateValueEnd: '',
+            dateType: 'byDay'
+}
+var vm = new Vue({
+        data: {
+            queryTimeData
+        }
+    });
+vm.$watch(
+	function() {//查询条件均不为空时,则调用子组件传递数据至父组件方法
+		if(queryTimeData.dateValueBegin!==''&&queryTimeData.dateValueEnd!==''){
+			return queryTimeData.dateValueBegin + queryTimeData.dateValueEnd + queryTimeData.dateType;
+		}
+	},
+	function(newVal, oldVal) {
+		 console.log(666666666);
+		// 做点什么
+	});
 module.exports= {
 	ready: function(){
 			$('#dateTimePickerBegin').datetimepicker(options);
@@ -49,20 +70,25 @@ module.exports= {
 			$('#dateValueBegin').val(today);
 			$('#dateValueEnd').val(today);
 			//初始化事件
-			this.clickTimeTarget();
-			this.clickDataTarget();
+			this.clickTimeValueTarget();
+			this.clickTimeTypeTarget();
 		},
 	methods: {
 		notify: function() {
-			//子组件传递数据至父组件
-		            if ($('#dateValueBegin').val()!=='') {
+			//获取开始时间
+		            if ($('#dateValueBegin').val()!=='') {//子组件传递数据至父组件
+		            	vm.queryTimeData.dateValueBegin = $('#dateValueBegin').val();
 			        this.$dispatch('head-bar-date-begin', $('#dateValueBegin').val());
 		            }
-		            if ($('#dateValueEnd').val()!=='') {
+		            //获取结束时间
+		            if ($('#dateValueEnd').val()!=='') {//子组件传递数据至父组件
+		            	vm.queryTimeData.dateValueEnd = $('#dateValueEnd').val();
 		           	        this.$dispatch('head-bar-date-end', $('#dateValueEnd').val());
 		            }
+		            //获取时间轴类型
+		            
 		},
-		clickTimeTarget: function() {
+		clickTimeValueTarget: function() {
 		            $('#durationTarget a').click(function(){
 		            	       //添加点击样式
 		                    $('#durationTarget a').removeClass('active');
@@ -92,11 +118,12 @@ module.exports= {
 		                    }
 		            })
 		 },
-		 clickDataTarget: function() {
+		 clickTimeTypeTarget: function() {
 		 	$('#dataTarget a').click(function(){
-		            	       //添加点击样式
+		           	         //添加点击样式
 		                    $('#dataTarget a').removeClass('active');
 		                    $(this).addClass('active');
+		                    vm.queryTimeData.dateType = $(this).context.id;
 		                })
 		}
 	}
