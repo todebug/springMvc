@@ -112,9 +112,15 @@ var renderChart=function(chart){
 var myChart;
 module.exports= {
 	ready: function(){
-		myChart = echarts.init(document.getElementById('statisticsData'));
+		this.drawEchart();
+  	},
+  	methods: {
+  		drawEchart: function() {
+  			myChart = echarts.init(document.getElementById('statisticsData'));
 		renderChart(myChart);
-  }
+  		}
+
+  	}
 }
 
 </script>
