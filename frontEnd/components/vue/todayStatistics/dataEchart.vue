@@ -5,16 +5,20 @@
     </div>
 </template>
 
-<script>
+<script type="text/javascript">
 'use strict';
 var echarts = require('echarts');
-var dates=[],errorDate=[],errorData=[],bookingData=[],replyData=[],cbaData=[];
+var config = require('../../lib/js/config');
+var queryDates=[],sumData=[],successData=[],failureData=[];
 var optionbooking = {
+	title: {
+        		text: '交易统计'
+    	},
 	tooltip: {
 		trigger: 'axis'
 	},
 	legend: {
-		data: ['订舱提交', '订舱批复','CBA发布']
+		data: ['总笔数', '成功笔数','失败笔数']
 	},
 	toolbox: {
 		show: false,
@@ -24,7 +28,7 @@ var optionbooking = {
 	},
 	xAxis: [{
 		type: 'category',
-		data:  dates
+		data:  queryDates
 	}],
 	yAxis: [{
 		type: 'value',
@@ -33,17 +37,17 @@ var optionbooking = {
 		}
 	}],
 	series: [{
-		name: '订舱提交',
+		name: '总笔数',
 		type:'line',
-		data: bookingData
+		data: sumData
 	}, {
-		name: '订舱批复',
+		name: '成功笔数',
 		type:'line',
-		data: replyData
+		data: successData
 	},{
-		name: 'CBA发布',
+		name: '失败笔数',
 		type:'line',
-		data: cbaData
+		data: failureData
 	}]
 };
 var renderChart=function(chart){
@@ -52,31 +56,52 @@ var renderChart=function(chart){
 			fontSize : 20
 		}
 	});
-	var url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
-	var result = fetch(url)
+	var host ;
+	var a = config.getHost(host);
+
+	var url = host+'statistic/getStatistic';
+	console.log(1111);
+	console.log(host);
+	console.log('http://localhost:8888/statistic/getStatistic');
+	console.log(2222);
+	//'http://localhost:8888/statistic/getStatistic'
+	var result = fetch('http://localhost:8888/statistic/getStatistic',{
+	  method: 'post',
+	  mode: 'cors',
+	   headers: {
+	     'Accept': 'application/json',
+	     'Content-Type': 'application/json'
+	 	},
+	  body: JSON.stringify({
+	    	                'dateType': 'YYYY-MM-HH',
+	 		    'beginTime': '2016-05-23',
+	 		    'endTime': '2016-05-27'
+	  })
+	})
 	result.then(function(response) {
 		return response.json();
 	}).then(function(j) {
-			dates = ['2016-05-21','2016-05-22','2016-05-23','2016-05-24','2016-05-25','2016-05-26','2016-05-27'];//dates=j.flowRecordDate;
-			bookingData=[1,2,3,4,5,6,7];//j.flowRecordCount[0].recordCount;
-			replyData=[2,5,6,9,3,5,2];//j.flowRecordCount[1].recordCount;
-			cbaData=[4,5,8,2,6,7,2];//j.flowRecordCount[2].recordCount;
+		console.log(j);
+			queryDates = ['2016-05-21','2016-05-22','2016-05-23','2016-05-24','2016-05-25','2016-05-26','2016-05-27'];//queryDates=j.flowRecordDate;
+			sumData=[1,2,3,4,5,6,7];//j.flowRecordCount[0].recordCount;
+			successData=[2,5,6,9,3,5,2];//j.flowRecordCount[1].recordCount;
+			failureData=[4,5,8,2,6,7,2];//j.flowRecordCount[2].recordCount;
 			optionbooking.xAxis=[{
 				type: 'category',
-				data:  dates
+				data:  queryDates
 			}];
 			optionbooking.series=[{
-				name: '订舱提交',
+				name: '总笔数',
 				type:'line',
-				data: bookingData
+				data: sumData
 			}, {
-				name: '订舱批复',
+				name: '成功笔数',
 				type:'line',
-				data: replyData
+				data: successData
 			},{
-				name: 'CBA发布',
+				name: '失败笔数',
 				type:'line',
-				data: cbaData
+				data: failureData
 			}];
 			chart.hideLoading();
 			chart.setOption(optionbooking);
@@ -86,9 +111,9 @@ var renderChart=function(chart){
 };
 var myChart;
 module.exports= {
-	ready:function(){
-	myChart = echarts.init(document.getElementById('statisticsData'));
-	renderChart(myChart);
+	ready: function(){
+		myChart = echarts.init(document.getElementById('statisticsData'));
+		renderChart(myChart);
   }
 }
 

@@ -6,10 +6,10 @@
 					<span>
 						<label>保险公司</label>
 						<select>
-							<<option value="全部">全部</option>
-							<<option value="人保">人保</option>
-							<<option value="太保">太保</option>
-							<<option value="国寿财">国寿财</option>
+							<option value="全部">全部</option>
+							<option value="人保">人保</option>
+							<option value="太保">太保</option>
+							<option value="国寿财">国寿财</option>
 						</select>
 					</span>
 				</div>
@@ -19,10 +19,10 @@
 					<span>
 						<label>承保地区</label>
 						<select>
-							<<option value="全部">全部</option>
-							<<option value="人保">人保</option>
-							<<option value="太保">太保</option>
-							<<option value="国寿财">国寿财</option>
+							<option value="全部">全部</option>
+							<option value="人保">人保</option>
+							<option value="太保">太保</option>
+							<option value="国寿财">国寿财</option>
 						</select>
 					</span>
 				</div>
@@ -32,10 +32,10 @@
 					<span>
 						<label>交易类型</label>
 						<select>
-							<<option value="全部">全部</option>
-							<<option value="人保">人保</option>
-							<<option value="太保">太保</option>
-							<<option value="国寿财">国寿财</option>
+							<option value="全部">全部</option>
+							<option value="人保">人保</option>
+							<option value="太保">太保</option>
+							<option value="国寿财">国寿财</option>
 						</select>
 					</span>
 				</div>

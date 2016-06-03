@@ -13,6 +13,12 @@ public class StatisticMo implements Serializable {
 
     private static final long serialVersionUID = -4641203330251711483L;
 
+    private String dateType;
+
+    private String beginTime;
+
+    private String endTime;
+
     private String code;
 
     private String name;
@@ -20,6 +26,30 @@ public class StatisticMo implements Serializable {
     private Date time;
 
     private List<Date> dateTime;
+
+    public String getDateType() {
+        return dateType;
+    }
+
+    public void setDateType(String dateType) {
+        this.dateType = dateType;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public String getCode() {
         return code;

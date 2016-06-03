@@ -6,7 +6,7 @@
             <div class="profile-bar">
                 <ul id="switchToggle" >
                         <li>
-                                <a @click="switchToggle">趋势分析</a>
+                                <a id="analyTrend" @click="switchToggleTrendChild" class="plus">趋势分析</a>
                                 <ul id="analyTrendChild" class="displayClosed">
                                         <li>
                                             <a v-link="{ path: '/index' }">
@@ -21,11 +21,26 @@
                                         </li>
                                 </ul>
                         <li>
-                                <a @click="switchToggle">数据统计</a>
-                                <ul id="analyDataChild">
+                                <a id="analyData" @click="switchToggleDataChild" class="minus">对接平台</a>
+                                <ul id="analyDataChild" class="displayOpen">
                                         <li class="active">
                                             <a v-link="{ path: '/todayStatistics' }" @click="choose">
-                                                    今日统计
+                                                    交易统计
+                                                </a>
+                                        </li>
+                                        <li>
+                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                                    交易时效
+                                                </a>
+                                        </li>
+                                        <li>
+                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                                    错误统计
+                                                </a>
+                                        </li>
+                                        <li>
+                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                                    日志查询
                                                 </a>
                                         </li>
                                 </ul>
@@ -45,7 +60,6 @@
 module.exports = {
     ready: function(){
         //初始化事件
-        this.switchToggle();
         this.choose();
     },
     methods: {
@@ -55,22 +69,25 @@ module.exports = {
                 $(this).addClass('active');
             })
         },
-        switchToggle: function() {
-                 //$('#switchToggle li a').click(function(event){
+        switchToggleTrendChild: function() {
                  console.log(this);
-                // console.log(this.$$);
                  console.log(this.$el);
                  console.log(this.$options);
-                var nextElementSibling= this.nextElementSibling;
                 $('#analyTrendChild').toggle();
-                if(nextElementSibling!=='null'){
-                    //console.log($('#'+nextElementSibling.id));
-                    //var id = $('#'+nextElementSibling.id).selector;
-                    //console.log(id);
-                    //console.log($(id).val());
-                   //$('#'+nextElementSibling.id).toggle();
+                if($('#analyTrend').hasClass('minus')){
+                    $('#analyTrend').removeClass('minus').addClass('plus');
+                }else{
+                    $('#analyTrend').removeClass('plus').addClass('minus');
                 }
-            //})
+                
+        },
+        switchToggleDataChild: function() {
+                 $('#analyDataChild').toggle();
+                  if($('#analyData').hasClass('minus')){
+                    $('#analyData').removeClass('minus').addClass('plus');
+                }else{
+                    $('#analyData').removeClass('plus').addClass('minus');
+                }
         }
     }
 }
@@ -139,7 +156,7 @@ aside {
     font-size: 18px;
     width:180px;
     font-weight: bold;
-    text-indent: 30px;
+    text-indent: 10px;
     cursor: pointer;
 }
 
@@ -171,7 +188,7 @@ aside {
 }
 
 .profile-bar ul li ul li a {
-    text-indent: 42px;
+    text-indent: 30px;
     display:block;
     color: #757d90;
     text-decoration: none;
@@ -206,6 +223,18 @@ section {
 
 .displayClosed {
     display: none;
+}
+
+.plus {  
+        background: url('../../components/lib/image/plus.png') center no-repeat #f8fbfa;
+        background-size: 10px;
+        background-position: 90;
+}
+
+.minus {
+        background: url('../../components/lib/image/minus.png') center no-repeat #f8fbfa;
+        background-size: 10px;
+        background-position: 90;
 }
 
 </style>

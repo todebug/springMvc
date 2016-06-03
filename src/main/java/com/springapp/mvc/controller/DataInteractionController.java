@@ -1,14 +1,14 @@
 package com.springapp.mvc.controller;
 
+import com.springapp.mvc.model.StatisticMo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.springapp.mvc.model.StatisticMo;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author dongyang
@@ -19,6 +19,25 @@ import java.util.*;
 @RequestMapping("/statistic")
 public class DataInteractionController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    // http://localhost:8080/statistic/getStatistic/1000
+    /**
+     * @title
+     * @description
+     * @author dongyang
+     * @Date 2016-05-25
+     * @param statisticMo
+     * @return StatisticMo
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getStatistic",method = RequestMethod.POST)
+    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
+        StatisticMo statistic = new StatisticMo();
+        statistic.setBeginTime("999999");
+        System.out.println(statisticMo);
+        System.out.println("2222");
+        return statistic;
+    }
 
     /**
      * @title  
@@ -39,23 +58,11 @@ public class DataInteractionController {
         return statistic;
     }
 
-    // http://localhost:8080/statistic/getStatistic/1000
-    /**
-     * @title  
-     * @description 
-     * @author dongyang
-     * @Date 2016-05-25
-     * @param statisticDate
-     * @return StatisticMo
-     * @throws Exception
-     */
-    @RequestMapping(value = "/getStatistic/{statisticDate}")
-    public @ResponseBody
-    StatisticMo getCustomerInfo(@PathVariable String statisticDate) throws Exception {
-        StatisticMo statistic = new StatisticMo();
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public void test(){
+        System.out.println("2222");
+        System.out.println("2222");
 
-        System.out.println(statisticDate);
-        return statistic;
     }
 
     @RequestMapping("/getSucessSaveHistory/{beginDate}/{endDate}")

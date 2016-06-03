@@ -35,6 +35,7 @@ var router = new VueRouter()
 //         component: user
 //     }
 // })
+
 //独立出来的路由
 routerMap.router(router)
 
