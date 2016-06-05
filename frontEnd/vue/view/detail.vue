@@ -72,6 +72,7 @@ module.exports = {
         switchToggleTrendChild: function() {
                  console.log(this);
                  console.log(this.$el);
+                 //console.log(this.options.querySelect.('.plus'));
                  console.log(this.$options);
                 $('#analyTrendChild').toggle();
                 if($('#analyTrend').hasClass('minus')){

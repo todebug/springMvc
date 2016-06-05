@@ -6,15 +6,15 @@
 		<a id="yesterday">昨天</a>
 		<a id="last7Days">最近7天</a>
 		<a id="last30Days">最近30天</a>
-		<a id="duration">时间区间</a>
+		<a id="duration">时间区间</a>vaule :{{queryTimeData.dateValueBegin}} vaule
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input v-model="dateValueBegin" class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" @blur="notify" readonly="readonly">
+			    <input v-model="queryTimeData.dateValueBegin" class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" @blur="notify" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input v-model="dateValueEnd" class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
+			    <input v-model="queryTimeData.dateValueEnd" class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -44,8 +44,8 @@ var options={
 };
 var Vue = require('vue')
 var queryTimeData={
-	dateValueBegin: '',
-            dateValueEnd: '',
+	dateValueBegin: today,
+            dateValueEnd: today,
             dateType: 'byDay'
 }
 var vm = new Vue({
@@ -64,11 +64,18 @@ vm.$watch(
 		// 做点什么
 	});
 module.exports= {
+	data: function () {
+	    return { 
+	    	queryTimeData
+	    }
+	},
 	ready: function(){
 			$('#dateTimePickerBegin').datetimepicker(options);
 			$('#dateTimePickerEnd').datetimepicker(options);
-			$('#dateValueBegin').val(today);
-			$('#dateValueEnd').val(today);
+			queryTimeData.dateValueBegin=today;
+			queryTimeData.dateValueEnd=today;
+			//$('#dateValueBegin').val(today);
+			//$('#dateValueEnd').val(today);
 			//初始化事件
 			this.clickTimeValueTarget();
 			this.clickTimeTypeTarget();
@@ -77,12 +84,12 @@ module.exports= {
 		notify: function() {
 			//获取开始时间
 		            if ($('#dateValueBegin').val()!=='') {//子组件传递数据至父组件
-		            	vm.queryTimeData.dateValueBegin = $('#dateValueBegin').val();
+		            	//this.queryTimeData.dateValueBegin = $('#dateValueBegin').val();
 			        this.$dispatch('head-bar-date-begin', $('#dateValueBegin').val());
 		            }
 		            //获取结束时间
 		            if ($('#dateValueEnd').val()!=='') {//子组件传递数据至父组件
-		            	vm.queryTimeData.dateValueEnd = $('#dateValueEnd').val();
+		            	//this.queryTimeData.dateValueEnd = $('#dateValueEnd').val();
 		           	        this.$dispatch('head-bar-date-end', $('#dateValueEnd').val());
 		            }
 		            //获取时间轴类型
@@ -123,7 +130,7 @@ module.exports= {
 		           	         //添加点击样式
 		                    $('#dataTarget a').removeClass('active');
 		                    $(this).addClass('active');
-		                    vm.queryTimeData.dateType = $(this).context.id;
+		                    //this.queryTimeData.dateType = $(this).context.id;
 		                })
 		}
 	}
