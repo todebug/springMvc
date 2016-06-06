@@ -62,16 +62,9 @@ var renderChart=function(chart,queryData){
 			fontSize : 20
 		}
 	});
-	var host ;
-	var a = config.getHost(host);
-
+	var host = config.host;
 	var url = host+'statistic/getStatistic';
-	console.log(1111);
-	console.log(host);
-	console.log('http://localhost:8888/statistic/getStatistic');
-	console.log(2222);
-	//'http://localhost:8888/statistic/getStatistic'
-	var result = fetch('http://localhost:8888/statistic/getStatistic',{
+	var result = fetch(url,{
 	  method: 'post',
 	  mode: 'cors',
 	   headers: {
