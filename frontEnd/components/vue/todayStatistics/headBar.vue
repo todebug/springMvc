@@ -9,12 +9,12 @@
 		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" readonly="readonly">
+			    <input class="span2" size="16" type="text"@blur="getDateTime" placeholder="请选择开始时间" id="dateValueBegin" >
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
+			    <input class="span2" size="16" type="text" @blur="getDateTime"placeholder="请选择结束时间" id="dateValueEnd"  >
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -33,19 +33,19 @@
 'use strict';
 require('imports?$=jquery!../../lib/js/bootstrap.min.js');
 require('imports?$=jquery!../../lib/js/bootstrap-datetimepicker.min.js');
+require('imports?$=jquery!../../lib/js/locales/bootstrap-datetimepicker.zh-CN.js');
+var Vue = require('vue')
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
-
 var options={
+	language: 'zh-CN',
 	format: 'yyyy-mm-dd hh:ii',
 	autoclose: true,
-        	todayBtn: true,
-        	pickerPosition: "bottom"
+        	todayBtn: true
 };
-var Vue = require('vue')
 var queryTimeData={
-	// dateValueBegin: today,
- //            dateValueEnd: today,
+	dateBegin: today,
+	dateEnd: today,
             dateType: 'byDay'
 }
 var vm = new Vue({
@@ -53,23 +53,6 @@ var vm = new Vue({
             queryTimeData
         }
     });
-// vm.$watch(
-// 	function() {//查询条件均不为空时,则调用子组件传递数据至父组件方法
-// 		if(queryTimeData.dateValueBegin!==''&&queryTimeData.dateValueEnd!==''){
-// 			return queryTimeData.dateValueBegin + queryTimeData.dateValueEnd + queryTimeData.dateType;
-// 		}
-// 	},
-// 	function(newVal, oldVal) {
-// 		 // console.log(666666666);
-// 		 // this.$dispatch('head-bar-date-begin', vm.queryTimeData.dateValueBegin);
-// 		 // this.$dispatch('head-bar-date-end', vm.queryTimeData.dateValueEnd);
-// 		 // this.$dispatch('head-bar-date-type', vm.queryTimeData.dateType);
-// 		 // console.log(vm.queryTimeData.dateValueBegin);
-// 		 // console.log(vm.queryTimeData.dateValueEnd);
-// 		 // console.log(vm.queryTimeData.dateType);
-// 		 // console.log(6666699999);
-// 		// 做点什么
-// 	});
 module.exports= {
 	data: function () {
 	    return { 
@@ -77,20 +60,39 @@ module.exports= {
 	    }
 	},
 	ready: function(){
-			$('#dateTimePickerBegin').datetimepicker(options);
-			$('#dateTimePickerEnd').datetimepicker(options);
+			this.datePicker();
 			//初始化事件
 			this.clickTimeValueTarget();
+			this.clickTimeTypeTarget();
 			$('#dateValueBegin').val(today)
 			$('#dateValueEnd').val(today)
-			this.clickTimeTypeTarget();
-		},
+			
+	},
 	methods: {
-		notify: function() {
-			//子组件传递数据至父组件
-			if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
-				this.dispatchData(this);
-			}
+		datePicker: function() {
+			$('#dateTimePickerBegin').datetimepicker(options).on('show', function(ev){
+				//添加点击事件样式
+	                    		$('#durationTarget a').removeClass('active');
+	                    		$('#duration').addClass('active');
+			});
+			// $('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
+			// 	queryTimeData.dateBegin = $('#dateValueBegin').val();
+			// });
+			$('#dateTimePickerEnd').datetimepicker(options).on('show', function(ev){
+				//添加点击事件样式
+	                    		$('#durationTarget a').removeClass('active');
+	                    		$('#duration').addClass('active');
+			});
+			// $('#dateTimePickerEnd').datetimepicker(options).on('hide', function(ev){
+			// 	//queryTimeData.dateEnd = $('#dateValueEnd').val();
+			// 	console.log(ev);
+			// 	this.dispatchData(this);
+			// });
+		},
+		getDateTime: function() {
+			console.log("来吧");
+			this.dispatchData(this);
+			console.log("走了");
 		},
 		clickTimeValueTarget: function() {
 		            $('#durationTarget a').click(function(){
@@ -139,6 +141,11 @@ module.exports= {
 					dateEnd: $('#dateValueEnd').val(),
 					dateType: vm.queryTimeData.dateType
 				}
+				// console.log("来吧");
+				// console.log(queryTimeData.dateBegin);
+				// console.log(queryTimeData.dateEnd);
+				// console.log(queryTimeData.dateType);
+				 console.log(dateData);
 				data.$dispatch('head-bar-date-condition', dateData);
 			}
 		}

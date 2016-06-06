@@ -2,7 +2,7 @@
 	<div id="todayStatistics">
 		<head-Bar></head-Bar>
 		<data-Ul :xdy="xdy"></data-Ul> 
-		<data-Echart :condition="condition"></data-Echart>
+		<data-Echart></data-Echart>
 		<condition-Bar></condition-Bar>
 		<div class="listDiv">
 			<table class="dataList">
@@ -50,6 +50,13 @@ var xdy = {
 		    orderConversionRate: '55%',
 		    dataList: dataList
 		};
+var queryData = {
+	dateBegin: '',
+	dateEnd: '',
+	dateType: '',
+	checkedName: [],
+	selectData: ''
+};
 module.exports= {
 	data: function () {
 	    return  {
@@ -59,16 +66,27 @@ module.exports= {
 	events: {
 	    'head-bar-date-condition': function (dateData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      //console.log(dateData);
-	      this.getDateTime(dateData);
+	      queryData.dateBegin = dateData.dateBegin;
+	      queryData.dateEnd = dateData.dateEnd;
+	      queryData.dateType = dateData.dateType;
+	      this.getDateTime(queryData);
+	    },
+	    'data-Ul-checkedNames': function (checkedNames) {
+	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	      queryData.checkedName = checkedNames;
+	      this.getDateTime(queryData);
+	    },
+	    'condition-bar-selectData': function (selectData) {
+	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	      queryData.selectData = selectData;
+	      this.getDateTime(queryData);
 	    }
 	},
 	methods: {
-		getDateTime: function(dateData){			
-			if(dateData.dateBegin !=='' && dateData.dateEnd!=='' && dateData.dateType!==''){
-				//console.log("xdy-xdy");
-				this.$broadcast('query-condition', dateData);
-				//console.log("xdy-xdy99");
+		getDateTime: function(queryData){			
+			if(queryData.dateBegin !=='' && queryData.dateEnd!=='' && queryData.dateType!==''){
+				this.$broadcast('query-condition', queryData);
+				//console.log(queryData);
 			}
 		}
 	},

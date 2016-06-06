@@ -4,22 +4,9 @@
 			<li>
 				<div>
 					<span>
-						<label>保险公司</label>
-						<select>
-							<option value="全部">全部</option>
-							<option value="人保">人保</option>
-							<option value="太保">太保</option>
-							<option value="国寿财">国寿财</option>
-						</select>
-					</span>
-				</div>
-			</li>
-			<li>
-				<div>
-					<span>
 						<label>承保地区</label>
-						<select>
-							<option value="全部">全部</option>
+						<select @change="insuredSelect">
+							<option value="全部"selected>全部</option>
 							<option value="人保">人保</option>
 							<option value="太保">太保</option>
 							<option value="国寿财">国寿财</option>
@@ -31,8 +18,8 @@
 				<div>
 					<span>
 						<label>交易类型</label>
-						<select>
-							<option value="全部">全部</option>
+						<select @change="itradeSelect">
+							<option value="全部"selected>全部</option>
 							<option value="人保">人保</option>
 							<option value="太保">太保</option>
 							<option value="国寿财">国寿财</option>
@@ -46,9 +33,37 @@
 
 <script>
 'use strict';
-
-
-
+var Vue = require('vue');
+var insuranceSelect,itradeSelect;
+var selectData={
+            insuranceSelect: '全部',
+            itradeSelect: '全部'
+}
+var vm = new Vue({
+        data: {
+            selectData
+        }
+    });
+module.exports= {
+	data: function () {
+		return { 
+		    selectData
+		}
+	},
+	methods: {
+		insuredSelect: function(event) {
+			selectData.insuredSelect = event.target.value;
+			this.dispatchData(this);
+		},
+		itradeSelect: function(event) {
+			selectData.insuredSelect = event.target.value;
+			this.dispatchData(this);
+		},
+		dispatchData: function(data) {
+			data.$dispatch('condition-bar-selectData', selectData);
+		}
+	}
+}
 </script>
 
 <style type="text/css">

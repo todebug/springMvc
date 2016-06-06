@@ -77,38 +77,14 @@
 		<div class="targetDiv">
 			<a @click="showTarget">指标</a>
 			<div id="targetParam" style="display:none">
-				<div class="insTrade">
-				<input type="checkbox" id="insTradeCount" value="保险公司总交易次数" v-model="checkedNames">
-				<label for="insTradeCount">保险公司总交易次数</label>
-				<input type="checkbox" id="insTradeSuccessCount" value="保险公司成功数" v-model="checkedNames">
-				<label for="insTradeSuccessCount">保险公司成功数</label>
-				<input type="checkbox" id="insTradeFailCount" value="保险公司失败数" v-model="checkedNames">
-				<label for="insTradeFailCount">保险公司失败数</label>
-				<input type="checkbox" id="insTradeCountRate" value="保险公司失败数" v-model="checkedNames">
-				<label for="insTradeCountRate">保险公司交易正确率</label>
-				</div>
-				<br>
-				<div class="indTrade">
-				<input type="checkbox" id="indTradeCount" value="承保地区总交易数" v-model="checkedNames">
-				<label for="indTradeCount">承保地区总交易数</label>
-				<input type="checkbox" id="indTradeSuccessCount" value="承保地区成功数" v-model="checkedNames">
-				<label for="indTradeSuccessCount">承保地区成功数</label>
-				<input type="checkbox" id="indTradeFailCount" value="承保地区失败数" v-model="checkedNames">
-				<label for="indTradeFailCount">承保地区失败数</label>	
-				<input type="checkbox" id="indTradeFailCountRate" value="承保地区交易正确率" v-model="checkedNames">	
-				<label for="indTradeCountRate">承保地区交易正确率</label>
-				</div>
-				<br>
-				<div class="tradeType">
-				<input type="checkbox" id="tradeTypeCount" value="交易类型总交易数" v-model="checkedNames">
-				<label for="tradeTypeCount">交易类型总交易数</label>
-				<input type="checkbox" id="tradeTypeSuccessCount" value="交易类型成功数" v-model="checkedNames">
-				<label for="tradeTypeSuccessCount">交易类型成功数</label>
-				<input type="checkbox" id="tradeTypeFailCount" value="交易类型失败数" v-model="checkedNames">
-				<label for="tradeTypeFailCount">交易类型失败数</label>
-				<input type="checkbox" id="tradeTypeCountRate" value="交易类型正确率" v-model="checkedNames">
-				<label for="tradeTypeCountRate">交易类型正确率</label>
-				</div>
+					<input type="radio" @click="targetChecked" id="tradeCount" value="tradeCount" v-model="checkedNames">
+					<label for="tradeCount">总交易次数</label>
+					<input type="radio" @click="targetChecked" id="tradeSuccessCount" value="tradeSuccessCount" v-model="checkedNames">
+					<label for="tradeSuccessCount">成功数</label>
+					<input type="radio" @click="targetChecked" id="tradeFailCount" value="tradeFailCount" v-model="checkedNames">
+					<label for="tradeFailCount">失败数</label>
+					<input type="radio" @click="targetChecked" id="tradeCountRate" value="tradeCountRate" v-model="checkedNames">
+					<label for="tradeCountRate">交易成功率</label>
 				<span>Checked names: {{ checkedNames | json }}</span>
 			</div>
 		</div>
@@ -121,17 +97,21 @@ module.exports= {
 	props:['xdy'],
 	data: function () {
 	    return { 
-	    	checkedNames: []
+	    	checkedNames: ''
 	    }
 	},
 	methods: {
 		showTarget: function() {
 			$('#targetParam').toggle();
+		},
+		targetChecked: function(event) {
+			this.getCheckedNames(this);
+		},
+		getCheckedNames: function(data) {
+			data.$dispatch('data-Ul-checkedNames', this.checkedNames);
 		}
 	}
-	// compiled: function () {
-	// console.log(this.item);
-	// }
+	
 }
 </script>
 
