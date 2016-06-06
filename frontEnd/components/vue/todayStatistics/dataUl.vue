@@ -258,7 +258,8 @@ module.exports= {
 
 .targetDiv {
 	display: block;
-	height: 80px;
+	height: auto;
+	/* height: 80px; */
 	background: #e2edfb;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
