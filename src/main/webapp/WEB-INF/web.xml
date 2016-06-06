@@ -72,11 +72,11 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/pages/404.html</location>
+		<location>/resources/404.html</location>
 	</error-page>
 
 	<welcome-file-list>
-		<welcome-file>pages/index.html</welcome-file>
+		<welcome-file>resources/index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>
