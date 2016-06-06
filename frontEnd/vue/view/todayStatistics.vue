@@ -2,7 +2,7 @@
 	<div id="todayStatistics">
 		<head-Bar></head-Bar>
 		<data-Ul :xdy="xdy"></data-Ul> 
-		<data-Echart></data-Echart>
+		<data-Echart :condition="condition"></data-Echart>
 		<condition-Bar></condition-Bar>
 		<div class="listDiv">
 			<table class="dataList">
@@ -22,7 +22,6 @@
 
 <script>
 'use strict';
-var dateValueBegin,dateValueEnd;
 var dataList = [];
 var data1 = {
 	date: '2016-06-01',
@@ -51,7 +50,6 @@ var xdy = {
 		    orderConversionRate: '55%',
 		    dataList: dataList
 		};
-
 module.exports= {
 	data: function () {
 	    return  {
@@ -59,21 +57,18 @@ module.exports= {
 		}
 	},
 	events: {
-	    'head-bar-date-begin': function (begin) {
+	    'head-bar-date-condition': function (dateData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      dateValueBegin = begin;
-	      this.getDateTime();
-	    },
-	    'head-bar-date-end': function (end) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      dateValueEnd = end;
-	      this.getDateTime();
+	      //console.log(dateData);
+	      this.getDateTime(dateData);
 	    }
 	},
 	methods: {
-		getDateTime: function(){
-			if(dateValueBegin !=='' && dateValueEnd!==''){
-				//TODO
+		getDateTime: function(dateData){			
+			if(dateData.dateBegin !=='' && dateData.dateEnd!=='' && dateData.dateType!==''){
+				//console.log("xdy-xdy");
+				this.$broadcast('query-condition', dateData);
+				//console.log("xdy-xdy99");
 			}
 		}
 	},
@@ -98,6 +93,7 @@ module.exports= {
 	border: 1px solid #d6d6d6;
 	background: grey;
 	vertical-align: middle;
+	min-width: 1000px;
 }
 
 .dataList {
@@ -106,6 +102,7 @@ module.exports= {
 	display:block;
 	text-align: center;
 	vertical-align: middle;
+	min-width: 1000px;
 }
 
 .dataList thead {

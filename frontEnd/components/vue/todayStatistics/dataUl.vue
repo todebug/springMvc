@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="dataUl">
 		<div class="pcDiv">
 			<div class="cpicDiv">
 				<div class="cpicSpan"></div>
@@ -77,10 +77,38 @@
 		<div class="targetDiv">
 			<a @click="showTarget">指标</a>
 			<div id="targetParam" style="display:none">
-				<input type="checkbox" id="tradeTime" value="交易次数" v-model="checkedNames">
-				<label for="tradeTime">交易次数</label>
-				<input type="checkbox" id="duration" value="时长" v-model="checkedNames">
-				<label for="duration">时长</label>
+				<div class="insTrade">
+				<input type="checkbox" id="insTradeCount" value="保险公司总交易次数" v-model="checkedNames">
+				<label for="insTradeCount">保险公司总交易次数</label>
+				<input type="checkbox" id="insTradeSuccessCount" value="保险公司成功数" v-model="checkedNames">
+				<label for="insTradeSuccessCount">保险公司成功数</label>
+				<input type="checkbox" id="insTradeFailCount" value="保险公司失败数" v-model="checkedNames">
+				<label for="insTradeFailCount">保险公司失败数</label>
+				<input type="checkbox" id="insTradeCountRate" value="保险公司失败数" v-model="checkedNames">
+				<label for="insTradeCountRate">保险公司交易正确率</label>
+				</div>
+				<br>
+				<div class="indTrade">
+				<input type="checkbox" id="indTradeCount" value="承保地区总交易数" v-model="checkedNames">
+				<label for="indTradeCount">承保地区总交易数</label>
+				<input type="checkbox" id="indTradeSuccessCount" value="承保地区成功数" v-model="checkedNames">
+				<label for="indTradeSuccessCount">承保地区成功数</label>
+				<input type="checkbox" id="indTradeFailCount" value="承保地区失败数" v-model="checkedNames">
+				<label for="indTradeFailCount">承保地区失败数</label>	
+				<input type="checkbox" id="indTradeFailCountRate" value="承保地区交易正确率" v-model="checkedNames">	
+				<label for="indTradeCountRate">承保地区交易正确率</label>
+				</div>
+				<br>
+				<div class="tradeType">
+				<input type="checkbox" id="tradeTypeCount" value="交易类型总交易数" v-model="checkedNames">
+				<label for="tradeTypeCount">交易类型总交易数</label>
+				<input type="checkbox" id="tradeTypeSuccessCount" value="交易类型成功数" v-model="checkedNames">
+				<label for="tradeTypeSuccessCount">交易类型成功数</label>
+				<input type="checkbox" id="tradeTypeFailCount" value="交易类型失败数" v-model="checkedNames">
+				<label for="tradeTypeFailCount">交易类型失败数</label>
+				<input type="checkbox" id="tradeTypeCountRate" value="交易类型正确率" v-model="checkedNames">
+				<label for="tradeTypeCountRate">交易类型正确率</label>
+				</div>
 				<span>Checked names: {{ checkedNames | json }}</span>
 			</div>
 		</div>
@@ -108,6 +136,10 @@ module.exports= {
 </script>
 
 <style type="text/css">
+
+.dataUl {
+	min-width: 1000px;
+}
 
 .pcDiv {
 	height: 123px;
@@ -137,7 +169,6 @@ module.exports= {
 	vertical-align: middle; 
 	background: url("../../lib/image/picc.png") left no-repeat white;
     	background-size: 100px;
-    	background-position: left;
 }
 
 .cpicSpan {
@@ -154,8 +185,8 @@ module.exports= {
 .cpicDiv {
 	background: white;
 	display: inline-flex;
-	width: 33%;
-	min-width: 330px;
+	width: 32%;
+	min-width: 250px;
 	text-align: center;
 	vertical-align: middle; 
 	border: 1px solid #d6d6d6;
@@ -167,8 +198,8 @@ module.exports= {
 .piccDiv {
 	background: white;
 	display: inline-flex;
-	width: 33%;
-	min-width: 330px;
+	width: 32%;
+	min-width: 250px;
 	text-align: center;
 	vertical-align: middle; 
 	border-right: 1px solid #d6d6d6;
@@ -183,8 +214,8 @@ module.exports= {
 .gpicDiv {
 	background: white;
 	display: inline-flex;
-	width: 32.3%;
-	min-width: 320px;
+	width: 32%;
+	min-width: 250px;
 	text-align: center;
 	vertical-align: middle; 
 	border-right: 1px solid #d6d6d6;
@@ -227,7 +258,7 @@ module.exports= {
 
 .targetDiv {
 	display: block;
-	height: 30px;
+	height: 80px;
 	background: #e2edfb;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
@@ -252,6 +283,22 @@ module.exports= {
 
 .targetDiv div {
 	display: inline;
-	margin-left: 30px;
+	font-size: 10px;
+	min-width: 1000px;
+}
+
+.insTrade {
+	margin-left: 21px;
+	min-width: 500px;
+}
+
+.indTrade {
+	margin-left: 60px;
+	min-width: 500px;
+}
+
+.tradeType {
+	margin-left: 60px;
+	min-width: 500px;
 }
 </style>

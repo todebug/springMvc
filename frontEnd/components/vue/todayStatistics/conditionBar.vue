@@ -63,18 +63,29 @@
 	text-align: center;
 	vertical-align: middle; 
 	font-size: 15px;
+	min-width: 1000px;
 	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
 }
 
+.queryBar ul {
+	min-width: 1000px;
+}
+
 .queryBar ul li {
-	padding: 6px 100px 0px 100px;
+	padding: 6px 50px 0px 50px;
 	display:inline-block;
+	min-width: 100px;
+}
+
+.queryBar ul li label {
+	min-width: 40px;
 }
 
 .queryBar ul li select {
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
     	background: #f2eeee;
+    	min-width: 50px;
 }
 
 </style>

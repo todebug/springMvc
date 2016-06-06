@@ -6,15 +6,15 @@
 		<a id="yesterday">昨天</a>
 		<a id="last7Days">最近7天</a>
 		<a id="last30Days">最近30天</a>
-		<a id="duration">时间区间</a>vaule :{{queryTimeData.dateValueBegin}} vaule
+		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input v-model="queryTimeData.dateValueBegin" class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" @blur="notify" readonly="readonly">
+			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input v-model="queryTimeData.dateValueEnd" class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
+			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" @blur="notify" readonly="readonly">
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -44,8 +44,8 @@ var options={
 };
 var Vue = require('vue')
 var queryTimeData={
-	dateValueBegin: today,
-            dateValueEnd: today,
+	// dateValueBegin: today,
+ //            dateValueEnd: today,
             dateType: 'byDay'
 }
 var vm = new Vue({
@@ -53,16 +53,23 @@ var vm = new Vue({
             queryTimeData
         }
     });
-vm.$watch(
-	function() {//查询条件均不为空时,则调用子组件传递数据至父组件方法
-		if(queryTimeData.dateValueBegin!==''&&queryTimeData.dateValueEnd!==''){
-			return queryTimeData.dateValueBegin + queryTimeData.dateValueEnd + queryTimeData.dateType;
-		}
-	},
-	function(newVal, oldVal) {
-		 console.log(666666666);
-		// 做点什么
-	});
+// vm.$watch(
+// 	function() {//查询条件均不为空时,则调用子组件传递数据至父组件方法
+// 		if(queryTimeData.dateValueBegin!==''&&queryTimeData.dateValueEnd!==''){
+// 			return queryTimeData.dateValueBegin + queryTimeData.dateValueEnd + queryTimeData.dateType;
+// 		}
+// 	},
+// 	function(newVal, oldVal) {
+// 		 // console.log(666666666);
+// 		 // this.$dispatch('head-bar-date-begin', vm.queryTimeData.dateValueBegin);
+// 		 // this.$dispatch('head-bar-date-end', vm.queryTimeData.dateValueEnd);
+// 		 // this.$dispatch('head-bar-date-type', vm.queryTimeData.dateType);
+// 		 // console.log(vm.queryTimeData.dateValueBegin);
+// 		 // console.log(vm.queryTimeData.dateValueEnd);
+// 		 // console.log(vm.queryTimeData.dateType);
+// 		 // console.log(6666699999);
+// 		// 做点什么
+// 	});
 module.exports= {
 	data: function () {
 	    return { 
@@ -72,32 +79,22 @@ module.exports= {
 	ready: function(){
 			$('#dateTimePickerBegin').datetimepicker(options);
 			$('#dateTimePickerEnd').datetimepicker(options);
-			queryTimeData.dateValueBegin=today;
-			queryTimeData.dateValueEnd=today;
-			//$('#dateValueBegin').val(today);
-			//$('#dateValueEnd').val(today);
 			//初始化事件
 			this.clickTimeValueTarget();
+			$('#dateValueBegin').val(today)
+			$('#dateValueEnd').val(today)
 			this.clickTimeTypeTarget();
 		},
 	methods: {
 		notify: function() {
-			//获取开始时间
-		            if ($('#dateValueBegin').val()!=='') {//子组件传递数据至父组件
-		            	//this.queryTimeData.dateValueBegin = $('#dateValueBegin').val();
-			        this.$dispatch('head-bar-date-begin', $('#dateValueBegin').val());
-		            }
-		            //获取结束时间
-		            if ($('#dateValueEnd').val()!=='') {//子组件传递数据至父组件
-		            	//this.queryTimeData.dateValueEnd = $('#dateValueEnd').val();
-		           	        this.$dispatch('head-bar-date-end', $('#dateValueEnd').val());
-		            }
-		            //获取时间轴类型
-		            
+			//子组件传递数据至父组件
+			if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
+				this.dispatchData(this);
+			}
 		},
 		clickTimeValueTarget: function() {
 		            $('#durationTarget a').click(function(){
-		            	       //添加点击样式
+		           	         //添加点击样式
 		                    $('#durationTarget a').removeClass('active');
 		                    $(this).addClass('active');
 		                    //点击时间标签时,datepicker赋值操作
@@ -114,24 +111,36 @@ module.exports= {
 		                    }else if($(this).context.id==='last7Days'){
 		                    	var weeksbefore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 		                    	$('#dateValueBegin').val(weeksbefore);
-		                    	$('#dateValueEnd').val(weeksbefore);
+		                    	$('#dateValueEnd').val(today);
 		                    }else if($(this).context.id==='last30Days'){
 		                    	var monthbefore=moment().subtract(30, 'days').format('YYYY-MM-DD');
 		                    	$('#dateValueBegin').val(monthbefore);
-		                    	$('#dateValueEnd').val(monthbefore);
+		                    	$('#dateValueEnd').val(today);
 		                    }else if($(this).context.id==='duration'){
 		                    	$('#dateValueBegin').val('');
 		                    	$('#dateValueEnd').val('');
 		                    }
-		            })
+		            });
+		            this.dispatchData(this);
 		 },
 		 clickTimeTypeTarget: function() {
 		 	$('#dataTarget a').click(function(){
 		           	         //添加点击样式
 		                    $('#dataTarget a').removeClass('active');
 		                    $(this).addClass('active');
-		                    //this.queryTimeData.dateType = $(this).context.id;
+		                    vm.queryTimeData.dateType = $(this).context.id;
 		                })
+		 	this.dispatchData(this);
+		},
+		dispatchData: function(data) {
+			if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
+				var dateData = {
+					dateBegin: $('#dateValueBegin').val(),
+					dateEnd: $('#dateValueEnd').val(),
+					dateType: vm.queryTimeData.dateType
+				}
+				data.$dispatch('head-bar-date-condition', dateData);
+			}
 		}
 	}
 	
@@ -146,6 +155,7 @@ module.exports= {
 	background: #e2edfb;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
+    	min-width: 1000px;
 }
 
 .displayDiv {

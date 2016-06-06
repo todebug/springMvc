@@ -56,7 +56,7 @@ var optionbooking = {
 		data: failureData
 	}]
 };
-var renderChart=function(chart){
+var renderChart=function(chart,queryData){
 	chart.showLoading({
 		textStyle : {
 			fontSize : 20
@@ -79,9 +79,9 @@ var renderChart=function(chart){
 	     'Content-Type': 'application/json'
 	 	},
 	  body: JSON.stringify({
-	    	                'dateType': 'YYYY-MM-HH',
-	 		    'beginTime': '2016-05-23',
-	 		    'endTime': '2016-05-27'
+	    	                'dateType': queryData.dateType,
+	 		    'beginTime': queryData.dateBegin,
+	 		    'endTime': queryData.dateEnd
 	  })
 	})
 	result.then(function(response) {
@@ -116,17 +116,30 @@ var renderChart=function(chart){
 	});
 };
 var myChart;
+var moment=require('moment');
+var today=moment().format('YYYY-MM-DD');
+var queryTimeData={
+	dateBegin: today,
+            dateEnd: today,
+            dateType: 'byDay'
+}
 module.exports= {
 	ready: function(){
-		this.drawEchart();
+		this.drawEchart(queryTimeData);
   	},
   	methods: {
-  		drawEchart: function() {
+  		drawEchart: function(queryData) {
   			myChart = echarts.init(document.getElementById('statisticsData'));
-		renderChart(myChart);
+			renderChart(myChart,queryData);
   		}
 
-  	}
+  	},
+  	events: {
+	    'query-condition': function (dateData) {
+	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	      this.drawEchart(dateData);
+	    }
+	}
 }
 
 </script>
@@ -146,6 +159,7 @@ module.exports= {
 .statisticsData {
 	width: 100%;
 	height: 400px;
+	min-width: 1000px;
 }
 
 

@@ -31,9 +31,13 @@
         </property>
     </bean>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="prefix" value="/webapp/pages/"/>-->
+        <!--<property name="suffix" value=".html"/>-->
+    <!--</bean>-->
+
+    <mvc:resources location="/resources/"  mapping="/resources/**" />
+
+
 
 </beans>

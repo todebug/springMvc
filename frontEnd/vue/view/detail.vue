@@ -155,7 +155,6 @@ aside {
     color: #555;
     text-decoration: none;
     font-size: 18px;
-    width:180px;
     font-weight: bold;
     text-indent: 10px;
     cursor: pointer;
@@ -230,12 +229,14 @@ section {
         background: url('../../components/lib/image/plus.png') center no-repeat #f8fbfa;
         background-size: 10px;
         background-position: 90;
+        width: 100px;
 }
 
 .minus {
         background: url('../../components/lib/image/minus.png') center no-repeat #f8fbfa;
         background-size: 10px;
         background-position: 90;
+        width: 100px;
 }
 
 </style>
