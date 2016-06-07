@@ -104,6 +104,7 @@ var renderChart=function(chart,queryData){
 			}];
 			chart.hideLoading();
 			chart.setOption(optionbooking);
+			window.onresize = chart.resize; 
 	}).catch(function(ex) {
 		console.log('failed', ex)
 	});
