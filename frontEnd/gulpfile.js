@@ -1,10 +1,13 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
+    cleanCss = require('gulp-clean-css'),
     copy = require('gulp-contrib-copy');
 var sourceFileLib = './components/lib/**/*';
 var outputPathLib = '../src/main/webapp/resources/components/lib/';
 var sourceFileDist = './dist/router.js';
 var outputPathLibDist = '../src/main/webapp/resources/dist/';
+var sourceFileHtml = './index.html';
+var outputPathHtml = '../src/main/webapp/resources/';
 
 gulp.task('begin', function() {
     console.log("哈哈哈,开始执行gulp任务了!!!");
@@ -16,11 +19,18 @@ gulp.task('minify', ['begin'], function() {
         .pipe(gulp.dest('dist'))
 });
 
-gulp.task('copyFileDist', ['minify'], function() {
+gulp.task('copyFileHtml', ['minify'], function() {
     gulp
-        .src(sourceFileDist)
+        .src(sourceFileHtml)
         .pipe(copy())
-        .pipe(gulp.dest(outputPathLibDist))
+        .pipe(gulp.dest(outputPathHtml))
+});
+
+gulp.task('copyFileDist', ['copyFileHtml'], function() {
+    gulp
+        .src(sourceFileLib)
+        .pipe(copy())
+        .pipe(gulp.dest(outputPathLib))
 });
 
 gulp.task('copyFileLib', ['copyFileDist'], function() {
