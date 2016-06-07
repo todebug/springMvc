@@ -50,11 +50,14 @@ var xdy = {
 		    orderConversionRate: '55%',
 		    dataList: dataList
 		};
+var moment=require('moment');
+var today=moment().format('YYYY-MM-DD');
+//初始化默认值
 var queryData = {
-	dateBegin: '',
-	dateEnd: '',
-	dateType: '',
-	checkedName: [],
+	dateBegin: today,
+	dateEnd: today,
+	dateType: 'byDay',
+	checkedName: 'tradeCount',
 	selectData: ''
 };
 module.exports= {

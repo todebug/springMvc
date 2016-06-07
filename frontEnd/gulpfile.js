@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 var sourceFileLib = './components/lib/**/*';
 var outputPathLib = '../src/main/webapp/resources/components/lib/';
 var sourceFileDist = './dist/router.js';
-var outputPathLibDist = '../src/main/webapp/resources/dist/';
+var outputPathDist = '../src/main/webapp/resources/dist/';
 var sourceFileHtml = './index.html';
 var outputPathHtml = '../src/main/webapp/resources/';
 
@@ -14,7 +14,8 @@ gulp.task('begin', function() {
 });
 
 gulp.task('minify', ['begin'], function() {
-    gulp.src('dist/router.js')
+    gulp
+        .src('dist/router.js')
         .pipe(uglify())
         .pipe(gulp.dest('dist'))
 });
@@ -28,9 +29,9 @@ gulp.task('copyFileHtml', ['minify'], function() {
 
 gulp.task('copyFileDist', ['copyFileHtml'], function() {
     gulp
-        .src(sourceFileLib)
+        .src(sourceFileDist)
         .pipe(copy())
-        .pipe(gulp.dest(outputPathLib))
+        .pipe(gulp.dest(outputPathDist))
 });
 
 gulp.task('copyFileLib', ['copyFileDist'], function() {

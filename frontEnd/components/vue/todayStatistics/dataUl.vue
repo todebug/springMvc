@@ -97,7 +97,7 @@ module.exports= {
 	props:['xdy'],
 	data: function () {
 	    return { 
-	    	checkedNames: ''
+	    	checkedNames: 'tradeCount'
 	    }
 	},
 	methods: {

@@ -44,8 +44,6 @@ var options={
         	todayBtn: true
 };
 var queryTimeData={
-	dateBegin: today,
-	dateEnd: today,
             dateType: 'byDay'
 }
 var vm = new Vue({
@@ -132,11 +130,6 @@ module.exports= {
 					dateEnd: $('#dateValueEnd').val(),
 					dateType: vm.queryTimeData.dateType
 				}
-				// console.log("来吧");
-				// console.log(queryTimeData.dateBegin);
-				// console.log(queryTimeData.dateEnd);
-				// console.log(queryTimeData.dateType);
-				 console.log(dateData);
 				data.$dispatch('head-bar-date-condition', dateData);
 			}
 		}
