@@ -10,7 +10,7 @@
 var echarts = require('echarts');
 var config = require('../../lib/js/config');
 var queryDates=[],sumData=[],successData=[],failureData=[];
-var optionbooking = {
+var tradeOption = {
 	title: {
         		text: '交易统计'
     	},
@@ -85,11 +85,11 @@ var renderChart=function(chart,queryData){
 			sumData=[1,2,3,4,5,6,7];//j.flowRecordCount[0].recordCount;
 			successData=[2,5,6,9,3,5,2];//j.flowRecordCount[1].recordCount;
 			failureData=[4,5,8,2,6,7,2];//j.flowRecordCount[2].recordCount;
-			optionbooking.xAxis=[{
+			tradeOption.xAxis=[{
 				type: 'category',
 				data:  queryDates
 			}];
-			optionbooking.series=[{
+			tradeOption.series=[{
 				name: '总笔数',
 				type:'line',
 				data: sumData
@@ -103,7 +103,7 @@ var renderChart=function(chart,queryData){
 				data: failureData
 			}];
 			chart.hideLoading();
-			chart.setOption(optionbooking);
+			chart.setOption(tradeOption);
 			window.onresize = chart.resize; 
 	}).catch(function(ex) {
 		console.log('failed', ex)
