@@ -9,12 +9,12 @@
 		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text"@blur="getDateTime" placeholder="请选择开始时间" id="dateValueBegin" >
+			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" >
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" @blur="getDateTime"placeholder="请选择结束时间" id="dateValueEnd"  >
+			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd"  >
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -70,29 +70,20 @@ module.exports= {
 	},
 	methods: {
 		datePicker: function() {
+			var _this = this;
 			$('#dateTimePickerBegin').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 			});
-			// $('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
-			// 	queryTimeData.dateBegin = $('#dateValueBegin').val();
-			// });
 			$('#dateTimePickerEnd').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 			});
-			// $('#dateTimePickerEnd').datetimepicker(options).on('hide', function(ev){
-			// 	//queryTimeData.dateEnd = $('#dateValueEnd').val();
-			// 	console.log(ev);
-			// 	this.dispatchData(this);
-			// });
-		},
-		getDateTime: function() {
-			console.log("来吧");
-			this.dispatchData(this);
-			console.log("走了");
+			$('#dateTimePickerEnd').datetimepicker(options).on('changeDate', function(ev){
+				_this.dispatchData(_this);
+			});
 		},
 		clickTimeValueTarget: function() {
 		            $('#durationTarget a').click(function(){
