@@ -112,6 +112,7 @@ var renderChart=function(chart,queryData){
 var myChart;
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
+//初始化查询条件
 var queryTimeData={
 	dateBegin: today,
             dateEnd: today,
