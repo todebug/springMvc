@@ -54,9 +54,9 @@ var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化默认值
 var queryData = {
-	dateBegin: today,
-	dateEnd: today,
-	dateType: 'byDay',
+	startDate: today,
+	endDate: today,
+	periodType: 'byDay',
 	checkedName: 'tradeCount',
 	selectData: ''
 };
@@ -69,9 +69,9 @@ module.exports= {
 	events: {
 	    'head-bar-date-condition': function (dateData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      queryData.dateBegin = dateData.dateBegin;
-	      queryData.dateEnd = dateData.dateEnd;
-	      queryData.dateType = dateData.dateType;
+	      queryData.startDate = dateData.startDate;
+	      queryData.endDate = dateData.endDate;
+	      queryData.periodType = dateData.periodType;
 	      this.getDateTime(queryData);
 	    },
 	    'data-Ul-checkedNames': function (checkedNames) {
@@ -87,7 +87,7 @@ module.exports= {
 	},
 	methods: {
 		getDateTime: function(queryData){			
-			if(queryData.dateBegin !=='' && queryData.dateEnd!=='' && queryData.dateType!==''){
+			if(queryData.startDate !=='' && queryData.endDate!=='' && queryData.periodType!==''){
 				this.$broadcast('query-condition', queryData);
 				//console.log(queryData);
 			}

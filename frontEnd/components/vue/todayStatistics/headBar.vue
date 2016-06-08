@@ -9,12 +9,12 @@
 		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
 			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd">
-			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" readonly>
+			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="startDate" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd">
-			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" readonly>
+			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="endDate" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -48,7 +48,7 @@ var options={
         	pickerPosition: "bottom-right"
 };
 var queryTimeData={
-            dateType: 'byDay'
+            periodType: 'byDay'
 }
 var vm = new Vue({
         data: {
@@ -66,8 +66,8 @@ module.exports= {
 			//初始化事件
 			this.clickTimeValueTarget();
 			this.clickTimeTypeTarget();
-			$('#dateValueBegin').val(today)
-			$('#dateValueEnd').val(today)
+			$('#startDate').val(today)
+			$('#endDate').val(today)
 			
 	},
 	methods: {
@@ -86,20 +86,20 @@ module.exports= {
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
 			$('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
-				if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
-					if($('#dateValueBegin').val()>$('#dateValueEnd').val()){
-						$('#dateValueBegin').val('');
-						$('#dateValueEnd').val('');
+				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
+					if($('#startDate').val()>$('#endDate').val()){
+						$('#startDate').val('');
+						$('#endDate').val('');
 						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
 					}
 				}
 			});	
 			$('#dateTimePickerEnd').datetimepicker(options).on('changeDate', function(ev){
-				if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
-					if($('#dateValueBegin').val()>$('#dateValueEnd').val()){
-						$('#dateValueBegin').val('');
-						$('#dateValueEnd').val('');
+				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
+					if($('#startDate').val()>$('#endDate').val()){
+						$('#startDate').val('');
+						$('#endDate').val('');
 						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
 					}else{
@@ -117,26 +117,26 @@ module.exports= {
 		                    $('#tip').removeClass('tipShow').addClass('tipHide');
 		                    //点击时间标签时,datepicker赋值操作
 		                    if($(this).context.id==='time'){
-		                    	$('#dateValueBegin').val('');
-		                    	$('#dateValueEnd').val('');
+		                    	$('#startDate').val('');
+		                    	$('#endDate').val('');
 		                    }else if($(this).context.id==='today'){
-		                    	$('#dateValueBegin').val(today);
-		                    	$('#dateValueEnd').val(today);
+		                    	$('#startDate').val(today);
+		                    	$('#endDate').val(today);
 		                    }else if($(this).context.id==='yesterday'){
 		                    	var yesterday=moment().subtract(1, 'days').format('YYYY-MM-DD');
-		                    	$('#dateValueBegin').val(yesterday);
-		                    	$('#dateValueEnd').val(yesterday);
+		                    	$('#startDate').val(yesterday);
+		                    	$('#endDate').val(yesterday);
 		                    }else if($(this).context.id==='last7Days'){
 		                    	var weeksbefore=moment().subtract(7, 'days').format('YYYY-MM-DD');
-		                    	$('#dateValueBegin').val(weeksbefore);
-		                    	$('#dateValueEnd').val(today);
+		                    	$('#startDate').val(weeksbefore);
+		                    	$('#endDate').val(today);
 		                    }else if($(this).context.id==='last30Days'){
 		                    	var monthbefore=moment().subtract(30, 'days').format('YYYY-MM-DD');
-		                    	$('#dateValueBegin').val(monthbefore);
-		                    	$('#dateValueEnd').val(today);
+		                    	$('#startDate').val(monthbefore);
+		                    	$('#endDate').val(today);
 		                    }else if($(this).context.id==='duration'){
-		                    	$('#dateValueBegin').val('');
-		                    	$('#dateValueEnd').val('');
+		                    	$('#startDate').val('');
+		                    	$('#endDate').val('');
 		                    }
 		            });
 		            this.dispatchData(this);
@@ -146,16 +146,16 @@ module.exports= {
 		           	         //添加点击样式
 		                    $('#dataTarget a').removeClass('active');
 		                    $(this).addClass('active');
-		                    vm.queryTimeData.dateType = $(this).context.id;
+		                    vm.queryTimeData.periodType = $(this).context.id;
 		                })
 		 	this.dispatchData(this);
 		},
 		dispatchData: function(data) {
-			if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
+			if($('#startDate').val()!==''&&$('#endDate').val()!==''){
 				var dateData = {
-					dateBegin: $('#dateValueBegin').val(),
-					dateEnd: $('#dateValueEnd').val(),
-					dateType: vm.queryTimeData.dateType
+					startDate: $('#startDate').val(),
+					endDate: $('#endDate').val(),
+					periodType: vm.queryTimeData.periodType
 				}
 				data.$dispatch('head-bar-date-condition', dateData);
 			}

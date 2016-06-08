@@ -27,6 +27,23 @@ public class StatisticMo implements Serializable {
     )
     private Date endTime;
 
+    /**
+     * 对比数据查询开始时间
+     */
+    @JsonFormat(
+            pattern  = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Date contrastStartDate;
+
+    /**
+     * 对比数据查询结束时间
+     */
+    @JsonFormat(
+            pattern  = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Date contrastEndDate;
     private String code;
 
     private String name;
@@ -89,5 +106,21 @@ public class StatisticMo implements Serializable {
 
     public void setDateTime(List<Date> dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public Date getContrastStartDate() {
+        return contrastStartDate;
+    }
+
+    public void setContrastStartDate(Date contrastStartDate) {
+        this.contrastStartDate = contrastStartDate;
+    }
+
+    public Date getContrastEndDate() {
+        return contrastEndDate;
+    }
+
+    public void setContrastEndDate(Date contrastEndDate) {
+        this.contrastEndDate = contrastEndDate;
     }
 }

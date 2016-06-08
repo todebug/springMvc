@@ -72,9 +72,11 @@ var renderChart=function(chart,queryData){
 	     'Content-Type': 'application/json'
 	 	},
 	  body: JSON.stringify({
-	    	                'dateType': queryData.dateType,
-	 		    'startDate': queryData.dateBegin,
-	 		    'endDate': queryData.dateEnd
+	    	                'periodType': queryData.periodType,
+	 		    'startDate': queryData.startDate,
+	 		    'endDate': queryData.endDate,
+	 		    'contrastStartDate': queryData.dateBegin,
+	 		    'contrastEndDate': queryData.dateBegin
 	  })
 	})
 	result.then(function(response) {
@@ -114,9 +116,9 @@ var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化查询条件
 var queryTimeData={
-	dateBegin: today,
-            dateEnd: today,
-            dateType: 'byDay'
+	startDate: today,
+            endDate: today,
+            periodType: 'byDay'
 }
 var schedule = require('node-schedule');
 module.exports= {
