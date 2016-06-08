@@ -117,16 +117,31 @@ var queryTimeData={
             dateEnd: today,
             dateType: 'byDay'
 }
+var schedule = require('node-schedule');
 module.exports= {
 	ready: function(){
 		this.drawEchart(queryTimeData);
+		this.nodeSchedule();
   	},
   	methods: {
   		drawEchart: function(queryData) {
   			myChart = echarts.init(document.getElementById('statisticsData'));
 			renderChart(myChart,queryData);
+  		},
+  		nodeSchedule: function() {
+  			var rule = new schedule.RecurrenceRule();  
+  			var times = [];
+  			//每三分钟执行一次
+			for(var i=0; i<60; i=i+3){
+			　　times.push(i);
+			}
+			rule.minute  = times;
+			var _this = this;
+			var j = schedule.scheduleJob(rule, function(){
+			     　　_this.drawEchart(queryTimeData);
+			      　　console.log(queryTimeData);
+			　　});
   		}
-
   	},
   	events: {
 	    'query-condition': function (dateData) {
