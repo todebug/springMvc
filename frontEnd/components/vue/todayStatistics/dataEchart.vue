@@ -138,9 +138,12 @@ module.exports= {
 			}
 			rule.minute  = times;
 			var _this = this;
+			var count = 0;
 			var j = schedule.scheduleJob(rule, function(){
 			     　　_this.drawEchart(queryTimeData);
-			      　　console.log(queryTimeData);
+			     	count++;
+			     	var myDate = new Date();
+				console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
 			　　});
   		}
   	},

@@ -16,19 +16,20 @@ gulp.task('begin', function() {
 
 //vue打包处理
 gulp.task('webpack', ['begin'], shell.task([
-    'webpack'
+    'webpack -p'
 ]));
 
-//压缩vueJS
-gulp.task('minify', ['webpack'], function() {
-    gulp
-        .src('dist/router.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'))
-});
+//压缩vueJS  实际貌似没有webpack -p压缩力度大,故先注释,待测试
+// gulp.task('minify', ['webpack'], function() {
+//     gulp
+//         .src('dist/router.js')
+//         .pipe(uglify())
+//         .pipe(gulp.dest('dist'))
+// });
+
 
 //copy文件 index.html
-gulp.task('copyFileHtml', ['minify'], function() {
+gulp.task('copyFileHtml', ['webpack'], function() {
     gulp
         .src(sourceFileHtml)
         .pipe(copy())
