@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    shell = require('gulp-shell'),
     uglify = require('gulp-uglify'),
     cleanCss = require('gulp-clean-css'),
     copy = require('gulp-contrib-copy');
@@ -13,13 +14,20 @@ gulp.task('begin', function() {
     console.log("哈哈哈,开始执行gulp任务了!!!");
 });
 
-gulp.task('minify', ['begin'], function() {
+//vue打包处理
+gulp.task('webpack', ['begin'], shell.task([
+    'webpack'
+]));
+
+//压缩vueJS
+gulp.task('minify', ['webpack'], function() {
     gulp
         .src('dist/router.js')
         .pipe(uglify())
         .pipe(gulp.dest('dist'))
 });
 
+//copy文件 index.html
 gulp.task('copyFileHtml', ['minify'], function() {
     gulp
         .src(sourceFileHtml)
@@ -27,6 +35,7 @@ gulp.task('copyFileHtml', ['minify'], function() {
         .pipe(gulp.dest(outputPathHtml))
 });
 
+//copy文件夹 dist
 gulp.task('copyFileDist', ['copyFileHtml'], function() {
     gulp
         .src(sourceFileDist)
@@ -34,6 +43,7 @@ gulp.task('copyFileDist', ['copyFileHtml'], function() {
         .pipe(gulp.dest(outputPathDist))
 });
 
+//copy文件夹 lib
 gulp.task('copyFileLib', ['copyFileDist'], function() {
     gulp
         .src(sourceFileLib)
