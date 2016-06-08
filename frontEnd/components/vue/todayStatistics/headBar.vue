@@ -6,15 +6,23 @@
 		<a id="yesterday">昨天</a>
 		<a id="last7Days">最近7天</a>
 		<a id="last30Days">最近30天</a>
-		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
-			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd">
-			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="startDate" readonly>
+			<div class="datePicker" id="dateTimePickerBegin">
+			    <input  size="16" type="text" placeholder="请选择开始时间" id="startDate" readonly>
+			</div> 
+			<div class="datePicker" id="dateTimePickerEnd">
+			    <input  size="16" type="text" placeholder="请选择结束时间" id="endDate" readonly>
+			</div> 
+		</div>
+		<a id="duration" @click="clickDurationTarget">时间区间</a>
+		<div id="contrastDisplay"  class="contrastHideDiv">
+			<div class="datePicker input-append date" id="contrastBegin" data-date-format="yyyy-mm-dd">
+			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="contrastStartDate" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
-			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd">
-			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="endDate" readonly>
+			<div class="datePicker input-append date" id="contrastEnd" data-date-format="yyyy-mm-dd">
+			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="contrastEndDate" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
@@ -73,33 +81,33 @@ module.exports= {
 	methods: {
 		datePicker: function() {
 			var _this = this;
-			$('#dateTimePickerBegin').datetimepicker(options).on('show', function(ev){
+			$('#contrastBegin').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
-			$('#dateTimePickerEnd').datetimepicker(options).on('show', function(ev){
+			$('#contrastEnd').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
-			$('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
-				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
-					if($('#startDate').val()>$('#endDate').val()){
-						$('#startDate').val('');
-						$('#endDate').val('');
+			$('#contrastBegin').datetimepicker(options).on('changeDate', function(ev){
+				if($('#contrastStartDate').val()!==''&&$('#contrastEndDate').val()!==''){
+					if($('#contrastStartDate').val()>$('#contrastEndDate').val()){
+						$('#contrastStartDate').val('');
+						$('#contrastEndDate').val('');
 						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
 					}
 				}
 			});	
-			$('#dateTimePickerEnd').datetimepicker(options).on('changeDate', function(ev){
-				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
-					if($('#startDate').val()>$('#endDate').val()){
-						$('#startDate').val('');
-						$('#endDate').val('');
+			$('#contrastEnd').datetimepicker(options).on('changeDate', function(ev){
+				if($('#contrastStartDate').val()!==''&&$('#contrastEndDate').val()!==''){
+					if($('#contrastStartDate').val()>$('#contrastEndDate').val()){
+						$('#contrastStartDate').val('');
+						$('#contrastEndDate').val('');
 						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
 					}else{
@@ -134,12 +142,18 @@ module.exports= {
 		                    	var monthbefore=moment().subtract(30, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(monthbefore);
 		                    	$('#endDate').val(today);
-		                    }else if($(this).context.id==='duration'){
-		                    	$('#startDate').val('');
-		                    	$('#endDate').val('');
 		                    }
 		            });
 		            this.dispatchData(this);
+		 },
+		 clickDurationTarget: function() {
+		 		$('#contrastStartDate').val('');
+		                    	$('#contrastEndDate').val('');
+		                    	 if($('#contrastDisplay').hasClass('contrastHideDiv')){
+		                    		$('#contrastDisplay').removeClass('contrastHideDiv').addClass('contrastShowDiv');
+		                    	}else{
+		                    		$('#contrastDisplay').removeClass('contrastShowDiv').addClass('contrastHideDiv');
+		                    	}
 		 },
 		 clickTimeTypeTarget: function() {
 		 	$('#dataTarget a').click(function(){
@@ -155,6 +169,8 @@ module.exports= {
 				var dateData = {
 					startDate: $('#startDate').val(),
 					endDate: $('#endDate').val(),
+					contrastStartDate: $('#contrastStartDate').val(),
+             				contrastEndDate: $('#contrastEndDate').val(),
 					periodType: vm.queryTimeData.periodType
 				}
 				data.$dispatch('head-bar-date-condition', dateData);
@@ -177,6 +193,15 @@ module.exports= {
 }
 
 .displayDiv {
+	display: inline-block;
+	position: relative;
+}
+
+.contrastHideDiv {
+	display: none;
+}
+
+.contrastShowDiv {
 	display: inline-block;
 	position: relative;
 }

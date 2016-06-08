@@ -72,11 +72,11 @@ var renderChart=function(chart,queryData){
 	     'Content-Type': 'application/json'
 	 	},
 	  body: JSON.stringify({
-	    	                'periodType': queryData.periodType,
 	 		    'startDate': queryData.startDate,
 	 		    'endDate': queryData.endDate,
-	 		    'contrastStartDate': queryData.dateBegin,
-	 		    'contrastEndDate': queryData.dateBegin
+	 		    'contrastStartDate': queryData.contrastStartDate,
+	 		    'contrastEndDate': queryData.contrastEndDate,
+	 		    'periodType': queryData.periodType
 	  })
 	})
 	result.then(function(response) {
@@ -118,6 +118,8 @@ var today=moment().format('YYYY-MM-DD');
 var queryTimeData={
 	startDate: today,
             endDate: today,
+            contrastStartDate: '',
+            contrastEndDate: '',
             periodType: 'byDay'
 }
 var schedule = require('node-schedule');

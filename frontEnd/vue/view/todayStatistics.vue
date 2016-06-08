@@ -56,6 +56,8 @@ var today=moment().format('YYYY-MM-DD');
 var queryData = {
 	startDate: today,
 	endDate: today,
+	contrastStartDate: '',
+             contrastEndDate: '',
 	periodType: 'byDay',
 	checkedName: 'tradeCount',
 	selectData: ''
