@@ -8,18 +8,19 @@
 		<a id="last30Days">最近30天</a>
 		<a id="duration">时间区间</a>
 		<div id="datePickerDisplay"  class="displayDiv">
-			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" >
+			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd">
+			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="dateValueBegin" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
-			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd hh:ii">
-			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd"  >
+			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd">
+			    <input class="span2" size="16" type="text" placeholder="请选择结束时间" id="dateValueEnd" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 		</div>
 	</div>
+	<span id="tip" class="tipHide">开始时间不得小于结束时间!</span>
 	<div class="dataTarget" id="dataTarget" @click="clickTimeTypeTarget">
 		<a id="byTime">按时</a>
 		<a class="active"  id="byDay">按日</a>
@@ -39,9 +40,12 @@ var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 var options={
 	language: 'zh-CN',
-	format: 'yyyy-mm-dd hh:ii',
+	format: 'yyyy-mm-dd',
+	minView: 'month',
 	autoclose: true,
-        	todayBtn: true
+        	todayBtn: true,
+        	endDate: today,
+        	pickerPosition: "bottom-right"
 };
 var queryTimeData={
             dateType: 'byDay'
@@ -73,14 +77,35 @@ module.exports= {
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
+	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
 			$('#dateTimePickerEnd').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
+	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
+			$('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
+				if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
+					if($('#dateValueBegin').val()>$('#dateValueEnd').val()){
+						$('#dateValueBegin').val('');
+						$('#dateValueEnd').val('');
+						//提示信息
+						 $('#tip').removeClass('tipHide').addClass('tipShow');
+					}
+				}
+			});	
 			$('#dateTimePickerEnd').datetimepicker(options).on('changeDate', function(ev){
-				_this.dispatchData(_this);
+				if($('#dateValueBegin').val()!==''&&$('#dateValueEnd').val()!==''){
+					if($('#dateValueBegin').val()>$('#dateValueEnd').val()){
+						$('#dateValueBegin').val('');
+						$('#dateValueEnd').val('');
+						//提示信息
+						 $('#tip').removeClass('tipHide').addClass('tipShow');
+					}else{
+						_this.dispatchData(_this);
+					}
+				}
 			});
 		},
 		clickTimeValueTarget: function() {
@@ -88,6 +113,8 @@ module.exports= {
 		           	         //添加点击样式
 		                    $('#durationTarget a').removeClass('active');
 		                    $(this).addClass('active');
+		                    //去除错误提示
+		                    $('#tip').removeClass('tipShow').addClass('tipHide');
 		                    //点击时间标签时,datepicker赋值操作
 		                    if($(this).context.id==='time'){
 		                    	$('#dateValueBegin').val('');
@@ -179,6 +206,18 @@ module.exports= {
     	font-weight: bold;
 }
 
+.tipShow {
+	display: inline;
+	min-width: 50px;
+	color:red;
+	font-size:10px;
+	margin-left: 10px;
+}
+
+.tipHide {
+	display:none;
+}
+
 .dataTarget {
 	display: inline;
 	min-width: 400px;
@@ -209,11 +248,11 @@ module.exports= {
 }
 
 .datePicker input {
+	display: inline;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
     	text-align: center;
     	background: #f7f1f1;
 }
-
 
 </style>

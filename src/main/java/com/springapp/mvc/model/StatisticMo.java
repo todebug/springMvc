@@ -1,5 +1,7 @@
 package com.springapp.mvc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,10 +16,16 @@ public class StatisticMo implements Serializable {
     private static final long serialVersionUID = -4641203330251711483L;
 
     private String dateType;
-
-    private String beginTime;
-
-    private String endTime;
+    @JsonFormat(
+            pattern  = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Date startDate;
+    @JsonFormat(
+            pattern  = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Date endTime;
 
     private String code;
 
@@ -35,19 +43,19 @@ public class StatisticMo implements Serializable {
         this.dateType = dateType;
     }
 
-    public String getBeginTime() {
-        return beginTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

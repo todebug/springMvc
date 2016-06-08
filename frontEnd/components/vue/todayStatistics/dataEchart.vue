@@ -73,8 +73,8 @@ var renderChart=function(chart,queryData){
 	 	},
 	  body: JSON.stringify({
 	    	                'dateType': queryData.dateType,
-	 		    'beginTime': queryData.dateBegin,
-	 		    'endTime': queryData.dateEnd
+	 		    'startDate': queryData.dateBegin,
+	 		    'endDate': queryData.dateEnd
 	  })
 	})
 	result.then(function(response) {

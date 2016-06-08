@@ -33,7 +33,7 @@ public class DataInteractionController {
     @RequestMapping(value = "/getStatistic",method = RequestMethod.POST)
     public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
         StatisticMo statistic = new StatisticMo();
-        statistic.setBeginTime("999999");
+        statistic.setStartDate(new Date());
         System.out.println(statisticMo);
         System.out.println("2222");
         return statistic;
