@@ -23,11 +23,33 @@
 
 <script>
 'use strict';
-
+var pageData = {
+	cur: 0,
+	all: 0
+}
 module.exports= {
+	data: function() {
+	    //绑定数据
+	    return  {pageData}
+	},
+	ready: function() {
+
+	},
 	props:['item'],
 	compiled: function () {
 		//console.log(this.item);
+	},
+	methods: {
+		dispatchPageData: function(curPage) {//将页数总数传递到父组件中,最终传递至子组件[pageBar.vue]中
+	            		//设置点击页数
+	            		this.$dispatch('dispatch-dataList-pageBar-PageData', pageData);
+	            }
+	},
+	events: {
+		'broadcast-todayStatistics-dataList-curPage': function(curPage) {//获取[pageBar.vue]传递至父组件的数据,当前点击页数
+	    		//查询当前页数信息
+	    		
+	    	}
 	}
 }
 </script>

@@ -217,7 +217,7 @@ module.exports= {
   		dispatchDataLoad: function(_this,data) {
   			if(data!==''&&data!==undefined){
   				//将查询数据上载到父组件进行分发处理
-  				_this.$dispatch('loading-other-vue-data', data);
+  				_this.$dispatch('dispatch-dataEchart-dataUl-loadingData', data);
   			}
   		},
   		modifyEchartData: function(j,echartData,indicators) {
@@ -307,14 +307,13 @@ module.exports= {
 
   		},
   		setNames: function(setNames) {
-			this.$dispatch('set-names', setNames);
+			this.$dispatch('dispatch-dataEchart-dataUl-names', setNames);//将name数据经由父组件[todayStatistics.vue]传递至子组件[dataUl.vue]中
 		}
   	},
   	events: {
-	    'query-condition': function(dateData) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	    'broadcast-todayStatistics-dataEchart-queryCondition': function(date) {
 	      // 动态绑定查询对象数据
-	      this.queryCondition = Object.assign({}, this.queryCondition, dateData);
+	      this.queryCondition = Object.assign({}, this.queryCondition, date);
 	      this.drawEchart(this.queryCondition);
 	    }
 	}

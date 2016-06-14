@@ -197,22 +197,22 @@ module.exports= {
 					startDate: $('#startDate').val(),
 					endDate: $('#endDate').val(),
 					contrastStartDate: $('#contrastStartDate').val(),
-             				contrastEndDate: $('#contrastEndDate').val(),
+             					contrastEndDate: $('#contrastEndDate').val(),
 					periodType: this.queryTimeData.periodType
 				}
-				//时间判断,防止错误查询条件触发查询操作
+				//将时间条件传递值父组件[todayStatistics.vue]中,最终至子组件[dataEchart.vue]中
 				if(dateData.startDate===''&&dateData.endDate===''&&dateData.contrastStartDate===''&&dateData.contrastEndDate===''){
 					//时间均为空
-					data.$dispatch('head-bar-date-condition', dateData);
+					data.$dispatch('dispatch-headBar-dataEchart-queryCondition', dateData);
 				}else if((dateData.startDate!==''&&dateData.endDate!=='')&&(dateData.contrastStartDate===''&&dateData.contrastEndDate==='')){
 					//判断对比时间为空,查询时间不为空
-					data.$dispatch('head-bar-date-condition', dateData);
+					data.$dispatch('dispatch-headBar-dataEchart-queryCondition', dateData);
 				}else if((dateData.startDate===''&&dateData.endDate==='')&&(dateData.contrastStartDate!==''&&dateData.contrastEndDate!=='')){
 					//判断对比时间不为空,查询时间为空
-					data.$dispatch('head-bar-date-condition', dateData);
+					data.$dispatch('dispatch-headBar-dataEchart-queryCondition', dateData);
 				}else if(dateData.startDate!==''&&dateData.endDate!==''&&dateData.contrastStartDate!==''&&dateData.contrastEndDate!==''){
 					//时间均为不空
-					data.$dispatch('head-bar-date-condition', dateData);
+					data.$dispatch('dispatch-headBar-dataEchart-queryCondition', dateData);
 				}	
 		}
 	}

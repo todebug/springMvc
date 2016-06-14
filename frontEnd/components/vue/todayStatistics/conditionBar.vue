@@ -52,8 +52,8 @@ module.exports= {
 			selectData.insuredSelect = event.target.value;
 			this.dispatchData(this);
 		},
-		dispatchData: function(data) {
-			data.$dispatch('condition-bar-selectData', selectData);
+		dispatchData: function(selectData) {//将查询条件通知到[todayStatistics.vue]父组件中
+			data.$dispatch('dispatch-conditionBar-dataEchart-queryData', selectData);
 		}
 	}
 }

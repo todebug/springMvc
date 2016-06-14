@@ -78,9 +78,21 @@ module.exports= {
 	            btnClick: function(data) {//页码点击事件
 		                if(data !== this.cur){
 		                    this.cur = data 
+		                    this.dispatchPageData(this.cur);
 		                }
+	            },
+	            dispatchPageData: function(curPage) {//将当前点击页数传递到父组件中
+	            		//设置点击页数
+	            		this.$dispatch('dispatch-pageBar-dataList-curPage', curPage);
 	            }
-        	}
+        	},
+        	events: {
+	    'broadcast-todayStatistics-pageBar-getPageData': function(pageData) {//从父组件中获取页数信息
+	      // 设置当前页数及总页数
+	      this.cur = pageData.cur;
+	      this.all = pageData.all;
+	    }
+	}
 }
 </script>
 

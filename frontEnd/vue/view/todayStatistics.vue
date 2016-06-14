@@ -88,41 +88,43 @@ var queryData = {
 };
 module.exports= {
 	data: function () {
-	    //绑定数据
-	    return  {info,queryData}
+	    	//绑定数据
+	    	return  {info,queryData}
 	},
 	events: {
-	    'head-bar-date-condition': function (dateData) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      this.queryData.startDate = dateData.startDate;
-	      this.queryData.endDate = dateData.endDate;
-	      this.queryData.periodType = dateData.periodType;
-	      this.getDateTime(this.queryData);
+	    'dispatch-headBar-dataEchart-queryCondition': function (dateData) {//获取[headBar.vue]中时间查询条件
+	      	// 事件回调内的 `this` 自动绑定到注册它的实例上
+	      	this.queryData.startDate = dateData.startDate;
+	      	this.queryData.endDate = dateData.endDate;
+	      	this.queryData.periodType = dateData.periodType;
+	      	this.getDateTime(this.queryData);
 	    },
-	    'data-Ul-checkedNames': function (checkedNames) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      this.queryData.indicators = [];
-	      this.queryData.indicators.push(checkedNames);
-	      this.getDateTime(this.queryData);
+	    'dispatch-dataUl-dataEchart-indicator': function (indicator) {//获取[dataUl.vue]中的指标信息
+	      	this.queryData.indicators = [];
+	      	this.queryData.indicators.push(indicator);
+	      	this.getDateTime(this.queryData);
 	    },
-	    'condition-bar-selectData': function (selectData) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      this.queryData.selectData = selectData;
-	      this.getDateTime(this.queryData);
+	    'dispatch-conditionBar-dataEchart-queryData': function (selectData) {//获取[conditionBar.vue]中的查询数据
+	      	this.queryData.selectData = selectData;
+	      	this.getDateTime(this.queryData);
 	    },
-	    'loading-other-vue-data': function (loadingData) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      // 动态设置属性
-	      this.info = Object.assign({}, this.info, loadingData);
+	    'dispatch-dataEchart-dataUl-loadingData': function (loadingData) {//获取[dataEchart.vue的fetch的j数据,绑定到当前vue中绑定的info上,通过prop传递给子组件]
+	      	// 动态设置属性
+	      	this.info = Object.assign({}, this.info, loadingData);
 	    },
-	    'set-names': function (setNames) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	     this.$broadcast('set-dataUl-names', setNames);
+	    'dispatch-dataEchart-dataUl-names': function (setNames) {//获取[dataEchart.vue的name数据,通知[dataUl.vue]交易统计数或时效name赋值
+	     	this.$broadcast('broadcast-todayStatistics-dataUl-names', setNames);
+	    },
+	    'dispatch-pageBar-dataList-curPage': function(curPage) {//获取[pageBar.vue]当前点击页数,将数据传递至子组件[dataList.vue]中
+	    	this.$broadcast('broadcast-todayStatistics-dataList-curPage', curPage);
+	    },
+	    'dispatch-dataList-pageBar-PageData': function(pageData) {//通知[pageBar.vue]当前页数及当前总页数
+	    	this.$broadcast('broadcast-todayStatistics-pageBar-getPageData', pageData);
 	    }
 	},
 	methods: {
-		getDateTime: function(queryData){	
-			this.$broadcast('query-condition', queryData);
+		getDateTime: function(queryData){//将查询条件广播到子组件中.[dataEchart.vue]
+			this.$broadcast('broadcast-todayStatistics-dataEchart-queryCondition', queryData);
 		}
 	},
 	components: {

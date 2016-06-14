@@ -276,14 +276,13 @@ module.exports= {
 		targetChecked: function(event) {
 			this.getCheckedNames(this,event.target.value);
 		},
-		getCheckedNames: function(data,checkedName) {
-			data.$dispatch('data-Ul-checkedNames', checkedName);
+		getCheckedNames: function(data,indicator) {//将指标信息传递到父组件[todayStatistics.vue]中
+			data.$dispatch('dispatch-dataUl-dataEchart-indicator', indicator);
 		}
 	},
 	events: {
-	    'set-dataUl-names': function(setNames) {
-	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	    this.names = Object.assign({}, this.names, setNames);
+	    'broadcast-todayStatistics-dataUl-names': function(setNames) {//获取父组件传递的name数据.实际由[dataEchart.vue]子组件传递
+	    	this.names = Object.assign({}, this.names, setNames);
 	    }
 	}
 }
