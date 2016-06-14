@@ -5,13 +5,13 @@
 	            	            		<a v-on:click="btnClick(1)">首页</a>
 	            	            </li>
 		            <li v-if="showFirst">
-		            		<a v-on:click="cur--">上一页</a>
+		            		<a v-on:click="cur--"><<</a>
 		            </li>
 		            <li v-for="index in indexs"  v-bind:class="{ 'active': cur === index}">
 		                	<a v-on:click="btnClick(index)">{{ index }}</a>
 		            </li>
 		            <li v-if="showLast">
-		            		<a v-on:click="cur++">下一页</a>
+		            		<a v-on:click="cur++">>></a>
 		            </li>
 		             <li>
 		             		<a>共<i>{{all}}</i>页</a>
@@ -117,6 +117,15 @@ ul,li {
 
 li {
     	list-style: none
+}
+
+.page-bar ul {
+    	display: inline-block;
+}
+
+.page-bar ul li {
+    	display: inline-block;
+    	float: left;
 }
 
 .page-bar li:first-child>a {

@@ -5,7 +5,7 @@
 		<data-Echart></data-Echart>
 		<condition-Bar></condition-Bar>
 		<data-List></data-List>
-		<page-bar></page-bar>
+		
 	</div>
 </template>
 
@@ -86,7 +86,7 @@ module.exports= {
 	},
 	methods: {
 		getDateTime: function(queryData){//将查询条件广播到子组件中.[dataEchart.vue]
-			this.$broadcast('broadcast-todayStatistics-dataEchart-queryCondition', queryData);
+			this.$broadcast('broadcast-todayStatistics-dataEchart-dataList-queryCondition', queryData);
 		}
 	},
 	components: {
@@ -94,8 +94,8 @@ module.exports= {
 		dataUl: require ('../../components/vue/todayStatistics/dataUl.vue'),
 		dataEchart: require ('../../components/vue/todayStatistics/dataEchart.vue'),
 		conditionBar: require ('../../components/vue/todayStatistics/conditionBar.vue'),
-		dataList: require ('../../components/vue/todayStatistics/dataList.vue'),
-		pageBar: require ('../../components/vue/todayStatistics/pageBar.vue')
+		dataList: require ('../../components/vue/todayStatistics/dataList.vue')
+		
 	}
 }
 </script>

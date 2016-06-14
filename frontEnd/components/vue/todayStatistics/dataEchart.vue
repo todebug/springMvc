@@ -98,6 +98,7 @@ var renderChart=function(chart,queryData,_this){
 		return response.json();
 	}).then(function(j) {
 		//console.log(j);
+			j={"reportData":{"dataTitle":["19:04","19:06","19:08","19:10","19:12","19:14","19:16","19:18","19:20","19:22","19:24","19:26","19:28","19:30","19:32","19:34","19:36","19:38","19:40","19:42","19:44","19:46","19:48","19:50","19:52","19:54","19:56","19:58","20:00","20:02"],"indicators":{"picc_TOTAL_COUNT":"总交易数-人保财险","gpic_TOTAL_COUNT":"总交易数-国寿财险","cpic_TOTAL_COUNT":"总交易数-太保财险"},"items":{"picc_TOTAL_COUNT":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"gpic_TOTAL_COUNT":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"cpic_TOTAL_COUNT":[3,2,2,0,0,0,0,1,2,1,1,0,0,0,0,4,2,0,1,0,1,1,0,0,1,3,4,2,1,1]},"sumTitle":{"cpic_calculatePremium":"保费计算","gpic_calculatePremium":"保费计算","gpic":"合计","picc_calculatePremium":"保费计算","picc_submitApplication":"保单提交","cpic":"合计","cpic_submitApplication":"保单提交","picc":"合计","gpic_submitApplication":"保单提交"},"sumItems":{"cpic_calculatePremium":[5,0,5,0,8,1,null,3.8],"gpic_calculatePremium":[0,0,0,0,0,0,null,0],"gpic":[0,0,0,0,0,0,null,0],"picc_calculatePremium":[0,0,0,0,0,0,null,0],"picc_submitApplication":[0,0,0,0,0,0,null,0],"cpic":[33,12,21,36.36,8,0,null,1.48],"cpic_submitApplication":[0,0,0,0,0,0,null,0],"picc":[0,0,0,0,0,0,null,0],"gpic_submitApplication":[0,0,0,0,0,0,null,0]}}};
 			//判断[dataUl.vue]中[交易统计]还是[交易时效]渲染name
 			 var flag = _this.judgeIndicator(queryData.indicators[0]);
 			 //赋判断属性---dataUl.vue
@@ -132,14 +133,22 @@ var renderChart=function(chart,queryData,_this){
 			tradeOption.legend.x='right';
 			tradeOption.legend.y='top';
 			tradeOption.legend.data=[echartData.dataCpicName, echartData.dataPiccName,echartData.dataGpicName];
-			tradeOption.xAxis=[{
-				type: 'category',
-				boundaryGap : false,//设置坐标轴数据靠近原点
-				axisLabel :{  
-				    	interval:0   //设置x轴坐标数据显示齐全
-				},
-				data:  echartData.queryDates
-			}];
+			if(queryData.periodType==='HOUR' || queryData.periodType==='TWO_MINUTE' ){
+				tradeOption.xAxis=[{
+					type: 'category',
+					boundaryGap : false,//设置坐标轴数据靠近原点
+					axisLabel :{  
+					    	interval:0   //设置x轴坐标数据显示齐全
+					},
+					data:  echartData.queryDates
+				}];
+			}else{
+				tradeOption.xAxis=[{
+					type: 'category',
+					boundaryGap : false,//设置坐标轴数据靠近原点
+					data:  echartData.queryDates
+				}];
+			}
 			tradeOption.series=[{
 				name: echartData.dataCpicName,
 				type:'line',
@@ -298,7 +307,7 @@ module.exports= {
   		}
   	},
   	events: {
-	    'broadcast-todayStatistics-dataEchart-queryCondition': function(date) {
+	    'broadcast-todayStatistics-dataEchart-dataList-queryCondition': function(date) {
 	      // 动态绑定查询对象数据
 	      this.queryCondition = Object.assign({}, this.queryCondition, date);
 	      this.drawEchart(this.queryCondition);

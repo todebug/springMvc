@@ -19,13 +19,16 @@
 								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic[4]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_calculatePremium[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[4]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_submitApplication[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[4]}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -34,13 +37,16 @@
 								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic[5]}}</div>
+							</td>
+							<td>	
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[5]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_calculatePremium[1]}}
-							</td>
-							<td>
-								{{info.reportData.sumItems.cpic_submitApplication[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[5]}}</div>	
 							</td>
 						</tr>
 						<tr>
@@ -49,13 +55,16 @@
 								<label  v-else >平均时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic[6]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_calculatePremium[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[6]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_submitApplication[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[6]}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -64,13 +73,16 @@
 								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.cpic[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.cpic[7]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_calculatePremium[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[7]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_submitApplication[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[7]}}</div>
 							</td>
 						</tr>
 					</tbody>
@@ -94,13 +106,16 @@
 								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc[4]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_calculatePremium[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[4]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_submitApplication[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_submitApplication[4]}}</div>	
 							</td>
 						</tr>
 						<tr>
@@ -109,13 +124,17 @@
 								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc[5]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_calculatePremium[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[5]}}</div>
+								
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_submitApplication[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_submitApplication[5]}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -124,13 +143,16 @@
 								<label  v-else >平均时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc[6]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_calculatePremium[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[6]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_submitApplication[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.picc_submitApplication[6]}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -139,13 +161,16 @@
 								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.picc[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.picc[7]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_calculatePremium[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[7]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_submitApplication[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.picc_submitApplication[7]}}</div>
 							</td>
 						</tr>
 					</tbody>
@@ -169,13 +194,16 @@
 								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic[4]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_calculatePremium[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[4]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_submitApplication[0]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[0]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[4]}}</div>	
 							</td>
 						</tr>
 						<tr>
@@ -184,13 +212,16 @@
 								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic[5]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_calculatePremium[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[5]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_submitApplication[1]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[1]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[5]}}</div>	
 							</td>
 						</tr>
 						<tr>
@@ -199,13 +230,16 @@
 								<label  v-else >平均时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic[6]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_calculatePremium[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[6]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_submitApplication[2]}}
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[2]}}</div>
+								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[6]}}</div>
 							</td>
 						</tr>
 						<tr>
@@ -214,13 +248,16 @@
 								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.gpic[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.gpic[7]}}</div>	
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_calculatePremium[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[7]}}</div>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_submitApplication[3]}}<span v-show="info.show">%</span>
+								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[3]}}%</div>
+								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[7]}}</div>
 							</td>
 						</tr>
 					</tbody>
