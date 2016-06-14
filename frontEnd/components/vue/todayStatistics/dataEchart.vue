@@ -77,30 +77,31 @@ var renderChart=function(chart,queryData,_this){
 			fontSize : 20
 		}
 	});
-	var host = config.host;
-	var url = host+'statistic/getStatistic';
+	var url = config.host+'statistic/getStatistic';
 	var result = fetch(url,{
-	  method: 'post',
-	  mode: 'cors',
-	   headers: {
-	     'Accept': 'application/json',
-	     'Content-Type': 'application/json'
-	 	},
-	  body: JSON.stringify({
-	 		    'startDate': queryData.startDate,
-	 		    'endDate': queryData.endDate,
-	 		    'contrastStartDate': queryData.contrastStartDate,
-	 		    'contrastEndDate': queryData.contrastEndDate,
-	 		    'periodType': queryData.periodType,
-	 		    'indicators': queryData.indicators
-	  })
-	})
+		  method: 'post',
+		  mode: 'cors',
+		   headers: {
+		     'Accept': 'application/json',
+		     'Content-Type': 'application/json'
+		 	},
+		  body: JSON.stringify({
+		 		    'startDate': queryData.startDate,
+		 		    'endDate': queryData.endDate,
+		 		    'contrastStartDate': queryData.contrastStartDate,
+		 		    'contrastEndDate': queryData.contrastEndDate,
+		 		    'periodType': queryData.periodType,
+		 		    'indicators': queryData.indicators
+		  })
+	});
 	result.then(function(response) {
 		return response.json();
 	}).then(function(j) {
 		//console.log(j);
-			 _this.judgeIndicator(queryData.indicators[0]);
-			//设置判断[交易统计]还是[交易时效]渲染条件
+			//判断[dataUl.vue]中[交易统计]还是[交易时效]渲染name
+			 var flag = _this.judgeIndicator(queryData.indicators[0]);
+			 //赋判断属性---dataUl.vue
+			 j = Object.assign({}, j, {show:flag});
 			//实时设置其他vue数据
 			_this.dispatchDataLoad(_this,j);
 			//按照指标设置数据
@@ -112,7 +113,7 @@ var renderChart=function(chart,queryData,_this){
 					splitArea: {
 						show: false
 					},
-					axisLabel: {
+					axisLabel: {//设置y轴显示百分百
 						show: true,
 						interval: 'auto',
 						formatter: '{value}%'
@@ -126,15 +127,16 @@ var renderChart=function(chart,queryData,_this){
 					}
 				}];
 			}
+			//设置legend显示位置
 			tradeOption.legend.orient='horizontal';
 			tradeOption.legend.x='right';
 			tradeOption.legend.y='top';
 			tradeOption.legend.data=[echartData.dataCpicName, echartData.dataPiccName,echartData.dataGpicName];
 			tradeOption.xAxis=[{
 				type: 'category',
-				boundaryGap : false,
+				boundaryGap : false,//设置坐标轴数据靠近原点
 				axisLabel :{  
-				    interval:0   
+				    	interval:0   //设置x轴坐标数据显示齐全
 				},
 				data:  echartData.queryDates
 			}];
@@ -164,14 +166,13 @@ var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化查询条件
 var queryCondition={
-	startDate: today,
+            startDate: today,
             endDate: today,
             contrastStartDate: '',
             contrastEndDate: '',
             periodType: 'TWO_MINUTE',//默认实时
             indicators: ['TOTAL_COUNT']//默认总交易数
 }
-
 module.exports= {
 	data: function () {
 	    //绑定查询条件
@@ -208,9 +209,9 @@ module.exports= {
 				if(_this.getQueryData().periodType==='TWO_MINUTE'){
 					//根据查询条件动态渲染echart
 				     　　_this.drawEchart(_this.getQueryData());
-			     	count++;
-			     	var myDate = new Date();
-				console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
+			     		count++;
+			     		var myDate = new Date();
+					console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
 				}
 			　　});
   		},
@@ -289,26 +290,12 @@ module.exports= {
   			return echartData;
   		},
   		judgeIndicator: function(indicator) {
-  			var setNames = {};
   			if(indicator==='TOTAL_COUNT' || indicator==='SUCCESS_COUNT' || indicator==='FAILURE_COUNT' || indicator==='SUCCESS_RATE'){
-  				setNames.name1 = '总数';
-  				setNames.name2 = '成功数';
-  				setNames.name3 = '失败数';
-  				setNames.name4 = '正确率';
-  				setNames.flag = true;
+  				return true;
   			}else{
-  				setNames.name1 = '最大时长';
-  				setNames.name2 = '最小时长';
-  				setNames.name3 = '平均时长';
-  				setNames.name4 = '90%时长';
-  				setNames.flag = false;
+  				return false;
   			}
-  			this.setNames(setNames);
-
-  		},
-  		setNames: function(setNames) {
-			this.$dispatch('dispatch-dataEchart-dataUl-names', setNames);//将name数据经由父组件[todayStatistics.vue]传递至子组件[dataUl.vue]中
-		}
+  		}
   	},
   	events: {
 	    'broadcast-todayStatistics-dataEchart-queryCondition': function(date) {

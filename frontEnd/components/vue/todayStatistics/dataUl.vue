@@ -15,7 +15,8 @@
 					<tbody>
 						<tr>
 							<td>
-								<label  style="color:#bb33c9">{{names.name1}}</label>
+								<label  v-show="info.show" style="color:#bb33c9">总数</label>
+								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.cpic[0]}}
@@ -29,7 +30,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label style="color:green">{{names.name2}}</label>
+								<label  v-show="info.show" style="color:green">成功数</label>
+								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.cpic[1]}}
@@ -43,7 +45,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label>{{names.name3}}</label>
+								<label  v-show="info.show" >失败数</label>
+								<label  v-else >平均时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.cpic[2]}}
@@ -57,16 +60,17 @@
 						</tr>
 						<tr>
 							<td>
-								<label style="color:orange">{{names.name4}}</label>
+								<label  v-show="info.show" style="color:orange">正确率</label>
+								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.cpic[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_calculatePremium[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.cpic_calculatePremium[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.cpic_submitApplication[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.cpic_submitApplication[3]}}<span v-show="info.show">%</span>
 							</td>
 						</tr>
 					</tbody>
@@ -86,7 +90,8 @@
 					<tbody>
 						<tr>
 							<td>
-								<label style="color:#bb33c9">{{names.name1}}</label>
+								<label  v-show="info.show" style="color:#bb33c9">总数</label>
+								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.picc[0]}}
@@ -100,7 +105,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label style="color:green">{{names.name2}}</label>
+								<label  v-show="info.show" style="color:green">成功数</label>
+								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.picc[1]}}
@@ -114,7 +120,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label>{{names.name3}}</label>
+								<label  v-show="info.show" >失败数</label>
+								<label  v-else >平均时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.picc[2]}}
@@ -128,16 +135,17 @@
 						</tr>
 						<tr>
 							<td>
-								<label style="color:orange">{{names.name4}}</label>
+								<label  v-show="info.show" style="color:orange">正确率</label>
+								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.picc[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_calculatePremium[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.picc_calculatePremium[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.picc_submitApplication[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.picc_submitApplication[3]}}<span v-show="info.show">%</span>
 							</td>
 						</tr>
 					</tbody>
@@ -157,7 +165,8 @@
 					<tbody>
 						<tr>
 							<td>
-								<label style="color:#bb33c9">{{names.name1}}</label>
+								<label  v-show="info.show" style="color:#bb33c9">总数</label>
+								<label  v-else style="color:#bb33c9">最大时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.gpic[0]}}
@@ -171,7 +180,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label style="color:green">{{names.name2}}</label>
+								<label  v-show="info.show" style="color:green">成功数</label>
+								<label  v-else style="color:green">最小时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.gpic[1]}}
@@ -185,7 +195,8 @@
 						</tr>
 						<tr>
 							<td>
-								<label >{{names.name3}}</label>
+								<label  v-show="info.show" >失败数</label>
+								<label  v-else >平均时长</label>
 							</td>
 							<td>
 								{{info.reportData.sumItems.gpic[2]}}
@@ -199,16 +210,17 @@
 						</tr>
 						<tr>
 							<td>
-								<label  style="color:orange">{{names.name4}}</label>
+								<label  v-show="info.show" style="color:orange">正确率</label>
+								<label  v-else style="color:orange">90%时长</label>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.gpic[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_calculatePremium[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.gpic_calculatePremium[3]}}<span v-show="info.show">%</span>
 							</td>
 							<td>
-								{{info.reportData.sumItems.gpic_submitApplication[3]}}<span v-show="names.flag">%</span>
+								{{info.reportData.sumItems.gpic_submitApplication[3]}}<span v-show="info.show">%</span>
 							</td>
 						</tr>
 					</tbody>
@@ -243,13 +255,6 @@
 
 <script>
 'use strict';
-var names = {
-	name1: '',
-	name2: '',
-	name3: '',
-	name4: '',
-	flag:{}
-};
 module.exports= {
 	props:['info'],  
 	compiled: function () {
@@ -258,7 +263,7 @@ module.exports= {
 	data: function () {
 	    //绑定数据
 	    return  {
-			names,checkedNames: 'TOTAL_COUNT'
+			checkedNames: 'TOTAL_COUNT'
 		}
 	},
 	ready: function() {
@@ -279,11 +284,6 @@ module.exports= {
 		getCheckedNames: function(data,indicator) {//将指标信息传递到父组件[todayStatistics.vue]中
 			data.$dispatch('dispatch-dataUl-dataEchart-indicator', indicator);
 		}
-	},
-	events: {
-	    'broadcast-todayStatistics-dataUl-names': function(setNames) {//获取父组件传递的name数据.实际由[dataEchart.vue]子组件传递
-	    	this.names = Object.assign({}, this.names, setNames);
-	    }
 	}
 }
 </script>
@@ -304,6 +304,7 @@ module.exports= {
 .gpicSpan {
 	margin-top: 12px;
 	margin-left: 5px;
+	margin-right: -20px;
     	height: 70px;
     	width: 30%;
 	min-width: 100px;
@@ -316,6 +317,7 @@ module.exports= {
 .piccSpan {
 	margin-top: 12px;
 	margin-left: 5px;
+	margin-right: -20px;
     	height: 70px;
     	width: 30%;
 	min-width: 100px;
@@ -328,6 +330,7 @@ module.exports= {
 .cpicSpan {
 	margin-top: 12px;
 	margin-left: 5px;
+	margin-right: -20px;
     	height: 70px;
     	width: 30%;
 	min-width: 100px;

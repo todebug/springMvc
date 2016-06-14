@@ -88,9 +88,9 @@ module.exports= {
         	},
         	events: {
 	    'broadcast-todayStatistics-pageBar-getPageData': function(pageData) {//从父组件中获取页数信息
-	      // 设置当前页数及总页数
-	      this.cur = pageData.cur;
-	      this.all = pageData.all;
+	      	// 设置当前页数及总页数
+	      	this.cur = pageData.cur;
+	      	this.all = pageData.all;
 	    }
 	}
 }
