@@ -25,12 +25,7 @@
                                 <ul id="analyDataChild" class="displayOpen">
                                         <li class="active">
                                             <a v-link="{ path: '/todayStatistics' }" @click="choose">
-                                                    交易统计
-                                                </a>
-                                        </li>
-                                        <li>
-                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
-                                                    交易时效
+                                                    交易统计及时效
                                                 </a>
                                         </li>
                                         <li>
@@ -70,10 +65,6 @@ module.exports = {
             })
         },
         switchToggleTrendChild: function() {
-                 console.log(this);
-                 console.log(this.$el);
-                 //console.log(this.options.querySelect.('.plus'));
-                 console.log(this.$options);
                 $('#analyTrendChild').toggle();
                 if($('#analyTrend').hasClass('minus')){
                     $('#analyTrend').removeClass('minus').addClass('plus');
@@ -83,7 +74,7 @@ module.exports = {
                 
         },
         switchToggleDataChild: function() {
-                 $('#analyDataChild').toggle();
+                  $('#analyDataChild').toggle();
                   if($('#analyData').hasClass('minus')){
                     $('#analyData').removeClass('minus').addClass('plus');
                 }else{
@@ -95,7 +86,6 @@ module.exports = {
 </script>
 
 <style type="text/css">
-
 aside {
     background: white;
     position: fixed;

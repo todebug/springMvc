@@ -7,13 +7,13 @@
 						{{item.date}}
 					</td>
 					<td>
-						{{item.timeRate}}
+						{{item.date}}
 					</td>
 					<td>
-						{{item.tradeCount}}
+						{{item.date}}
 					</td>
 					<td>
-						{{item.tradeCount}}
+						{{item.date}}
 					</td>
 				</tr>
 			</tbody>
@@ -25,12 +25,14 @@
 'use strict';
 
 module.exports= {
-	props:['item']
+	props:['item'],
+	compiled: function () {
+		//console.log(this.item);
+	}
 }
 </script>
 
 <style type="text/css">
-
 .itemList {
 	width: 99%;
 	min-width: 1000px;

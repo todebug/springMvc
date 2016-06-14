@@ -141,11 +141,28 @@ var renderChart=function(type,startDate,endDate,chart){
 			fontSize : 20
 		}
 	});
+	var host = config.host;
+	var url = host+'statistic/getStatistic';
+	var result = fetch(url,{
+	  method: 'post',
+	  mode: 'cors',
+	   headers: {
+	     'Accept': 'application/json',
+	     'Content-Type': 'application/json'
+	 	},
+	  body: JSON.stringify({
+	 		    'startDate': queryData.startDate,
+	 		    'endDate': queryData.endDate,
+	 		    'contrastStartDate': queryData.contrastStartDate,
+	 		    'contrastEndDate': queryData.contrastEndDate,
+	 		    'periodType': queryData.periodType
+	  })
+	})
 	var bookingurl=host+'getSucessSaveHistory/'+startDate+'/'+endDate;
 	var failedurl=host+'getFailureInfoCount/'+startDate+'/'+endDate;
 	var url=type===1?bookingurl:failedurl;
 	url = 'http://localhost:8888/statistic/getSucessSaveHistory/2016-05-23/2016-05-27';
-	var result = fetch(url)
+	//var result = fetch(url)
 	result.then(function(response) {
 		return response.json();
 	}).then(function(j) {

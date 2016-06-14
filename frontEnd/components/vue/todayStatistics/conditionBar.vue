@@ -33,22 +33,15 @@
 
 <script>
 'use strict';
-var Vue = require('vue');
 var insuranceSelect,itradeSelect;
 var selectData={
             insuranceSelect: '全部',
             itradeSelect: '全部'
 }
-var vm = new Vue({
-        data: {
-            selectData
-        }
-    });
 module.exports= {
 	data: function () {
-		return { 
-		    selectData
-		}
+		//绑定数据
+		return {selectData}
 	},
 	methods: {
 		insuredSelect: function(event) {
@@ -67,7 +60,6 @@ module.exports= {
 </script>
 
 <style type="text/css">
-
 .queryBar {
 	margin: 5px;
 	height: 36px;

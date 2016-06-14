@@ -1,7 +1,7 @@
 <template>
 	<div id="todayStatistics">
 		<head-Bar></head-Bar>
-		<data-Ul :xdy="xdy"></data-Ul> 
+		<data-Ul :info="info"></data-Ul> 
 		<data-Echart></data-Echart>
 		<condition-Bar></condition-Bar>
 		<div class="listDiv">
@@ -16,7 +16,7 @@
 				</thead>
 			</table>
 		</div>
-		<data-List v-for="item in xdy.dataList"  :item="item"></data-List>
+		<data-List v-for="item in info.dataList"  :item="item"></data-List>
 	</div>
 </template>
 
@@ -41,15 +41,38 @@ var data3 = {
 dataList.push(data1);
 dataList.push(data2);
 dataList.push(data3);
-var xdy = {
-	    	    accessCount: '434',
-		    accessTime: '00:03:09',
-		    averageAccessPage: '1.19',
-		    conversionCount: '34',
-		    conversionRate: '31%',
-		    orderConversionRate: '55%',
-		    dataList: dataList
-		};
+//初始化对象属性
+var info = {
+	reportData: {
+		sumTitle: {
+			cpic: '',
+			cpic_calculatePremium: {},
+			cpic_submitApplication: {},
+			picc: {},
+			picc_calculatePremium: {},
+			picc_submitApplication: {},
+			gpic: {},
+			gpic_calculatePremium: {},
+			gpic_submitApplication: {},
+		},
+		sumItems: {
+			cpic: {},
+			cpic_calculatePremium: {},
+			cpic_submitApplication: {},
+			picc: {},
+			picc_calculatePremium: {},
+			picc_submitApplication: {},
+			gpic: {},
+			gpic_calculatePremium: {},
+			gpic_submitApplication: {}
+		}
+	},
+	dataList: dataList
+};
+var Vue = require('vue');
+var vm = new Vue({
+  data: info
+})
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化默认值
@@ -57,50 +80,56 @@ var queryData = {
 	startDate: today,
 	endDate: today,
 	contrastStartDate: '',
-             contrastEndDate: '',
-	periodType: 'byDay',
-	checkedName: 'tradeCount',
+            	contrastEndDate: '',
+	periodType: 'TWO_MINUTE',//默认实时
+            	indicators: ['TOTAL_COUNT'],//默认总交易数
 	selectData: ''
 };
 module.exports= {
 	data: function () {
-	    return  {
-	    	xdy
-		}
+	    //绑定数据
+	    return  {info,queryData}
 	},
 	events: {
 	    'head-bar-date-condition': function (dateData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      queryData.startDate = dateData.startDate;
-	      queryData.endDate = dateData.endDate;
-	      queryData.periodType = dateData.periodType;
-	      this.getDateTime(queryData);
+	      this.queryData.startDate = dateData.startDate;
+	      this.queryData.endDate = dateData.endDate;
+	      this.queryData.periodType = dateData.periodType;
+	      this.getDateTime(this.queryData);
 	    },
 	    'data-Ul-checkedNames': function (checkedNames) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      queryData.checkedName = checkedNames;
-	      this.getDateTime(queryData);
+	      this.queryData.indicators = [];
+	      this.queryData.indicators.push(checkedNames);
+	      this.getDateTime(this.queryData);
 	    },
 	    'condition-bar-selectData': function (selectData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      queryData.selectData = selectData;
-	      this.getDateTime(queryData);
+	      this.queryData.selectData = selectData;
+	      this.getDateTime(this.queryData);
+	    },
+	    'loading-other-vue-data': function (loadingData) {
+	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	      // 动态设置属性
+	      this.info = Object.assign({}, this.info, loadingData);
+	    },
+	    'set-names': function (setNames) {
+	      // 事件回调内的 `this` 自动绑定到注册它的实例上
+	     this.$broadcast('set-dataUl-names', setNames);
 	    }
 	},
 	methods: {
-		getDateTime: function(queryData){			
-			if(queryData.startDate !=='' && queryData.endDate!=='' && queryData.periodType!==''){
-				this.$broadcast('query-condition', queryData);
-				//console.log(queryData);
-			}
+		getDateTime: function(queryData){	
+			this.$broadcast('query-condition', queryData);
 		}
 	},
 	components: {
-	headBar: require ('../../components/vue/todayStatistics/headBar.vue'),
-	dataUl: require ('../../components/vue/todayStatistics/dataUl.vue'),
-	dataEchart: require ('../../components/vue/todayStatistics/dataEchart.vue'),
-	conditionBar: require ('../../components/vue/todayStatistics/conditionBar.vue'),
-	dataList: require ('../../components/vue/todayStatistics/dataList.vue')
+		headBar: require ('../../components/vue/todayStatistics/headBar.vue'),
+		dataUl: require ('../../components/vue/todayStatistics/dataUl.vue'),
+		dataEchart: require ('../../components/vue/todayStatistics/dataEchart.vue'),
+		conditionBar: require ('../../components/vue/todayStatistics/conditionBar.vue'),
+		dataList: require ('../../components/vue/todayStatistics/dataList.vue')
 	}
 	
 }

@@ -9,7 +9,15 @@
 'use strict';
 var echarts = require('echarts');
 var config = require('../../lib/js/config');
-var queryDates=[],sumData=[],successData=[],failureData=[];
+var echartData={
+	queryDates: [],
+	dataCpic: [],
+	dataPicc: [],
+	dataGpic: [],
+	dataCpicName: '',
+	dataPiccName: '',
+	dataGpicName: ''
+}
 var tradeOption = {
 	title: {
         		text: '交易统计'
@@ -18,7 +26,10 @@ var tradeOption = {
 		trigger: 'axis'
 	},
 	legend: {
-		data: ['总笔数', '成功笔数','失败笔数']
+		orient: 'horizontal', 
+        		x: 'right',
+        		y: 'top',
+		data: [echartData.dataCpicName, echartData.dataPiccName,echartData.dataGpicName]
 	},
 	grid: {
 	        	left: '3%',
@@ -34,29 +45,33 @@ var tradeOption = {
 	},
 	xAxis: [{
 		type: 'category',
-		data:  queryDates
+		boundaryGap : false,
+		axisLabel :{  
+		    interval:0   
+		},
+		data:  echartData.queryDates
 	}],
 	yAxis: [{
 		type: 'value',
 		splitArea: {
-			show: true
+			show: false
 		}
 	}],
 	series: [{
-		name: '总笔数',
+		name: echartData.dataCpicName,
 		type:'line',
-		data: sumData
+		data: echartData.dataCpic
 	}, {
-		name: '成功笔数',
+		name: echartData.dataPiccName,
 		type:'line',
-		data: successData
+		data: echartData.dataPicc
 	},{
-		name: '失败笔数',
+		name: echartData.dataGpicName,
 		type:'line',
-		data: failureData
+		data: echartData.dataGpic
 	}]
 };
-var renderChart=function(chart,queryData){
+var renderChart=function(chart,queryData,_this){
 	chart.showLoading({
 		textStyle : {
 			fontSize : 20
@@ -76,33 +91,65 @@ var renderChart=function(chart,queryData){
 	 		    'endDate': queryData.endDate,
 	 		    'contrastStartDate': queryData.contrastStartDate,
 	 		    'contrastEndDate': queryData.contrastEndDate,
-	 		    'periodType': queryData.periodType
+	 		    'periodType': queryData.periodType,
+	 		    'indicators': queryData.indicators
 	  })
 	})
 	result.then(function(response) {
 		return response.json();
 	}).then(function(j) {
-		console.log(j);
-			queryDates = ['2016-05-21','2016-05-22','2016-05-23','2016-05-24','2016-05-25','2016-05-26','2016-05-27'];//queryDates=j.flowRecordDate;
-			sumData=[1,2,3,4,5,6,7];//j.flowRecordCount[0].recordCount;
-			successData=[2,5,6,9,3,5,2];//j.flowRecordCount[1].recordCount;
-			failureData=[4,5,8,2,6,7,2];//j.flowRecordCount[2].recordCount;
+		//console.log(j);
+			 _this.judgeIndicator(queryData.indicators[0]);
+			//设置判断[交易统计]还是[交易时效]渲染条件
+			//实时设置其他vue数据
+			_this.dispatchDataLoad(_this,j);
+			//按照指标设置数据
+			echartData = _this.modifyEchartData(j,echartData,queryData.indicators[0]);
+			//指标为成功率时,设置y轴百分比
+			if(queryData.indicators[0]==='SUCCESS_RATE'){
+				tradeOption.yAxis=[{
+					type: 'value',
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						show: true,
+						interval: 'auto',
+						formatter: '{value}%'
+					}
+				}];
+			}else{
+				tradeOption.yAxis=[{
+					type: 'value',
+					splitArea: {
+						show: false
+					}
+				}];
+			}
+			tradeOption.legend.orient='horizontal';
+			tradeOption.legend.x='right';
+			tradeOption.legend.y='top';
+			tradeOption.legend.data=[echartData.dataCpicName, echartData.dataPiccName,echartData.dataGpicName];
 			tradeOption.xAxis=[{
 				type: 'category',
-				data:  queryDates
+				boundaryGap : false,
+				axisLabel :{  
+				    interval:0   
+				},
+				data:  echartData.queryDates
 			}];
 			tradeOption.series=[{
-				name: '总笔数',
+				name: echartData.dataCpicName,
 				type:'line',
-				data: sumData
+				data: echartData.dataCpic
 			}, {
-				name: '成功笔数',
+				name: echartData.dataPiccName,
 				type:'line',
-				data: successData
+				data: echartData.dataPicc
 			},{
-				name: '失败笔数',
+				name: echartData.dataGpicName,
 				type:'line',
-				data: failureData
+				data: echartData.dataGpic
 			}];
 			chart.hideLoading();
 			chart.setOption(tradeOption);
@@ -112,28 +159,41 @@ var renderChart=function(chart,queryData){
 	});
 };
 var myChart;
+var schedule = require('node-schedule');
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化查询条件
-var queryTimeData={
+var queryCondition={
 	startDate: today,
             endDate: today,
             contrastStartDate: '',
             contrastEndDate: '',
-            periodType: 'byDay'
+            periodType: 'TWO_MINUTE',//默认实时
+            indicators: ['TOTAL_COUNT']//默认总交易数
 }
-var schedule = require('node-schedule');
+
 module.exports= {
+	data: function () {
+	    //绑定查询条件
+	    return  {queryCondition}
+	},
 	ready: function(){
-		this.drawEchart(queryTimeData);
-		this.nodeSchedule();
+		this.drawEchart(this.queryCondition);
+		this.nodeSchedule(this.queryCondition);
   	},
   	methods: {
   		drawEchart: function(queryData) {
+  			//echart渲染
+  			var _this = this;
   			myChart = echarts.init(document.getElementById('statisticsData'));
-			renderChart(myChart,queryData);
+			renderChart(myChart,queryData,_this);	
   		},
-  		nodeSchedule: function() {
+  		getQueryData: function() {
+  			//实时获取查询vue绑定的查询条件
+  			return this.queryCondition;
+  		},
+  		nodeSchedule: function(queryData) {
+  			//页面定时刷新处理
   			var rule = new schedule.RecurrenceRule();  
   			var times = [];
   			//每三分钟执行一次
@@ -144,17 +204,118 @@ module.exports= {
 			var _this = this;
 			var count = 0;
 			var j = schedule.scheduleJob(rule, function(){
-			     　　_this.drawEchart(queryTimeData);
+				//指标为实时时才刷新
+				if(_this.getQueryData().periodType==='TWO_MINUTE'){
+					//根据查询条件动态渲染echart
+				     　　_this.drawEchart(_this.getQueryData());
 			     	count++;
 			     	var myDate = new Date();
 				console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
+				}
 			　　});
-  		}
+  		},
+  		dispatchDataLoad: function(_this,data) {
+  			if(data!==''&&data!==undefined){
+  				//将查询数据上载到父组件进行分发处理
+  				_this.$dispatch('loading-other-vue-data', data);
+  			}
+  		},
+  		modifyEchartData: function(j,echartData,indicators) {
+  			if(indicators==='TOTAL_COUNT'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_TOTAL_COUNT;
+				echartData.dataPicc = j.reportData.items.picc_TOTAL_COUNT;
+				echartData.dataGpic = j.reportData.items.gpic_TOTAL_COUNT;
+				echartData.dataCpicName = j.reportData.indicators.cpic_TOTAL_COUNT;
+				echartData.dataPiccName = j.reportData.indicators.picc_TOTAL_COUNT;
+				echartData.dataGpicName = j.reportData.indicators.gpic_TOTAL_COUNT;
+  			}else if(indicators==='SUCCESS_COUNT'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_SUCCESS_COUNT;
+				echartData.dataPicc = j.reportData.items.picc_SUCCESS_COUNT;
+				echartData.dataGpic = j.reportData.items.gpic_SUCCESS_COUNT;
+				echartData.dataCpicName = j.reportData.indicators.cpic_SUCCESS_COUNT;
+				echartData.dataPiccName = j.reportData.indicators.picc_SUCCESS_COUNT;
+				echartData.dataGpicName = j.reportData.indicators.gpic_SUCCESS_COUNT;
+  			}else if(indicators==='FAILURE_COUNT'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_FAILURE_COUNT;
+				echartData.dataPicc = j.reportData.items.picc_FAILURE_COUNT;
+				echartData.dataGpic = j.reportData.items.gpic_FAILURE_COUNT;
+				echartData.dataCpicName = j.reportData.indicators.cpic_FAILURE_COUNT;
+				echartData.dataPiccName = j.reportData.indicators.picc_FAILURE_COUNT;
+				echartData.dataGpicName = j.reportData.indicators.gpic_FAILURE_COUNT;
+  			}else if(indicators==='SUCCESS_RATE'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_SUCCESS_RATE;
+				echartData.dataPicc = j.reportData.items.picc_SUCCESS_RATE;
+				echartData.dataGpic = j.reportData.items.gpic_SUCCESS_RATE;
+				echartData.dataCpicName = j.reportData.indicators.cpic_SUCCESS_RATE;
+				echartData.dataPiccName = j.reportData.indicators.picc_SUCCESS_RATE;
+				echartData.dataGpicName = j.reportData.indicators.gpic_SUCCESS_RATE;
+  			}else if(indicators==='MAX_DURATION'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_MAX_DURATION;
+				echartData.dataPicc = j.reportData.items.picc_MAX_DURATION;
+				echartData.dataGpic = j.reportData.items.gpic_MAX_DURATION;
+				echartData.dataCpicName = j.reportData.indicators.cpic_MAX_DURATION;
+				echartData.dataPiccName = j.reportData.indicators.picc_MAX_DURATION;
+				echartData.dataGpicName = j.reportData.indicators.gpic_MAX_DURATION;
+  			}else if(indicators==='MIN_DURATION'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_MIN_DURATION;
+				echartData.dataPicc = j.reportData.items.picc_MIN_DURATION;
+				echartData.dataGpic = j.reportData.items.gpic_MIN_DURATION;
+				echartData.dataCpicName = j.reportData.indicators.cpic_MIN_DURATION;
+				echartData.dataPiccName = j.reportData.indicators.picc_MIN_DURATION;
+				echartData.dataGpicName = j.reportData.indicators.gpic_MIN_DURATION;
+  			}else if(indicators==='AVERAGE_DURATION'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_AVERAGE_DURATION;
+				echartData.dataPicc = j.reportData.items.picc_AVERAGE_DURATION;
+				echartData.dataGpic = j.reportData.items.gpic_AVERAGE_DURATION;
+				echartData.dataCpicName = j.reportData.indicators.cpic_AVERAGE_DURATION;
+				echartData.dataPiccName = j.reportData.indicators.picc_AVERAGE_DURATION;
+				echartData.dataGpicName = j.reportData.indicators.gpic_AVERAGE_DURATION;
+  			}else if(indicators==='NINETY_DURATION'){
+  				echartData.queryDates = j.reportData.dataTitle;
+				echartData.dataCpic = j.reportData.items.cpic_NINETY_DURATION;
+				echartData.dataPicc = j.reportData.items.picc_NINETY_DURATION;
+				echartData.dataGpic = j.reportData.items.gpic_NINETY_DURATION;
+				echartData.dataCpicName = j.reportData.indicators.cpic_NINETY_DURATION;
+				echartData.dataPiccName = j.reportData.indicators.picc_NINETY_DURATION;
+				echartData.dataGpicName = j.reportData.indicators.gpic_NINETY_DURATION;
+  			}
+  			return echartData;
+  		},
+  		judgeIndicator: function(indicator) {
+  			var setNames = {};
+  			if(indicator==='TOTAL_COUNT' || indicator==='SUCCESS_COUNT' || indicator==='FAILURE_COUNT' || indicator==='SUCCESS_RATE'){
+  				setNames.name1 = '总数';
+  				setNames.name2 = '成功数';
+  				setNames.name3 = '失败数';
+  				setNames.name4 = '正确率';
+  				setNames.flag = true;
+  			}else{
+  				setNames.name1 = '最大时长';
+  				setNames.name2 = '最小时长';
+  				setNames.name3 = '平均时长';
+  				setNames.name4 = '90%时长';
+  				setNames.flag = false;
+  			}
+  			this.setNames(setNames);
+
+  		},
+  		setNames: function(setNames) {
+			this.$dispatch('set-names', setNames);
+		}
   	},
   	events: {
-	    'query-condition': function (dateData) {
+	    'query-condition': function(dateData) {
 	      // 事件回调内的 `this` 自动绑定到注册它的实例上
-	      this.drawEchart(dateData);
+	      // 动态绑定查询对象数据
+	      this.queryCondition = Object.assign({}, this.queryCondition, dateData);
+	      this.drawEchart(this.queryCondition);
 	    }
 	}
 }
@@ -162,7 +323,6 @@ module.exports= {
 </script>
 
 <style type="text/css">
-
 .dataEchart {
 	margin-left: 5px;
 	margin-right: 5px;

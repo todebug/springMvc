@@ -1,8 +1,8 @@
 <template>
 <div class="headBar" id="headBar">
 	<div class="durationTarget" id="durationTarget" @click="clickTimeValueTarget">
-		<a id="time">实时</a>
-		<a class="active" id="today">今天</a>
+	 	<a class="active" id="TWO_MINUTE">实时</a>
+		<a id="today">今天</a>
 		<a id="yesterday">昨天</a>
 		<a id="last7Days">最近7天</a>
 		<a id="last30Days">最近30天</a>
@@ -30,10 +30,10 @@
 	</div>
 	<span id="tip" class="tipHide">开始时间不得小于结束时间!</span>
 	<div class="dataTarget" id="dataTarget" @click="clickTimeTypeTarget">
-		<a id="byTime">按时</a>
-		<a class="active"  id="byDay">按日</a>
-		<a id="byWeek">按周</a>
-		<a id="byMonth">按月</a>
+		<a id="HOUR">按时</a>
+		<a id="DAILY">按日</a>
+		<a id="WEEKLY">按周</a>
+		<a id="MONTHLY">按月</a>
 	</div>
 </div>
 </template>
@@ -43,7 +43,7 @@
 require('imports?$=jquery!../../lib/js/bootstrap.min.js');
 require('imports?$=jquery!../../lib/js/bootstrap-datetimepicker.min.js');
 require('imports?$=jquery!../../lib/js/locales/bootstrap-datetimepicker.zh-CN.js');
-var Vue = require('vue')
+var Vue = require('vue');
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 var options={
@@ -56,26 +56,20 @@ var options={
         	pickerPosition: "bottom-right"
 };
 var queryTimeData={
-            periodType: 'byDay'
+            periodType: 'TWO_MINUTE'
 }
-var vm = new Vue({
-        data: {
-            queryTimeData
-        }
-    });
 module.exports= {
-	data: function () {
-	    return { 
-	    	queryTimeData
-	    }
+	data: function() {
+	    //绑定数据
+	    return {queryTimeData}
 	},
 	ready: function(){
 			this.datePicker();
 			//初始化事件
 			this.clickTimeValueTarget();
 			this.clickTimeTypeTarget();
-			$('#startDate').val(today)
-			$('#endDate').val(today)
+			$('#startDate').val('')
+			$('#endDate').val('')
 			
 	},
 	methods: {
@@ -117,6 +111,7 @@ module.exports= {
 			});
 		},
 		clickTimeValueTarget: function() {
+			var _this = this;
 		            $('#durationTarget a').click(function(){
 		           	         //添加点击样式
 		                    $('#durationTarget a').removeClass('active');
@@ -124,27 +119,47 @@ module.exports= {
 		                    //去除错误提示
 		                    $('#tip').removeClass('tipShow').addClass('tipHide');
 		                    //点击时间标签时,datepicker赋值操作
-		                    if($(this).context.id==='time'){
-		                    	$('#startDate').val('');
-		                    	$('#endDate').val('');
+		                    if($(this).context.id==='TWO_MINUTE'){
+		                    	//清空查询时间
+		                    	$('#startDate').val('')
+				$('#endDate').val('')
+		                    	//设置查询条件
+		                    	_this.queryTimeData.periodType = 'TWO_MINUTE';
+		                    	//移除按时等标签
+		                    	$('#dataTarget a').removeClass('active');
 		                    }else if($(this).context.id==='today'){
 		                    	$('#startDate').val(today);
 		                    	$('#endDate').val(today);
+		                    	//没有设置指标,则设置默认指标
+		                    	_this.setIndicator();
 		                    }else if($(this).context.id==='yesterday'){
 		                    	var yesterday=moment().subtract(1, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(yesterday);
 		                    	$('#endDate').val(yesterday);
+		                    	//没有设置指标,则设置默认指标
+		                    	_this.setIndicator();
 		                    }else if($(this).context.id==='last7Days'){
 		                    	var weeksbefore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(weeksbefore);
 		                    	$('#endDate').val(today);
+		                    	//没有设置指标,则设置默认指标
+		                    	_this.setIndicator();
 		                    }else if($(this).context.id==='last30Days'){
 		                    	var monthbefore=moment().subtract(30, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(monthbefore);
 		                    	$('#endDate').val(today);
+		                    	//没有设置指标,则设置默认指标
+		                    	_this.setIndicator();
 		                    }
 		            });
 		            this.dispatchData(this);
+		 },
+		 setIndicator: function() {
+		 	if(!$('#HOUR').hasClass('active')&&!$('#DAILY ').hasClass('active')&&!$('#WEEKLY ').hasClass('active')&&!$('#MONTHLY').hasClass('active')){
+		 		//默认实时是,选择天时,默认设置按时查询指标
+		 		$('#HOUR').addClass('active');
+		 		this.queryTimeData.periodType = 'HOUR';
+		 	}
 		 },
 		 clickDurationTarget: function() {
 		 		$('#contrastStartDate').val('');
@@ -156,33 +171,55 @@ module.exports= {
 		                    	}
 		 },
 		 clickTimeTypeTarget: function() {
+		 	var _this = this;
 		 	$('#dataTarget a').click(function(){
+		 	         //点击按时或按日或按周或按月时,如果没有预先选中时间,则默认设置今天
+		 	         _this.setQueryTime();
+		 	         //移除实时样式
+		 	         $('#TWO_MINUTE').removeClass('active');
 		           	         //添加点击样式
 		                    $('#dataTarget a').removeClass('active');
 		                    $(this).addClass('active');
-		                    vm.queryTimeData.periodType = $(this).context.id;
+		                    _this.queryTimeData.periodType = $(this).context.id;
 		                })
 		 	this.dispatchData(this);
 		},
+		setQueryTime: function() {
+			if(!$('#today').hasClass('active')&&!$('#yesterday ').hasClass('active')&&!$('#last7Days  ').hasClass('active')&&!$('#last30Days  ').hasClass('active')&&!$('#duration').hasClass('active')){
+		 		//点击按时或按日或按周或按月时,如果没有预先选中时间,则默认设置今天
+		 		$('#today').addClass('active');
+		 		$('#startDate').val(today);
+		 		$('#endDate').val(today);
+		 	}
+		},
 		dispatchData: function(data) {
-			if($('#startDate').val()!==''&&$('#endDate').val()!==''){
 				var dateData = {
 					startDate: $('#startDate').val(),
 					endDate: $('#endDate').val(),
 					contrastStartDate: $('#contrastStartDate').val(),
              				contrastEndDate: $('#contrastEndDate').val(),
-					periodType: vm.queryTimeData.periodType
+					periodType: this.queryTimeData.periodType
 				}
-				data.$dispatch('head-bar-date-condition', dateData);
-			}
+				//时间判断,防止错误查询条件触发查询操作
+				if(dateData.startDate===''&&dateData.endDate===''&&dateData.contrastStartDate===''&&dateData.contrastEndDate===''){
+					//时间均为空
+					data.$dispatch('head-bar-date-condition', dateData);
+				}else if((dateData.startDate!==''&&dateData.endDate!=='')&&(dateData.contrastStartDate===''&&dateData.contrastEndDate==='')){
+					//判断对比时间为空,查询时间不为空
+					data.$dispatch('head-bar-date-condition', dateData);
+				}else if((dateData.startDate===''&&dateData.endDate==='')&&(dateData.contrastStartDate!==''&&dateData.contrastEndDate!=='')){
+					//判断对比时间不为空,查询时间为空
+					data.$dispatch('head-bar-date-condition', dateData);
+				}else if(dateData.startDate!==''&&dateData.endDate!==''&&dateData.contrastStartDate!==''&&dateData.contrastEndDate!==''){
+					//时间均为不空
+					data.$dispatch('head-bar-date-condition', dateData);
+				}	
 		}
 	}
-	
 }
 </script>
 
 <style type="text/css">
-
 .headBar {
 	margin: 5px;
 	height: 36px;
