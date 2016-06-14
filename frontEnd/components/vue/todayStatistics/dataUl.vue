@@ -306,7 +306,8 @@ module.exports= {
 	margin-top: 12px;
 	margin-left: 5px;
     	height: 70px;
-    	width: 100px;
+    	width: 30%;
+	min-width: 100px;
 	text-align: center;
 	vertical-align: middle; 
 	background: url("../../lib/image/gpic.png") left no-repeat white;
@@ -317,7 +318,8 @@ module.exports= {
 	margin-top: 12px;
 	margin-left: 5px;
     	height: 70px;
-    	width: 100px;
+    	width: 30%;
+	min-width: 100px;
 	text-align: center;
 	vertical-align: middle; 
 	background: url("../../lib/image/picc.png") left no-repeat white;
@@ -328,7 +330,8 @@ module.exports= {
 	margin-top: 12px;
 	margin-left: 5px;
     	height: 70px;
-    	width: 100px;
+    	width: 30%;
+	min-width: 100px;
 	text-align: center;
 	vertical-align: middle; 
 	background: url("../../lib/image/cpic.png") left no-repeat white;
@@ -339,7 +342,7 @@ module.exports= {
 	background: white;
 	display: inline-flex;
 	width: 32%;
-	min-width: 250px;
+	min-width: 300px;
 	text-align: center;
 	vertical-align: middle; 
 	border: 1px solid #d6d6d6;
@@ -352,7 +355,7 @@ module.exports= {
 	background: white;
 	display: inline-flex;
 	width: 32%;
-	min-width: 250px;
+	min-width: 300px;
 	text-align: center;
 	vertical-align: middle; 
 	border-right: 1px solid #d6d6d6;
@@ -368,7 +371,7 @@ module.exports= {
 	background: white;
 	display: inline-flex;
 	width: 32%;
-	min-width: 250px;
+	min-width: 300px;
 	text-align: center;
 	vertical-align: middle; 
 	border-right: 1px solid #d6d6d6;
@@ -380,7 +383,8 @@ module.exports= {
 }
 
 .divUl {
-	width: 350px;
+	width: 70%;
+	min-width: 200px;
 	list-style-type:none;
 	margin-bottom: 5px;
 	text-align: center;
@@ -389,7 +393,8 @@ module.exports= {
 
 .divUl thead {
 	font-weight: bold;
-	width: 10px;
+	width: 100%;
+	min-width: 190px;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -397,7 +402,8 @@ module.exports= {
 .divUl thead tr {
 	font-weight: bold;
 	text-align: center;
-	width: 30px;
+	width: 100%;
+	min-width: 190px;
 	vertical-align: middle;
 }
 
@@ -409,12 +415,15 @@ module.exports= {
 }
 
 .divUl tbody {
+	width: 100%;
+	min-width: 190px;
 	text-align: center;
 	vertical-align: middle;
-	width: 10px;
 }
 
 .divUl tbody tr {
+	width: 100%;
+	min-width: 190px;
 	text-align: center;
 	vertical-align: middle;
 }

@@ -17,6 +17,7 @@
 			</table>
 		</div>
 		<data-List v-for="item in info.dataList"  :item="item"></data-List>
+		<page-bar></page-bar>
 	</div>
 </template>
 
@@ -129,7 +130,8 @@ module.exports= {
 		dataUl: require ('../../components/vue/todayStatistics/dataUl.vue'),
 		dataEchart: require ('../../components/vue/todayStatistics/dataEchart.vue'),
 		conditionBar: require ('../../components/vue/todayStatistics/conditionBar.vue'),
-		dataList: require ('../../components/vue/todayStatistics/dataList.vue')
+		dataList: require ('../../components/vue/todayStatistics/dataList.vue'),
+		pageBar: require ('../../components/vue/todayStatistics/pageBar.vue')
 	}
 	
 }

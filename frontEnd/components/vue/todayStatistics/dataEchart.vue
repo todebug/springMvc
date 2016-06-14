@@ -99,7 +99,6 @@ var renderChart=function(chart,queryData,_this){
 		return response.json();
 	}).then(function(j) {
 		//console.log(j);
-		j={"reportData":{"dataTitle":["08:54","08:56","08:58","09:00","09:02","09:04","09:06","09:08","09:10","09:12","09:14","09:16","09:18","09:20","09:22","09:24","09:26","09:28","09:30","09:32","09:34","09:36","09:38","09:40","09:42","09:44","09:46","09:48","09:50","09:52"],"indicators":{"gpic_MAX_DURATION":"最大时长-国寿财险","cpic_MAX_DURATION":"最大时长-太保财险","picc_MAX_DURATION":"最大时长-人保财险"},"items":{"gpic_MAX_DURATION":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,11,0,0,0,0,0,0,0,0,0,0,0,0,0],"cpic_MAX_DURATION":[0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"picc_MAX_DURATION":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},"sumTitle":{"cpic_calculatePremium":"保费计算","gpic_calculatePremium":"保费计算","gpic":"合计","picc_calculatePremium":"保费计算","picc_submitApplication":"保单提交","cpic":"合计","cpic_submitApplication":"保单提交","picc":"合计","gpic_submitApplication":"保单提交"},"sumItems":{"cpic_calculatePremium":[2,0,2,0.00,2,1,null,1.5],"gpic_calculatePremium":[3,3,0,100.00,26,7,null,14.67],"gpic":[9,9,0,100.00,26,0,null,6],"picc_calculatePremium":[0,0,0,0,0,0,null,0],"picc_submitApplication":[0,0,0,0,0,0,null,0],"cpic":[4,2,2,50.00,2,1,null,1.75],"cpic_submitApplication":[0,0,0,0,0,0,null,0],"picc":[0,0,0,0,0,0,null,0],"gpic_submitApplication":[0,0,0,0,0,0,null,0]}}};
 			 _this.judgeIndicator(queryData.indicators[0]);
 			//设置判断[交易统计]还是[交易时效]渲染条件
 			//实时设置其他vue数据
