@@ -7,14 +7,18 @@
 		<a id="last7Days">最近7天</a>
 		<a id="last30Days">最近30天</a>
 		<div id="datePickerDisplay"  class="displayDiv">
-			<div class="datePicker" id="dateTimePickerBegin">
-			    <input  size="16" type="text" placeholder="请选择开始时间" id="startDate" readonly>
+			<div class="datePicker input-append date" id="dateTimePickerBegin" data-date-format="yyyy-mm-dd">
+			    <input  class="span2" size="16" type="text" placeholder="请选择开始时间" id="startDate" readonly>
+			    <span class="add-on"><i class="icon-remove"></i></span>
+			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
-			<div class="datePicker" id="dateTimePickerEnd">
-			    <input  size="16" type="text" placeholder="请选择结束时间" id="endDate" readonly>
+			<div class="datePicker input-append date" id="dateTimePickerEnd" data-date-format="yyyy-mm-dd">
+			    <input  class="span2" size="16" type="text" placeholder="请选择结束时间" id="endDate" readonly>
+			    <span class="add-on"><i class="icon-remove"></i></span>
+			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 		</div>
-		<a id="duration" @click="clickDurationTarget">时间区间</a>
+		<a id="duration" @click="clickDurationTarget">与其他时间段对比</a>
 		<div id="contrastDisplay"  class="contrastHideDiv">
 			<div class="datePicker input-append date" id="contrastBegin" data-date-format="yyyy-mm-dd">
 			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="contrastStartDate" readonly>
@@ -28,7 +32,8 @@
 			</div> 
 		</div>
 	</div>
-	<span id="tip" class="tipHide">开始时间不得小于结束时间!</span>
+	<span id="tip" class="tipHide">请填写对比时间!</span>
+	<span id="contrastTip" class="tipHide">开始时间不得小于结束时间!</span>
 	<div class="dataTarget" id="dataTarget" @click="clickTimeTypeTarget">
 		<a id="HOUR">按时</a>
 		<a id="DAILY">按日</a>
@@ -75,16 +80,54 @@ module.exports= {
 	methods: {
 		datePicker: function() {
 			var _this = this;
+			$('#dateTimePickerBegin').datetimepicker(options).on('show', function(ev){
+				//添加点击事件样式
+	                    		 $('#durationTarget a').removeClass('active');
+	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
+	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
+			});
+			$('#dateTimePickerEnd').datetimepicker(options).on('show', function(ev){
+				//添加点击事件样式
+	                    		 $('#durationTarget a').removeClass('active');
+	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
+	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
+			});
+			$('#dateTimePickerBegin').datetimepicker(options).on('changeDate', function(ev){
+				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
+					if($('#startDate').val()>$('#endDate').val()){
+						$('#startDate').val('');
+						$('#endDate').val('');
+						//提示信息
+						 $('#contrastTip').removeClass('tipHide').addClass('tipShow');
+					}else{
+						_this.dispatchData(_this);	
+					}
+				}
+			});	
+			$('#dateTimePickerEnd').datetimepicker(options).on('changeDate', function(ev){
+				if($('#startDate').val()!==''&&$('#endDate').val()!==''){
+					if($('#startDate').val()>$('#endDate').val()){
+						$('#startDate').val('');
+						$('#endDate').val('');
+						//提示信息
+						 $('#contrastTip').removeClass('tipHide').addClass('tipShow');
+					}else{
+						_this.dispatchData(_this);	
+					}
+				}
+			});	
 			$('#contrastBegin').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
+	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
 			$('#contrastEnd').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
 	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
+	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
 			$('#contrastBegin').datetimepicker(options).on('changeDate', function(ev){
@@ -93,7 +136,12 @@ module.exports= {
 						$('#contrastStartDate').val('');
 						$('#contrastEndDate').val('');
 						//提示信息
+						 $('#contrastTip').removeClass('tipHide').addClass('tipShow');
+					}else if($('#startDate').val()===''&&$('#endDate').val()===''){
+						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
+					}else{
+						_this.dispatchData(_this);	
 					}
 				}
 			});	
@@ -102,6 +150,9 @@ module.exports= {
 					if($('#contrastStartDate').val()>$('#contrastEndDate').val()){
 						$('#contrastStartDate').val('');
 						$('#contrastEndDate').val('');
+						//提示信息
+						 $('#contrastTip').removeClass('tipHide').addClass('tipShow');
+					}else if($('#startDate').val()===''&&$('#endDate').val()===''){
 						//提示信息
 						 $('#tip').removeClass('tipHide').addClass('tipShow');
 					}else{
@@ -117,6 +168,7 @@ module.exports= {
 		                    $('#durationTarget a').removeClass('active');
 		                    $(this).addClass('active');
 		                    //去除错误提示
+		                    $('#contrastTip').removeClass('tipShow').addClass('tipHide');
 		                    $('#tip').removeClass('tipShow').addClass('tipHide');
 		                    //点击时间标签时,datepicker赋值操作
 		                    if($(this).context.id==='TWO_MINUTE'){
@@ -173,20 +225,20 @@ module.exports= {
 		 clickTimeTypeTarget: function() {
 		 	var _this = this;
 		 	$('#dataTarget a').click(function(){
-		 	         //点击按时或按日或按周或按月时,如果没有预先选中时间,则默认设置今天
-		 	         _this.setQueryTime();
-		 	         //移除实时样式
-		 	         $('#TWO_MINUTE').removeClass('active');
-		           	         //添加点击样式
-		                    $('#dataTarget a').removeClass('active');
-		                    $(this).addClass('active');
-		                    _this.queryTimeData.periodType = $(this).context.id;
+		 	         	//点击按时或按日或按周或按月时,如果没有预先设置时间,则默认设置今天
+		 	         	_this.setQueryTime();
+		 	         	//移除实时样式
+		 	         	$('#TWO_MINUTE').removeClass('active');
+		           	         	//添加点击样式
+		                    	$('#dataTarget a').removeClass('active');
+		                    	$(this).addClass('active');
+		                    	_this.queryTimeData.periodType = $(this).context.id;
 		                })
 		 	this.dispatchData(this);
 		},
 		setQueryTime: function() {
-			if(!$('#today').hasClass('active')&&!$('#yesterday ').hasClass('active')&&!$('#last7Days  ').hasClass('active')&&!$('#last30Days  ').hasClass('active')&&!$('#duration').hasClass('active')){
-		 		//点击按时或按日或按周或按月时,如果没有预先选中时间,则默认设置今天
+			if(($('#startDate').val()===''&&$('#endDate').val()==='')||($('#startDate').val()!==''&&$('#endDate').val()==='')||($('#startDate').val()===''&&$('#endDate').val()!=='')){
+		 		//点击按时或按日或按周或按月时,如果没有预先设置时间,则默认设置今天
 		 		$('#today').addClass('active');
 		 		$('#startDate').val(today);
 		 		$('#endDate').val(today);

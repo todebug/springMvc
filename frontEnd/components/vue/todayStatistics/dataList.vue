@@ -15,36 +15,38 @@
 				</thead>
 				<tbody>
 					<tr v-for="item in info.reportDetailData.items.content" :item="item">
-					<td>
-						{{item[0]}}
-					</td>
-					<td>
-						{{item[1]}}
-					</td>
-					<td>
-						{{item[2]}}
-					</td>
-					<td>
-						{{item[3]}}
-					</td>
-					<td>
-						{{item[4]}}
-					</td>
-					<td>
-						{{item[5]}}
-					</td>
-					<td>
-						{{item[6]}}
-					</td>
-					<td>
-						{{item[7]}}%
-					</td>
-				</tr>
+						<td>
+							{{item[0]}}
+						</td>
+						<td>
+							{{item[1]}}
+						</td>
+						<td>
+							{{item[2]}}
+						</td>
+						<td>
+							{{item[3]}}
+						</td>
+						<td>
+							{{item[4]}}
+						</td>
+						<td>
+							{{item[5]}}
+						</td>
+						<td>
+							{{item[6]}}
+						</td>
+						<td v-show="info.reportDetailData.columnNames[7][1]==='成功率'">
+							{{item[7]}}%
+						</td>
+						<td v-else>
+							{{item[7]}}
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<page-bar></page-bar>
 	</div>
-	<!-- <data-Item  v-for="item in info.reportDetailData.items.content"  :item="item"></data-Item> -->
 </template>
 
 <script>
@@ -67,7 +69,7 @@ var pageData = {
 	cur: 0,
 	all: 0
 }
-var array = [['',''],['',''],['',''],['',''],['',''],['',''],['',''],['','']]
+var array = [['',''],['',''],['',''],['',''],['',''],['',''],['',''],['','']];
 var info = {
 	reportDetailData: {
 		columnNames: array,
@@ -83,7 +85,7 @@ module.exports= {
 	    //绑定数据
 	    return  {info,queryCondition,pageData}
 	},
-	ready: function() {
+	created: function() {
 		this.getDataList(this.queryCondition);
 	},
 	methods: {
@@ -132,9 +134,9 @@ module.exports= {
 	    		//调用查询
 	    		this.getDataList(this.queryCondition);
 	    	},
-	    	 'broadcast-todayStatistics-dataEchart-dataList-queryCondition': function(date) {
+	    	 'broadcast-todayStatistics-dataEchart-dataList-queryCondition': function(data) {
 		      	// 获取共享查询条件
-		      	this.queryCondition = Object.assign({}, this.queryCondition, date);
+		      	this.queryCondition = Object.assign({}, this.queryCondition, data);
 		      	this.getDataList(this.queryCondition);
 		    }
 	},
@@ -149,9 +151,9 @@ module.exports= {
 	margin-left: 5px;
 	margin-right: 5px;
 	border-radius: 5px;
-	height: 26px;
+	height: 28px;
 	border: 1px solid #d6d6d6;
-	background: grey;
+	background: #e2edfb;
 	vertical-align: middle;
 	min-width: 1000px;
 }
@@ -172,8 +174,15 @@ module.exports= {
 	vertical-align: middle;
 }
 
+.dataList thead tr{
+	width: 100%;
+	min-width: 1000px;
+	text-align: center;
+	vertical-align: middle;}
+
 .dataList thead tr td {
-	color: #fff;
+	font-size: 15px;
+	height: 25px;
 	font-weight: bold;
 	min-width: 25px;
 	text-align: center;
@@ -181,6 +190,10 @@ module.exports= {
 	overflow: hidden;
     	text-overflow: ellipsis;
     	white-space: nowrap;
+}
+
+.dataList tbody {
+	margin-top: 10px;
 }
 
 .dataList tbody tr {

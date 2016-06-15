@@ -5,7 +5,6 @@
 		<data-Echart></data-Echart>
 		<condition-Bar></condition-Bar>
 		<data-List></data-List>
-		
 	</div>
 </template>
 

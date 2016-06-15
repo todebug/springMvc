@@ -5,13 +5,13 @@
 	            	            		<a v-on:click="btnClick(1)">首页</a>
 	            	            </li>
 		            <li v-if="showFirst">
-		            		<a v-on:click="cur--"><<</a>
+		            		<a v-on:click="cur--" @click="query">上一页</a>
 		            </li>
 		            <li v-for="index in indexs"  v-bind:class="{ 'active': cur === index}">
 		                	<a v-on:click="btnClick(index)">{{ index }}</a>
 		            </li>
 		            <li v-if="showLast">
-		            		<a v-on:click="cur++">>></a>
+		            		<a v-on:click="cur++" @click="query">下一页</a>
 		            </li>
 		             <li>
 		             		<a>共<i>{{all}}</i>页</a>
@@ -29,7 +29,7 @@ module.exports= {
 	data: function() {
 	    //绑定数据
 	    return  {
-	    	all: 20, //总页数
+	    	all: 1, //总页数
         		cur: 1,//当前页码
         		}
 	},
@@ -65,16 +65,25 @@ module.exports= {
 		                if(this.cur === this.all){
 		                    return false
 		                }
+		                if(this.all<=5){
+		                	return false
+		                }
 		                return true
 	           },
 	           showFirst: function() {
 		                if(this.cur === 1){
 		                    return false
 		                }
+		                if(this.cur<=5){
+		                	return false
+		                }
 	               	return true
 	           }
 	},
 	 methods: {
+	 	query: function() {
+	 		this.dispatchPageData(this.cur);
+	 	},
 	            btnClick: function(data) {//页码点击事件
 		                if(data !== this.cur){
 		                    this.cur = data 
@@ -99,7 +108,7 @@ module.exports= {
 <style type="text/css">
 
 .page-bar {
-	width: 50%;	
+	width: 100%;	
 	min-width: 500px;
 	height: 40px;
 	display:block;
