@@ -5,11 +5,9 @@
 				<div>
 					<span>
 						<label>承保地区</label>
-						<select @change="insuredSelect">
-							<option value="全部"selected>全部</option>
-							<option value="人保">人保</option>
-							<option value="太保">太保</option>
-							<option value="国寿财">国寿财</option>
+						<select @change="selectProvinces">
+							<option value="" selected>全部</option>
+							<option v-for="item in provinces.provincesInfo" :item="item"   value="{{item[0]}}">{{item[1]}}</option>
 						</select>
 					</span>
 				</div>
@@ -18,11 +16,9 @@
 				<div>
 					<span>
 						<label>交易类型</label>
-						<select @change="itradeSelect">
-							<option value="全部"selected>全部</option>
-							<option value="人保">人保</option>
-							<option value="太保">太保</option>
-							<option value="国寿财">国寿财</option>
+						<select @change="selectInterfaceTypes">
+							<option value="" selected>全部</option>
+							<option v-for="items in interfaceTypes.interfaceTypeInfo" :items="items"   value="{{items[0]}}">{{items[1]}}</option>
 						</select>
 					</span>
 				</div>
@@ -33,27 +29,63 @@
 
 <script>
 'use strict';
-var insuranceSelect,itradeSelect;
-var selectData={
-            insuranceSelect: '全部',
-            itradeSelect: '全部'
+var config = require('../../lib/js/config');
+var provincesInfo;
+var interfaceTypesInfo;
+//省份信息
+var provinces={
+	provincesInfo: []
+}
+var interfaceTypes={
+	interfaceTypeInfo: []
 }
 module.exports= {
 	data: function () {
 		//绑定数据
-		return {selectData}
+		return {provinces,provincesInfo,interfaceTypes,interfaceTypesInfo}
+	},
+	created: function() {
+		this.getProvinces();
+		this.getInterfaceType();
 	},
 	methods: {
-		insuredSelect: function(event) {
-			selectData.insuredSelect = event.target.value;
-			this.dispatchData(this);
+		getProvinces: function() {
+			var _this = this;
+			var url = config.host+'statistic/getProvinces';
+			var result = fetch(url,{method: 'get',mode: 'cors',});
+			result.then(function(response) {
+				return response.json();
+			}).then(function(j) {
+				_this.provinces = Object.assign(_this.provinces, j);
+			}).catch(function(ex) {
+				console.log('failed', ex)
+			});
 		},
-		itradeSelect: function(event) {
-			selectData.insuredSelect = event.target.value;
-			this.dispatchData(this);
+		getInterfaceType: function() {
+			var _this = this;
+			var url = config.host+'statistic/getInterfaceType';
+			var result = fetch(url,{method: 'get',mode: 'cors',});
+			result.then(function(response) {
+				return response.json();
+			}).then(function(j) {
+				_this.interfaceTypes = Object.assign(_this.interfaceTypes, j);
+			}).catch(function(ex) {
+				console.log('failed', ex)
+			});
 		},
-		dispatchData: function(selectData) {//将查询条件通知到[todayStatistics.vue]父组件中
-			data.$dispatch('dispatch-conditionBar-dataEchart-queryData', selectData);
+		selectProvinces: function(event) {
+			this.provincesInfo = event.target.value;
+			this.dispatchProvincesData(this.provincesInfo);
+		},
+		selectInterfaceTypes: function(event) {
+			this.interfaceTypesInfo = event.target.value;
+			this.dispatchInterfaceTypesData(this.interfaceTypesInfo);
+		},
+		dispatchProvincesData: function(data) {//将查询条件通知到[todayStatistics.vue]父组件中
+			this.$dispatch('dispatch-conditionBar-dataEchart-provinces', data);
+		},
+		dispatchInterfaceTypesData: function(data) {//将查询条件通知到[todayStatistics.vue]父组件中
+			this.$dispatch('dispatch-conditionBar-dataEchart-interfaceTypes', data);
 		}
 	}
 }
@@ -67,11 +99,10 @@ module.exports= {
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
 	display: block;
-	text-align: center;
-	vertical-align: middle; 
+	color:#428bca;
 	font-size: 15px;
 	min-width: 1000px;
-	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
+	font-family: 微软雅黑;
 }
 
 .queryBar ul {

@@ -14,7 +14,7 @@
 var info = {
 	reportData: {
 		sumTitle: {
-			cpic: '',
+			cpic: {},
 			cpic_calculatePremium: {},
 			cpic_submitApplication: {},
 			picc: {},
@@ -35,20 +35,22 @@ var info = {
 			gpic_calculatePremium: {},
 			gpic_submitApplication: {}
 		}
-	},
-	show: {}
+	}
 };
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化默认值
+var arr1 = [];
+var arr2 = [];
 var queryData = {
 	startDate: today,
 	endDate: today,
 	contrastStartDate: '',
             	contrastEndDate: '',
 	periodType: 'TWO_MINUTE',//默认实时
-            	indicators: ['TOTAL_COUNT'],//默认总交易数
-	selectData: ''
+            	indicators: ['TOTAL_COUNT','MAX_DURATION'],//默认总交易数
+	provinces: arr1,
+              interfaceTypes: arr2
 };
 module.exports= {
 	data: function () {
@@ -63,13 +65,30 @@ module.exports= {
 	      	this.queryData.periodType = dateData.periodType;
 	      	this.getDateTime(this.queryData);
 	    },
-	    'dispatch-dataUl-dataEchart-indicator': function (indicator) {//获取[dataUl.vue]中的指标信息
-	      	this.queryData.indicators = [];
-	      	this.queryData.indicators.push(indicator);
+	    'dispatch-dataUl-dataEchart-tradeCount': function (tradeCount) {//获取[dataUl.vue]中的指标信息
+	    	if(this.queryData.indicators[0]!==tradeCount){
+	    		this.queryData.indicators.$set(0,tradeCount);
+	    	}
 	      	this.getDateTime(this.queryData);
 	    },
-	    'dispatch-conditionBar-dataEchart-queryData': function (selectData) {//获取[conditionBar.vue]中的查询数据
-	      	this.queryData.selectData = selectData;
+	    'dispatch-dataUl-dataEchart-tradeTime': function (tradeTime) {//获取[dataUl.vue]中的指标信息
+	    	if(this.queryData.indicators[1]!==tradeTime){
+	    		this.queryData.indicators.$set(1,tradeTime);
+	    	}
+	      	this.getDateTime(this.queryData);
+	    },
+	    'dispatch-conditionBar-dataEchart-provinces': function (provinces) {//获取[conditionBar.vue]中的查询数据
+	    	this.queryData.provinces.shift();
+	    	if(provinces!==''){
+	      		this.queryData.provinces.push(provinces);
+	      	}
+	      	this.getDateTime(this.queryData);
+	    },
+	   'dispatch-conditionBar-dataEchart-interfaceTypes': function (interfaceTypes) {//获取[conditionBar.vue]中的查询数据
+	      	this.queryData.interfaceTypes.shift();
+	      	if(interfaceTypes!==''){
+	      		this.queryData.interfaceTypes.push(interfaceTypes);
+	      	}
 	      	this.getDateTime(this.queryData);
 	    },
 	    'dispatch-dataEchart-dataUl-loadingData': function (loadingData) {//获取[dataEchart.vue的fetch的j数据,绑定到info上,通过prop传递给子组件

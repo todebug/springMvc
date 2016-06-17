@@ -1,290 +1,122 @@
 <template>
 	<div class="dataUl">
-		<div class="pcDiv">
-			<div class="cpicDiv">
-				<div class="cpicSpan"></div>
-				<table class="divUl">
-					<thead>
-						<tr>
-							<td></td>
-							<td>&nbsp;&nbsp{{info.reportData.sumTitle.cpic}}&nbsp;&nbsp</td>
-							<td>{{info.reportData.sumTitle.cpic_calculatePremium}}</td>
-							<td>{{info.reportData.sumTitle.cpic_submitApplication}}</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:#bb33c9">总数</label>
-								<label  v-else style="color:#bb33c9">最大时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic[4]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[4]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[4]}}</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:green">成功数</label>
-								<label  v-else style="color:green">最小时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic[5]}}</div>
-							</td>
-							<td>	
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[5]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[5]}}</div>	
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" >失败数</label>
-								<label  v-else >平均时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic[6]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[6]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[6]}}</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:orange">正确率</label>
-								<label  v-else style="color:orange">90%时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.cpic[7]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_calculatePremium[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.cpic_calculatePremium[7]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.cpic_submitApplication[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.cpic_submitApplication[7]}}</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="piccDiv">
-				<div class="piccSpan"></div>
-				<table class="divUl">
-					<thead>
-						<tr>
-							<td></td>
-							<td>&nbsp;&nbsp{{info.reportData.sumTitle.picc}}&nbsp;&nbsp</td>
-							<td>{{info.reportData.sumTitle.picc_calculatePremium}}</td>
-							<td>{{info.reportData.sumTitle.picc_submitApplication}}</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:#bb33c9">总数</label>
-								<label  v-else style="color:#bb33c9">最大时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc[4]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[4]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_submitApplication[4]}}</div>	
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:green">成功数</label>
-								<label  v-else style="color:green">最小时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc[5]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[5]}}</div>
-								
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_submitApplication[5]}}</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" >失败数</label>
-								<label  v-else >平均时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc[6]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[6]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.picc_submitApplication[6]}}</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:orange">正确率</label>
-								<label  v-else style="color:orange">90%时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.picc[7]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_calculatePremium[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.picc_calculatePremium[7]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.picc_submitApplication[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.picc_submitApplication[7]}}</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="gpicDiv">
-				<div class="gpicSpan"></div>
-				<table class="divUl">
-					<thead>
-						<tr>
-							<td></td>
-							<td>&nbsp;&nbsp{{info.reportData.sumTitle.gpic}}&nbsp;&nbsp</td>
-							<td>{{info.reportData.sumTitle.gpic_calculatePremium}}</td>
-							<td>{{info.reportData.sumTitle.gpic_submitApplication}}</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:#bb33c9">总数</label>
-								<label  v-else style="color:#bb33c9">最大时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic[4]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[4]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[0]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[4]}}</div>	
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:green">成功数</label>
-								<label  v-else style="color:green">最小时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic[5]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[5]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[1]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[5]}}</div>	
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" >失败数</label>
-								<label  v-else >平均时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic[6]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[6]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[2]}}</div>
-								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[6]}}</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label  v-show="info.show" style="color:orange">正确率</label>
-								<label  v-else style="color:orange">90%时长</label>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.gpic[7]}}</div>	
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_calculatePremium[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.gpic_calculatePremium[7]}}</div>
-							</td>
-							<td>
-								<div v-show="info.show">{{info.reportData.sumItems.gpic_submitApplication[3]}}%</div>
-								<div v-else>{{info.reportData.sumItems.gpic_submitApplication[7]}}</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="main-header-show">
+			<div class="col-lg-4 cpicStyle">
+			        <ul class="nav navbar navbar-nav">
+			            <li style="margin-right:22px;"><img style="margin-left: -15px;margin-top: 10px;" src="../../lib/image/cpic.png" alt=""></li>
+			            <li style="width:101px;">
+			                <p>交易数(笔)</p>
+			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[0]}}</span></h3>
+			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[0]}}</span></h4>
+			            </li>
+			            <li style="width:88px">
+			                <p>成功率</p>
+			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[3]|parseNum}}%</span></h3>
+			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[3]|parseNum}}%</span></h4>
+			            </li>
+			            <li style="width:78px">
+			                <p>90时长(秒) </p>
+			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[7]}}</span></h3>
+			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[7]}}</span></h4>
+			            </li>
+			            <li style="width:85px">
+			                <p>平均时长(秒)</p>
+			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[6]|parseNum}}</span></h3>
+			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[6]|parseNum}}</span></h4>
+			            </li>
+			        </ul>
+			    </div>
+			    <div class="col-lg-4 piccStyle">
+			        <ul class="nav navbar navbar-nav">
+			            <li style="margin-right:26px;"><img style="margin-left: -10px;margin-top: 10px;" src="../../lib/image/picc.png" alt=""></li>
+			            <li style="width:101px">
+			                <p>交易数(笔)</p>
+			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[0]}}</span></h3>
+			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[0]}}</span></h4>
+			            </li>
+			            <li style="width:88px">
+			                <p>成功率</p>
+			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[3]|parseNum}}%</span></h3>
+			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[3]|parseNum}}%</span></h4>
+			            </li>
+			            <li style="width:78px">
+			                <p>90时长(秒) </p>
+			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[7]}}</span></h3>
+			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[7]}}</span></h4></li>
+			            <li style="width:81px">
+			                <p>平均时长(秒)</p>
+			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[6]|parseNum}}</span></h3>
+			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[6]|parseNum}}</span></h4>
+			            </li>
+			        </ul>
+			    </div>
+			    <div class="col-lg-4 gpicStyle">
+			        <ul class="nav navbar navbar-nav">
+			            <li style="margin-right:18px;"><img style="margin-left: -24px;margin-top: 10px;"src="../../lib/image/gpic.png" alt=""></li>
+			            <li style="width:101px">
+			                <p>交易数(笔)</p>
+			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[0]}}</span></h3>
+			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[0]}}</span></h4>
+			            </li>
+			            <li style="width:88px">
+			                <p>成功率</p>
+			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[3]|parseNum}}%</span></h3>
+			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[3]|parseNum}}%</span></h4>
+			            </li>
+			            <li style="width:78px">
+			                <p>90时长(秒) </p>
+			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[7]}}</span></h3>
+			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[7]}}</span></h4>
+			            </li>
+			            <li style="width:89px">
+			                <p>平均时长(秒)</p>
+			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[6]|parseNum}}</span></h3>
+			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[6]|parseNum}}</span></h4>
+			            </li>
+			        </ul>
+			    </div>
 		</div>
 		<div class="targetDiv">
 			<a @click="showTarget">指标</a>
 			<div class="targetParam" id="targetParam" style="display:none">
-					<input type="radio" @click="targetChecked" id="TOTAL_COUNT" value="TOTAL_COUNT" v-model="checkedNames">
-					<label for="TOTAL_COUNT">总交易次数</label>
-					<input type="radio" @click="targetChecked" id="SUCCESS_COUNT" value="SUCCESS_COUNT" v-model="checkedNames">
-					<label for="SUCCESS_COUNT">成功数</label>
-					<input type="radio" @click="targetChecked" id="FAILURE_COUNT" value="FAILURE_COUNT" v-model="checkedNames">
-					<label for="FAILURE_COUNT">失败数</label>
-					<input type="radio" @click="targetChecked" id="SUCCESS_RATE" value="SUCCESS_RATE" v-model="checkedNames">
-					<label for="SUCCESS_RATE">交易成功率</label>
-					<br>
-					<input type="radio" @click="targetChecked" id="MAX_DURATION" value="MAX_DURATION" v-model="checkedNames">
-					<label for="MAX_DURATION">最大时长</label>
-					<input type="radio" @click="targetChecked" id="MIN_DURATION" value="MIN_DURATION" v-model="checkedNames">
-					<label for="MIN_DURATION">最小时长</label>
-					<input type="radio" @click="targetChecked" id="AVERAGE_DURATION" value="AVERAGE_DURATION" v-model="checkedNames">
-					<label for="AVERAGE_DURATION">平均时长</label>
-					<input type="radio" @click="targetChecked" id="NINETY_DURATION" value="NINETY_DURATION" v-model="checkedNames">
-					<label for="NINETY_DURATION">90%时长</label>
-				<!-- <span>Checked names: {{ checkedNames | json }}</span> -->
+				<table>
+					<tr>
+						<td>
+							<input type="radio" @click="targetCountChecked" id="TOTAL_COUNT" value="TOTAL_COUNT" v-model="tradeCount">
+							<label for="TOTAL_COUNT">总交易次数</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetCountChecked" id="SUCCESS_COUNT" value="SUCCESS_COUNT" v-model="tradeCount">
+							<label for="SUCCESS_COUNT">成功数</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetCountChecked" id="FAILURE_COUNT" value="FAILURE_COUNT" v-model="tradeCount">
+							<label for="FAILURE_COUNT">失败数</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetCountChecked" id="SUCCESS_RATE" value="SUCCESS_RATE" v-model="tradeCount">
+							<label for="SUCCESS_RATE">交易成功率</label>
+						</td>
+					</tr>
+					<tr>	
+						<td>
+							<input type="radio" @click="targetTimeChecked" id="MAX_DURATION" value="MAX_DURATION" v-model="tradeTime">
+							<label for="MAX_DURATION">最大时长</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetTimeChecked" id="MIN_DURATION" value="MIN_DURATION" v-model="tradeTime">
+							<label for="MIN_DURATION">最小时长</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetTimeChecked" id="AVERAGE_DURATION" value="AVERAGE_DURATION" v-model="tradeTime">
+							<label for="AVERAGE_DURATION">平均时长</label>
+						</td>
+						<td>
+							<input type="radio" @click="targetTimeChecked" id="NINETY_DURATION" value="NINETY_DURATION" v-model="tradeTime">
+							<label for="NINETY_DURATION">90%时长</label>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -300,7 +132,7 @@ module.exports= {
 	data: function () {
 	    //绑定数据
 	    return  {
-			checkedNames: 'TOTAL_COUNT'
+			tradeCount: 'TOTAL_COUNT',tradeTime: 'MAX_DURATION'
 		}
 	},
 	ready: function() {
@@ -315,11 +147,17 @@ module.exports= {
 		showTarget: function() {
 			$('#targetParam').toggle();
 		},
-		targetChecked: function(event) {
-			this.getCheckedNames(this,event.target.value);
+		targetCountChecked: function(event) {
+			this.getCheckedCount(this,event.target.value);
 		},
-		getCheckedNames: function(data,indicator) {//将指标信息传递到父组件[todayStatistics.vue]中
-			data.$dispatch('dispatch-dataUl-dataEchart-indicator', indicator);
+		targetTimeChecked: function(event) {
+			this.getCheckedTime(this,event.target.value);
+		},
+		getCheckedCount: function(data,indicator) {//将指标信息传递到父组件[todayStatistics.vue]中
+			data.$dispatch('dispatch-dataUl-dataEchart-tradeCount', indicator);
+		},
+		getCheckedTime: function(data,indicator) {//将指标信息传递到父组件[todayStatistics.vue]中
+			data.$dispatch('dispatch-dataUl-dataEchart-tradeTime', indicator);
 		}
 	}
 }
@@ -328,158 +166,16 @@ module.exports= {
 <style type="text/css">
 .dataUl {
 	min-width: 1000px;
-}
-
-.pcDiv {
-	height: 123px;
-	display: table;
-	width: 100%;
-	min-width: 1000px;
-	padding: 5px 5px 5px 5px;
-}
-
-.gpicSpan {
-	margin-top: 12px;
-	margin-left: 5px;
-	margin-right: -20px;
-    	height: 70px;
-    	width: 30%;
-	min-width: 100px;
-	text-align: center;
-	vertical-align: middle; 
-	background: url("../../lib/image/gpic.png") left no-repeat white;
-    	background-size: 100px;
-}
-
-.piccSpan {
-	margin-top: 12px;
-	margin-left: 5px;
-	margin-right: -20px;
-    	height: 70px;
-    	width: 30%;
-	min-width: 100px;
-	text-align: center;
-	vertical-align: middle; 
-	background: url("../../lib/image/picc.png") left no-repeat white;
-    	background-size: 100px;
-}
-
-.cpicSpan {
-	margin-top: 12px;
-	margin-left: 5px;
-	margin-right: -20px;
-    	height: 70px;
-    	width: 30%;
-	min-width: 100px;
-	text-align: center;
-	vertical-align: middle; 
-	background: url("../../lib/image/cpic.png") left no-repeat white;
-    	background-size: 100px;
-}
-
-.cpicDiv {
-	background: white;
-	display: inline-flex;
-	width: 32%;
-	min-width: 300px;
-	text-align: center;
-	vertical-align: middle; 
-	border: 1px solid #d6d6d6;
-	border-radius: 5px;
-	box-shadow: 1px 1px 0.5px #888888;
-	margin-right: 8px;
-}
-
-.piccDiv {
-	background: white;
-	display: inline-flex;
-	width: 32%;
-	min-width: 300px;
-	text-align: center;
-	vertical-align: middle; 
-	border-right: 1px solid #d6d6d6;
-	border-top: 1px solid #d6d6d6;
-	border-bottom: 1px solid #d6d6d6;
-	border-radius: 5px;
-	box-shadow: 1px 1px 0.5px #888888;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-.gpicDiv {
-	background: white;
-	display: inline-flex;
-	width: 32%;
-	min-width: 300px;
-	text-align: center;
-	vertical-align: middle; 
-	border-right: 1px solid #d6d6d6;
-	border-top: 1px solid #d6d6d6;
-	border-bottom: 1px solid #d6d6d6;
-	border-radius: 5px;
-	box-shadow: 1px 1px 0.5px #888888;
-	margin-left: 5px;
-}
-
-.divUl {
-	width: 70%;
-	min-width: 200px;
-	list-style-type:none;
-	margin-bottom: 5px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.divUl thead {
-	font-weight: bold;
-	width: 100%;
-	min-width: 190px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.divUl thead tr {
-	font-weight: bold;
-	text-align: center;
-	width: 100%;
-	min-width: 190px;
-	vertical-align: middle;
-}
-
-.divUl thead tr td {
-	font-weight: bold;
-	font-size: 12px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.divUl tbody {
-	width: 100%;
-	min-width: 190px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.divUl tbody tr {
-	width: 100%;
-	min-width: 190px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.divUl tbody tr td {
-	font-size: 12px;
-	text-align: center;
-	vertical-align: middle;
+	
 }
 
 .targetDiv {
 	display: block;
-	height: auto;
-	/* height: 30px; */
+	height: 36px;
 	background: #e2edfb;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
+    	margin-top: 5px;
     	margin-left: 5px;
     	margin-right: 5px;
 }
@@ -493,7 +189,7 @@ module.exports= {
 	cursor: pointer;
 	background: #f9fcfb;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 15px;
 	border-radius: 5px;
 	text-decoration: none;
 	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
@@ -519,15 +215,108 @@ module.exports= {
 	padding-top: 5px;
 	z-index: 20;
 	display: inline-block;
-	font-size: 10px;
-	height: 60px;
-	width: 300px;
+	font-size: 14px;
+	height: 65px;
+	width: 400px;
 	position: absolute;
 	background: #e2edfb;
-	left: 15px;
-	top: 190px;
+	left: 18px;
+	top: 230px;
 	border-radius: 5px;
 	border: 1px solid #d6d6d6;
 }
 
+.fontStyle {
+	background: #e0ecf2;
+    	border-radius: 100%;
+    	font-style: normal;
+    	line-height: 1pc;
+    	width: 2pc;
+    	margin-right: 4px;
+}
+
+.main-header-show {
+    width: 100%;
+    min-width: 1000px;
+    height: 150px;
+    font-family: 微软雅黑;
+    overflow: hidden;
+}
+
+.main-header-show .col-lg-4 {
+    padding: 0px 5px;
+    background: white;
+}
+
+.main-header-show ul {
+    padding: 20px 0px 15px;
+    width: 100%;
+    min-width:330px;
+    height: 150px;
+    border: 1px solid #d6d6d6;
+    overflow: hidden;
+}
+
+.main-header-show ul > li {
+    width: 20%;
+    padding: 0px 5px 0px 6px;
+    border-right: 1px solid #d6d6d6;
+}
+
+.main-header-show ul > li:first-child, .main-header-show ul > li:last-child {
+    border: none;
+}
+
+.main-header-show ul > li p {
+    color: #999;
+}
+
+.main-header-show ul > li h3 {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.main-header-show ul > li h3 span {
+    border-bottom: 1px dashed #d6d6d6;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.main-header-show ul > li h4 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 24px;
+}
+
+.main-header-show ul > li span.primary {
+    color: #006f90
+}
+
+.main-header-show ul > li span.success {
+    color: #239423
+}
+
+.main-header-show ul > li span.warning {
+    color: #df8a11
+}
+
+.main-header-show ul > li span.danger {
+    color: #d9534f
+}
+
+.cpicStyle li{
+	padding:5px 0px 5px 0px;
+}
+
+.cpicStyle ul li p {
+	font-size:5pt;
+}
+
+.piccStyle ul li p {
+	font-size:5pt;
+}
+
+.gpicStyle ul li p {
+	font-size:5pt;
+}
 </style>

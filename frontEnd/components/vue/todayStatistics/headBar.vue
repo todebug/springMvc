@@ -18,8 +18,9 @@
 			    <span class="add-on"><i class="icon-th"></i></span>
 			</div> 
 		</div>
-		<a id="duration" @click="clickDurationTarget">与其他时间段对比</a>
+		
 		<div id="contrastDisplay"  class="contrastHideDiv">
+		<a id="duration" @click="clickDurationTarget">与其他时间段对比</a>
 			<div class="datePicker input-append date" id="contrastBegin" data-date-format="yyyy-mm-dd">
 			    <input class="span2" size="16" type="text" placeholder="请选择开始时间" id="contrastStartDate" readonly>
 			    <span class="add-on"><i class="icon-remove"></i></span>
@@ -50,14 +51,12 @@ require('imports?$=jquery!../../lib/js/bootstrap-datetimepicker.min.js');
 require('imports?$=jquery!../../lib/js/locales/bootstrap-datetimepicker.zh-CN.js');
 var Vue = require('vue');
 var moment=require('moment');
-var today=moment().format('YYYY-MM-DD');
 var options={
 	language: 'zh-CN',
 	format: 'yyyy-mm-dd',
 	minView: 'month',
 	autoclose: true,
         	todayBtn: true,
-        	endDate: today,
         	pickerPosition: "bottom-right"
 };
 var queryTimeData={
@@ -118,14 +117,12 @@ module.exports= {
 			});	
 			$('#contrastBegin').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
-	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
 			});
 			$('#contrastEnd').datetimepicker(options).on('show', function(ev){
 				//添加点击事件样式
-	                    		$('#durationTarget a').removeClass('active');
 	                    		$('#duration').addClass('active');
 	                    		$('#contrastTip').removeClass('tipShow').addClass('tipHide');
 	                    		$('#tip').removeClass('tipShow').addClass('tipHide');
@@ -165,8 +162,10 @@ module.exports= {
 			var _this = this;
 		            $('#durationTarget a').click(function(){
 		           	         //添加点击样式
-		                    $('#durationTarget a').removeClass('active');
-		                    $(this).addClass('active');
+		           	       if($(this).context.id!=='duration'){
+		                    	$('#durationTarget a').removeClass('active');
+		                    	$(this).addClass('active');
+		                     }
 		                    //去除错误提示
 		                    $('#contrastTip').removeClass('tipShow').addClass('tipHide');
 		                    $('#tip').removeClass('tipShow').addClass('tipHide');
@@ -179,32 +178,39 @@ module.exports= {
 		                    	_this.queryTimeData.periodType = 'TWO_MINUTE';
 		                    	//移除按时等标签
 		                    	$('#dataTarget a').removeClass('active');
+		                    	_this.dispatchData(_this);
 		                    }else if($(this).context.id==='today'){
+		                    	var today=moment().format('YYYY-MM-DD');
 		                    	$('#startDate').val(today);
 		                    	$('#endDate').val(today);
 		                    	//没有设置指标,则设置默认指标
 		                    	_this.setIndicator();
+		                    	_this.dispatchData(_this);
 		                    }else if($(this).context.id==='yesterday'){
 		                    	var yesterday=moment().subtract(1, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(yesterday);
 		                    	$('#endDate').val(yesterday);
 		                    	//没有设置指标,则设置默认指标
 		                    	_this.setIndicator();
+		                    	_this.dispatchData(_this);
 		                    }else if($(this).context.id==='last7Days'){
+		                    	var today=moment().format('YYYY-MM-DD');
 		                    	var weeksbefore=moment().subtract(7, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(weeksbefore);
 		                    	$('#endDate').val(today);
 		                    	//没有设置指标,则设置默认指标
 		                    	_this.setIndicator();
+		                    	_this.dispatchData(_this);
 		                    }else if($(this).context.id==='last30Days'){
+		                    	var today=moment().format('YYYY-MM-DD');
 		                    	var monthbefore=moment().subtract(30, 'days').format('YYYY-MM-DD');
 		                    	$('#startDate').val(monthbefore);
 		                    	$('#endDate').val(today);
 		                    	//没有设置指标,则设置默认指标
 		                    	_this.setIndicator();
+		                    	_this.dispatchData(_this);
 		                    }
 		            });
-		            this.dispatchData(this);
 		 },
 		 setIndicator: function() {
 		 	if(!$('#HOUR').hasClass('active')&&!$('#DAILY ').hasClass('active')&&!$('#WEEKLY ').hasClass('active')&&!$('#MONTHLY').hasClass('active')){
@@ -217,8 +223,10 @@ module.exports= {
 		 		$('#contrastStartDate').val('');
 		                    	$('#contrastEndDate').val('');
 		                    	 if($('#contrastDisplay').hasClass('contrastHideDiv')){
+		                    	 	$('#duration').addClass('active');
 		                    		$('#contrastDisplay').removeClass('contrastHideDiv').addClass('contrastShowDiv');
 		                    	}else{
+		                    		$('#duration').removeClass('active');
 		                    		$('#contrastDisplay').removeClass('contrastShowDiv').addClass('contrastHideDiv');
 		                    	}
 		 },
@@ -239,6 +247,7 @@ module.exports= {
 		setQueryTime: function() {
 			if(($('#startDate').val()===''&&$('#endDate').val()==='')||($('#startDate').val()!==''&&$('#endDate').val()==='')||($('#startDate').val()===''&&$('#endDate').val()!=='')){
 		 		//点击按时或按日或按周或按月时,如果没有预先设置时间,则默认设置今天
+		 		var today=moment().format('YYYY-MM-DD');
 		 		$('#today').addClass('active');
 		 		$('#startDate').val(today);
 		 		$('#endDate').val(today);
@@ -274,7 +283,7 @@ module.exports= {
 <style type="text/css">
 .headBar {
 	margin: 5px;
-	height: 36px;
+	height: 34px;
 	background: #e2edfb;
 	border: 1px solid #d6d6d6;
     	border-radius: 5px;
@@ -305,12 +314,12 @@ module.exports= {
 }
 
 .durationTarget a {
-	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
+	font-family: 微软雅黑;
 	display: inline-block;
 	margin: 10px 10px 0px 10px;
 	text-decoration: none;
 	cursor: pointer;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .durationTarget .active {
@@ -318,6 +327,7 @@ module.exports= {
     	background-color: #41a1db;
     	border-radius: 5px;
     	font-weight: bold;
+    	font-family: 微软雅黑;
 }
 
 .tipShow {
@@ -325,6 +335,7 @@ module.exports= {
 	min-width: 50px;
 	color:red;
 	font-size:10px;
+	font-family: 微软雅黑;
 	margin-left: 10px;
 }
 
@@ -342,12 +353,12 @@ module.exports= {
 }
 
 .dataTarget a {
-	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
+	font-family: 微软雅黑;
 	display: inline-block;
 	margin: 10px 10px 0px 10px;
 	text-decoration: none;
 	cursor: pointer;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .dataTarget .active {
@@ -355,6 +366,7 @@ module.exports= {
     	background-color: #faf9f9;
     	border-radius: 5px;
     	font-weight: bold;
+    	font-family: 微软雅黑;
 }
 
 .datePickerDisplay {

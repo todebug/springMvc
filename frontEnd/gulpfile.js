@@ -4,18 +4,29 @@ var gulp = require('gulp'),
     cleanCss = require('gulp-clean-css'),
     copy = require('gulp-contrib-copy');
 var sourceFileLib = './components/lib/**/*';
-var outputPathLib = '../src/main/webapp/resources/components/lib/';
+var outputPathLib = '../src/main/webapp/components/lib/';
 var sourceFileDist = './dist/router.js';
-var outputPathDist = '../src/main/webapp/resources/dist/';
+var outputPathDist = '../src/main/webapp/dist/';
 var sourceFileHtml = './index.html';
-var outputPathHtml = '../src/main/webapp/resources/';
+var outputPathHtml = '../src/main/webapp/';
+var devConfig = './components/lib/js/dev/config.js';
+var prodConfig = './components/lib/js/prod/config.js';
+var hostConfg = './components/lib/js/';
 
 gulp.task('begin', function() {
     console.log("哈哈哈,开始执行gulp任务了!!!");
 });
 
+//先设置生产配置地址
+gulp.task('setProdConfig', ['begin'], function() {
+    gulp
+        .src(prodConfig)
+        .pipe(copy())
+        .pipe(gulp.dest(hostConfg))
+});
+
 //vue打包处理
-gulp.task('webpack', ['begin'], shell.task([
+gulp.task('webpack', ['setProdConfig'], shell.task([
     'webpack -p'
 ]));
 
@@ -52,7 +63,15 @@ gulp.task('copyFileLib', ['copyFileDist'], function() {
         .pipe(gulp.dest(outputPathLib))
 });
 
-gulp.task('default', ['copyFileLib'], function() {
+//最后将生产地址设置成开发配置地址
+gulp.task('setDevConfig', ['copyFileLib'], function() {
+    gulp
+        .src(devConfig)
+        .pipe(copy())
+        .pipe(gulp.dest(hostConfg))
+});
+
+gulp.task('default', ['setDevConfig'], function() {
     // Your default task
     console.log("哈哈哈,结束执行gulp任务了!!!");
 });

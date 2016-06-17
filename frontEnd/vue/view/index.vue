@@ -43,7 +43,7 @@ var moment=require('moment');
 var _=require("lodash");
 var today=moment().format('YYYY-MM-DD');
 var weeksbfore=moment().subtract(7, 'days').format('YYYY-MM-DD');
-var host='http://http://localhost:8888/statistic/';
+var host='http://localhost:8888/statistic/';
 var dates=[],errorDate=[],errorData=[],bookingData=[],replyData=[],cbaData=[];
 
 var optionerror = {

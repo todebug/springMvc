@@ -1,51 +1,67 @@
 <template>
-	<div class="listDiv">
+	<div v-show="pageData.all!==0" class="listDiv">
 			<table class="dataList">
 				<thead>
 					<tr>
-						<td>{{info.reportDetailData.columnNames[0][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[1][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[2][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[3][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[4][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[5][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[6][1]}}</td>
-						<td>{{info.reportDetailData.columnNames[7][1]}}</td>
+						<td align="center">{{info.reportDetailData.columnNames[0][1]}}</td>
+						<td align="center">{{info.reportDetailData.columnNames[1][1]}}</td>
+						<td align="left">{{info.reportDetailData.columnNames[2][1]}}</td>
+						<td align="center">{{info.reportDetailData.columnNames[3][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[4][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[5][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[6][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[7][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[8][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[9][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[10][1]}}</td>
+						<td align="right" style="padding-right:4px;">{{info.reportDetailData.columnNames[11][1]}}</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="item in info.reportDetailData.items.content" :item="item">
-						<td>
-							{{item[0]}}
+						<td align="center" style="width:10%; padding-right:4px;">
+							{{item[0]|insurance}}
 						</td>
-						<td>
+						<td align="center"style="width:15%;padding-right:4px;">
 							{{item[1]}}
 						</td>
-						<td>
-							{{item[2]}}
+						<td align="left"style="width:15%;padding-right:4px;">
+							{{item[2]|tradeType}}
 						</td>
-						<td>
-							{{item[3]}}
+						<td align="center"style="width:11%;padding-right:4px;">
+							{{item[3]|area}}
 						</td>
-						<td>
+						<td align="right" class="setWidth"style="width:7%;padding-right:4px;">
 							{{item[4]}}
 						</td>
-						<td>
+						<td align="right"style="width:7%;padding-right:4px;">
 							{{item[5]}}
 						</td>
-						<td>
+						<td align="right"style="width:7%;padding-right:4px;">
 							{{item[6]}}
 						</td>
-						<td v-show="info.reportDetailData.columnNames[7][1]==='成功率'">
-							{{item[7]}}%
+						<td align="right" style="width:6%;padding-right:4px;">
+							{{item[7]|parseNum}}%
 						</td>
-						<td v-else>
-							{{item[7]}}
+						<td align="right"style="width:6%;padding-right:4px;">
+							{{item[8]}}
+						</td>
+						<td align="right"style="width:6%;padding-right:4px;">
+							{{item[9]}}
+						</td>
+						<td align="right"style="width:6%;padding-right:4px;">
+							{{item[10]}}
+						</td>
+						<td align="right"style="width:6%;padding-right:4px;">
+							{{item[11]|parseNum}}
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<page-bar></page-bar>
+	</div>
+	<div v-else class="noneDataDiv">
+		暂无接口交互数据!
 	</div>
 </template>
 
@@ -55,13 +71,17 @@ var config = require('../../lib/js/config');
 var moment=require('moment');
 var today=moment().format('YYYY-MM-DD');
 //初始化查询条件
+var arr1 = [];
+var arr2 = [];
 var queryCondition={
             startDate: today,
             endDate: today,
             contrastStartDate: '',
             contrastEndDate: '',
             periodType: 'TWO_MINUTE',//默认实时
-            indicators: ['TOTAL_COUNT'],//默认总交易数
+            indicators: ['TOTAL_COUNT','MAX_DURATION'],//默认总交易数
+            provinces: arr1,
+            interfaceTypes: arr2,
             page: 1,
             size: 20//默认每页20条
 }
@@ -69,7 +89,7 @@ var pageData = {
 	cur: 0,
 	all: 0
 }
-var array = [['',''],['',''],['',''],['',''],['',''],['',''],['',''],['','']];
+var array = [['',''],['',''],['',''],['',''],['',''],['',''],['',''],['',''],['',''],['',''],['',''],['','']];
 var info = {
 	reportDetailData: {
 		columnNames: array,
@@ -112,6 +132,8 @@ module.exports= {
 				 		    'contrastEndDate': queryData.contrastEndDate,
 				 		    'periodType': queryData.periodType,
 				 		    'indicators': queryData.indicators,
+				 		    'provinces': queryData.provinces,
+		 		   		    'interfaceTypes': queryData.interfaceTypes,
 				 		    'page': queryData.page, 
 				 		    'size': queryData.size
 				  })
@@ -170,22 +192,22 @@ module.exports= {
 .dataList thead {
 	width: 100%;
 	min-width: 1000px;
-	text-align: center;
 	vertical-align: middle;
 }
 
 .dataList thead tr{
 	width: 100%;
 	min-width: 1000px;
-	text-align: center;
-	vertical-align: middle;}
+	height: 25px;
+	vertical-align: middle;
+}
 
 .dataList thead tr td {
 	font-size: 15px;
 	height: 25px;
 	font-weight: bold;
-	min-width: 25px;
-	text-align: center;
+	font-family: 微软雅黑;
+	min-width: 30px;
 	vertical-align: middle;
 	overflow: hidden;
     	text-overflow: ellipsis;
@@ -201,7 +223,6 @@ module.exports= {
 	width: 100%;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	text-align: center;
 	vertical-align: middle;
 	padding: 10px 0px 0px 10px;
 	border-bottom: 1px #e5e5e5 solid;
@@ -209,13 +230,24 @@ module.exports= {
 
 .dataList tbody tr td {
 	height: 30px;
-	font-size:10px;
-	text-align: center;
+	font-size:14px;
+	font-family: 微软雅黑;
 	vertical-align: middle;
     	width: 200px;
 }
 
 .dataList tbody tr:nth-child(odd)  {
    	 background: #EEE;
+}
+
+.noneDataDiv {
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+	font-family: 微软雅黑;
+}
+
+.setWidth {
+	width: 30px;
 }
 </style>

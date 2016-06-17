@@ -108,6 +108,8 @@ module.exports= {
 <style type="text/css">
 
 .page-bar {
+	font-size: 12px;
+	font-family: 微软雅黑;
 	width: 100%;	
 	min-width: 500px;
 	height: 40px;
@@ -167,6 +169,7 @@ li {
 .page-bar i {
     	font-style:normal;
     	color: #d44950;
+    	font-family: 微软雅黑;
     	margin: 0px 4px;
     	font-size: 12px;
 }

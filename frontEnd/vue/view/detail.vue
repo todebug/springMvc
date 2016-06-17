@@ -5,7 +5,7 @@
             </div>
             <div class="profile-bar">
                 <ul id="switchToggle" >
-                        <li>
+                        <li style="display:none">
                                 <a id="analyTrend" @click="switchToggleTrendChild" class="plus">趋势分析</a>
                                 <ul id="analyTrendChild" class="displayClosed">
                                         <li>
@@ -18,8 +18,8 @@
                                                     用户分析
                                                 </a>
                                         </li>
-                                        </li>
                                 </ul>
+                        </li>
                         <li>
                                 <a id="analyData" @click="switchToggleDataChild" class="minus">对接平台</a>
                                 <ul id="analyDataChild" class="displayOpen">
@@ -150,7 +150,7 @@ aside {
     cursor: pointer;
 }
 
-.active {
+.displayOpen .active {
     color: #bfb2b2;
     background-color: #bfb2b2;
     border-radius: 5px;
