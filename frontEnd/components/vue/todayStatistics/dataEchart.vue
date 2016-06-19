@@ -836,8 +836,8 @@ module.exports= {
 	    'broadcast-todayStatistics-dataEchart-dataList-queryCondition': function(date) {
 	      // 动态绑定查询对象数据
 	      this.queryCondition = Object.assign({}, this.queryCondition, date);
-	      this.drawEchart(this.queryCondition);
 	      this.showEchartDisplay(this.queryCondition.periodType);
+	      this.drawEchart(this.queryCondition);
 	    }
 	}
 }
