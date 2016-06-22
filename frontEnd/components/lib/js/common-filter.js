@@ -101,7 +101,7 @@ module.exports = {
         if (isNaN(f)) {
             return value;
         }
-        var f = Math.round(value * 100) / 100;
+        var f = Math.round(value * 10) / 10.0;
         var s = f.toString();
         var rs = s.indexOf('.');
         if (rs < 0) {

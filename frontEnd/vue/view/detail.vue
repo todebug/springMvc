@@ -29,7 +29,7 @@
                                                 </a>
                                         </li>
                                         <li>
-                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                            <a v-link="{ path: '/errorStatistics' }" @click="choose">
                                                     错误统计
                                                 </a>
                                         </li>
@@ -201,7 +201,6 @@ section {
 .main {
     margin-top: 6px;
     margin-left: 10px;
-    margin-right: 10px;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
     background: #faf8f8;

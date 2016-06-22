@@ -10,6 +10,9 @@ module.exports = {
             },
             '/todayStatistics': {
                 component: require('./view/todayStatistics.vue')
+            },
+            '/errorStatistics': {
+                component: require('./view/errorStatistics.vue')
             }
         })
         return router;

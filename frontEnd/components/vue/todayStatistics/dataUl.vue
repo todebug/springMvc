@@ -1,77 +1,83 @@
 <template>
 	<div class="dataUl">
 		<div class="main-header-show">
-			<div class="col-lg-4 cpicStyle">
+			<div class="cpicStyle">
 			        <ul class="nav navbar navbar-nav">
-			            <li style="margin-right:22px;"><img style="margin-left: -15px;margin-top: 10px;" src="../../lib/image/cpic.png" alt=""></li>
-			            <li style="width:101px;">
+			            <li class="cpicLi1">
+			            	<div class="cpicImg"></div>
+			            </li>
+			            <li class="cpicLi2"align="right">
 			                <p>交易数(笔)</p>
 			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[0]}}</span></h3>
-			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[0]}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.cpic_submitApplication[0]}}</span></h4>
 			            </li>
-			            <li style="width:88px">
+			            <li class="cpicLi3"align="right">
 			                <p>成功率</p>
 			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[3]|parseNum}}%</span></h3>
-			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[3]|parseNum}}%</span></h4>
+			                <h4><span>{{info.reportData.sumItems.cpic_submitApplication[3]|parseNum}}%</span></h4>
 			            </li>
-			            <li style="width:78px">
+			            <li class="cpicLi4"align="right">
 			                <p>90时长(秒) </p>
 			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[7]}}</span></h3>
-			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[7]}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.cpic_submitApplication[7]}}</span></h4>
 			            </li>
-			            <li style="width:85px">
+			            <li class="cpicLi5"align="right">
 			                <p>平均时长(秒)</p>
 			                <h3><span>{{info.reportData.sumItems.cpic_calculatePremium[6]|parseNum}}</span></h3>
-			                <h4><span class="primary">{{info.reportData.sumItems.cpic_submitApplication[6]|parseNum}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.cpic_submitApplication[6]|parseNum}}</span></h4>
 			            </li>
 			        </ul>
 			    </div>
-			    <div class="col-lg-4 piccStyle">
+			    <div class="piccStyle">
 			        <ul class="nav navbar navbar-nav">
-			            <li style="margin-right:26px;"><img style="margin-left: -10px;margin-top: 10px;" src="../../lib/image/picc.png" alt=""></li>
-			            <li style="width:101px">
+			            <li  class="piccLi1">
+			            	<div class="piccImg"></div>
+			            </li>
+			            <li class="piccLi2"align="right">
 			                <p>交易数(笔)</p>
 			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[0]}}</span></h3>
-			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[0]}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.picc_submitApplication[0]}}</span></h4>
 			            </li>
-			            <li style="width:88px">
+			            <li class="piccLi3"align="right">
 			                <p>成功率</p>
 			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[3]|parseNum}}%</span></h3>
-			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[3]|parseNum}}%</span></h4>
+			                <h4><span>{{info.reportData.sumItems.picc_submitApplication[3]|parseNum}}%</span></h4>
 			            </li>
-			            <li style="width:78px">
+			            <li class="piccLi4"align="right">
 			                <p>90时长(秒) </p>
 			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[7]}}</span></h3>
-			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[7]}}</span></h4></li>
-			            <li style="width:81px">
+			                <h4><span>{{info.reportData.sumItems.picc_submitApplication[7]}}</span></h4></li>
+			            <li class="piccLi5"align="right">
 			                <p>平均时长(秒)</p>
 			                <h3><span>{{info.reportData.sumItems.picc_calculatePremium[6]|parseNum}}</span></h3>
-			                <h4><span class="warning">{{info.reportData.sumItems.picc_submitApplication[6]|parseNum}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.picc_submitApplication[6]|parseNum}}</span></h4>
 			            </li>
 			        </ul>
 			    </div>
-			    <div class="col-lg-4 gpicStyle">
+			    <div class="gpicStyle">
 			        <ul class="nav navbar navbar-nav">
-			            <li style="margin-right:18px;"><img style="margin-left: -24px;margin-top: 10px;"src="../../lib/image/gpic.png" alt=""></li>
-			            <li style="width:101px">
+			            <li class="gpicLi1">
+			            	<div class="gpicImg"></div>
+			            </li>
+			            <li class="gpicLi2"align="right">
 			                <p>交易数(笔)</p>
 			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[0]}}</span></h3>
-			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[0]}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.gpic_submitApplication[0]}}</span></h4>
 			            </li>
-			            <li style="width:88px">
+			            <li class="gpicLi3"align="right">
 			                <p>成功率</p>
 			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[3]|parseNum}}%</span></h3>
-			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[3]|parseNum}}%</span></h4>
+			                <h4><span>{{info.reportData.sumItems.gpic_submitApplication[3]|parseNum}}%</span></h4>
 			            </li>
-			            <li style="width:78px">
+			            <li class="gpicLi4"align="right">
 			                <p>90时长(秒) </p>
 			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[7]}}</span></h3>
-			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[7]}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.gpic_submitApplication[7]}}</span></h4>
 			            </li>
-			            <li style="width:89px">
+			            <li class="gpicLi5"align="right">
 			                <p>平均时长(秒)</p>
 			                <h3><span>{{info.reportData.sumItems.gpic_calculatePremium[6]|parseNum}}</span></h3>
-			                <h4><span class="success">{{info.reportData.sumItems.gpic_submitApplication[6]|parseNum}}</span></h4>
+			                <h4><span>{{info.reportData.sumItems.gpic_submitApplication[6]|parseNum}}</span></h4>
 			            </li>
 			        </ul>
 			    </div>
@@ -166,7 +172,7 @@ module.exports= {
 <style type="text/css">
 .dataUl {
 	min-width: 1000px;
-	
+	width: 100%;
 }
 
 .targetDiv {
@@ -195,21 +201,6 @@ module.exports= {
 	font-family: Microsoft Yahei,\\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,STHeiti;
 }
 
-.insTrade {
-	margin-left: 21px;
-	min-width: 500px;
-}
-
-.indTrade {
-	margin-left: 60px;
-	min-width: 500px;
-}
-
-.tradeType {
-	margin-left: 60px;
-	min-width: 500px;
-}
-
 .targetParam {
 	padding-left: 10px;
 	padding-top: 5px;
@@ -226,82 +217,115 @@ module.exports= {
 	border: 1px solid #d6d6d6;
 }
 
-.fontStyle {
-	background: #e0ecf2;
-    	border-radius: 100%;
-    	font-style: normal;
-    	line-height: 1pc;
-    	width: 2pc;
-    	margin-right: 4px;
-}
-
 .main-header-show {
-    width: 100%;
-    min-width: 1000px;
-    height: 150px;
-    font-family: 微软雅黑;
-    overflow: hidden;
+    	width: 100%;
+    	min-width: 1000px;
+    	height: 150px;
+    	font-family: 微软雅黑;
+    	overflow: hidden;
 }
 
-.main-header-show .col-lg-4 {
-    padding: 0px 5px;
-    background: white;
+@media (min-width: 768px)
+.navbar-nav {
+    	float: left;
+    	margin: 0;
+}
+
+@media (min-width: 768px)
+.navbar {
+    	border-radius: 4px;
+}
+
+.navbar {
+    	position: relative;
+	z-index: 1000;
+    	min-height: 50px;
+}
+
+.nav {
+    	list-style: none;
+}
+
+.cpicStyle {
+    	width:32.6%;
+    	min-width:326px;
+    	display:inline-block;
+    	padding: 0px 0px;
+    	margin: 0px 2px;
+    	background: white;
+}
+
+.piccStyle {
+    	width:32.6%;
+    	min-width:326px;
+    	display:inline-block;
+    	padding: 0px 0px;
+    	margin: 0px 2px;
+    	background: white;	
+}
+
+.gpicStyle {
+    	width:32.6%;
+    	min-width:326px;
+    	display:inline-block;
+    	padding: 0px 0px;
+    	margin: 0px 2px;
+    	background: white;	
 }
 
 .main-header-show ul {
-    padding: 20px 0px 15px;
-    width: 100%;
-    min-width:330px;
-    height: 150px;
-    border: 1px solid #d6d6d6;
-    overflow: hidden;
+    	padding: 20px 0px 15px;
+    	width: 100%;
+    	min-width:326px;
+    	height: 150px;
+    	border: 1px solid #d6d6d6;
+    	overflow: hidden;
 }
 
 .main-header-show ul > li {
-    width: 20%;
-    padding: 0px 5px 0px 6px;
-    border-right: 1px solid #d6d6d6;
+    	padding: 0px 5px 0px 6px;
+    	border-right: 1px solid #d6d6d6;
 }
 
 .main-header-show ul > li:first-child, .main-header-show ul > li:last-child {
-    border: none;
+    	border: none;
 }
 
 .main-header-show ul > li p {
-    color: #999;
+    	color: #999;
 }
 
 .main-header-show ul > li h3 {
-    margin-top: 10px;
-    font-size: 24px;
+    	margin-top: 10px;
+    	font-size: 24px;
 }
 
 .main-header-show ul > li h3 span {
-    border-bottom: 1px dashed #d6d6d6;
-    display: inline-block;
-    padding-bottom: 5px;
+    	border-bottom: 1px dashed #d6d6d6;
+    	display: inline-block;
+    	padding-bottom: 5px;
 }
 
 .main-header-show ul > li h4 {
-    margin: 0px;
-    padding: 0px;
-    font-size: 24px;
+    	margin: 0px;
+    	padding: 0px;
+    	font-size: 24px;
 }
 
 .main-header-show ul > li span.primary {
-    color: #006f90
+    	color: #006f90
 }
 
 .main-header-show ul > li span.success {
-    color: #239423
+    	color: #239423
 }
 
 .main-header-show ul > li span.warning {
-    color: #df8a11
+    	color: #df8a11
 }
 
 .main-header-show ul > li span.danger {
-    color: #d9534f
+    	color: #d9534f
 }
 
 .cpicStyle li{
@@ -318,5 +342,269 @@ module.exports= {
 
 .gpicStyle ul li p {
 	font-size:5pt;
+}
+
+.cpicLi1 {
+	width:19%;
+}
+
+.cpicLi2 {
+	width:26%;
+}
+
+.cpicLi3 {
+	width:20%;
+}
+
+.cpicLi4 {
+	width:15%;
+}
+
+.cpicLi5 {
+	width:18%;
+}
+
+.piccLi1 {
+	width:21%;
+}
+
+.piccLi2 {
+	width:24%;
+}
+
+.piccLi3 {
+	width:19%;
+}
+
+.piccLi4 {
+	width:15%;
+}
+
+.piccLi5 {
+	width:18%;
+}
+
+.gpicLi1 {
+	width:19%;
+}
+
+.gpicLi2 {
+	width:26%;
+}
+
+.gpicLi3 {
+	width:20%;
+}
+
+.gpicLi4 {
+	width:15%;
+}
+
+.gpicLi5 {
+	width:18%;
+}
+
+.cpicImg {
+	margin-left: -6px;
+	margin-top: -10px;
+	text-align: center;
+	vertical-align: middle;
+	height: 120px;
+	background: url("../../lib/image/cpic.png") left no-repeat white;
+	background-size: 100px;
+}
+
+.piccImg {
+	margin-left: -6px;
+	margin-top: -10px;
+	text-align: center;
+	vertical-align: middle;
+	height: 120px;
+	background: url("../../lib/image/picc.png") left no-repeat white;
+	background-size: 100px;
+}
+
+.gpicImg {
+	margin-left: -6px;
+	margin-top: -10px;
+	text-align: center;
+	vertical-align: middle;
+	height: 120px;
+	background: url("../../lib/image/gpic.png") left no-repeat white;
+	background-size: 100px;
+}
+
+@media screen and (max-width: 1640px) {
+    	.main-header-show {
+		    width: 100%;
+		    min-width: 1000px;
+		    height: 150px;
+		    font-family: 微软雅黑;
+		    overflow: hidden;
+	}
+
+	.cpicStyle {
+		width:32.6%;
+		min-width:326px;
+		display:inline-block;
+		padding: 0px 0px;
+		margin: 0px 2px;
+		background: white;
+	}
+
+	.piccStyle {
+		width:32.6%;
+		min-width:326px;
+		display:inline-block;
+		padding: 0px 0px;
+		margin: 0px 2px;
+		background: white;
+	}
+
+	.gpicStyle {
+		width:32.6%;
+		min-width:326px;
+		display:inline-block;
+		padding: 0px 0px;
+		margin: 0px 2px;
+		background: white;
+	}
+
+	.main-header-show ul {
+		padding: 20px 0px 15px;
+		width: 100%;
+		min-width:326px;
+		height: 150px;
+		border: 1px solid #d6d6d6;
+		overflow: hidden;
+	}
+
+	.main-header-show ul > li {
+		padding: 18px 0px 0px 3px;
+		border-right: 1px solid #d6d6d6;
+	}
+
+	.main-header-show ul > li h3 {
+		margin-top: 10px;
+		font-size: 12px;
+	}
+
+	.main-header-show ul > li h3 span {
+		border-bottom: 1px dashed #d6d6d6;
+		display: inline-block;
+		padding-bottom: 5px;
+	}
+
+	.main-header-show ul > li h4 {
+		margin: 0px;
+		padding: 0px;
+		font-size: 12px;
+	}
+
+	.cpicStyle li{
+		padding:5px 0px 5px 0px;
+	}
+
+	.cpicStyle ul li p {
+		font-size:5pt;
+	}
+
+	.piccStyle ul li p {
+		font-size:5pt;
+	}
+
+	.gpicStyle ul li p {
+		font-size:5pt;
+	}
+
+	.cpicLi1{
+		width:19%;
+	}
+
+	.cpicLi2 {
+		width:20%;
+	}
+
+	.cpicLi3 {
+		width:15%;
+	}
+
+	.cpicLi4 {
+		width:21%;
+	}
+
+	.cpicLi5 {
+		width:23%;
+	}
+
+	.piccLi1 {
+		width:19%;
+	}
+
+	.piccLi2 {
+		width:20%;
+	}
+
+	.piccLi3 {
+		width:15%;
+	}
+
+	.piccLi4 {
+		width:21%;
+	}
+
+	.piccLi5 {
+		width:23%;
+	}
+
+	.gpicLi1 {
+		width:19%;
+	}
+
+	.gpicLi2 {
+		width:20%;
+	}
+
+	.gpicLi3 {
+		width:15%;
+	}
+
+	.gpicLi4 {
+		width:21%;
+	}
+
+	.gpicLi5 {
+		width:23%;
+	}
+
+	.cpicImg {
+		margin-left: -15px;
+		margin-top: -24px;
+		text-align: center;
+		vertical-align: middle;
+		height: 120px;
+		background: url("../../lib/image/cpic.png") left no-repeat white;
+		background-size: 90px;
+	}
+
+	.piccImg {
+		margin-left: -7px;
+		margin-top: -24px;
+		text-align: center;
+		vertical-align: middle;
+		height: 120px;
+		background: url("../../lib/image/picc.png") left no-repeat white;
+		background-size: 73px;
+	}
+
+	.gpicImg {
+		margin-left: -15px;
+		margin-top: -24px;
+		text-align: center;
+		vertical-align: middle;
+		height: 120px;
+		background: url("../../lib/image/gpic.png") left no-repeat white;
+		background-size: 90px;
+	}
 }
 </style>

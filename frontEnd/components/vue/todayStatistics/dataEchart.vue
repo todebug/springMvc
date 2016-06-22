@@ -381,7 +381,7 @@ module.exports= {
 				     　　_this.drawEchart(_this.getQueryData());
 			     		count++;
 			     		var myDate = new Date();
-					console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
+					//console.log('npm schedule 第'+count+'次执行,当前时间是:'+myDate.getHours()+':'+myDate.getMinutes());
 				}
 			　　});
   		},
@@ -858,12 +858,12 @@ module.exports= {
 .statisticsData {
 	width: 99%;
 	height: 400px;
-	min-width: 1000px;
+	min-width: 990px;
 }
 .statisticsCalculateData {
 	width: 99%;
 	height: 400px;
-	min-width: 1000px;
+	min-width: 990px;
 }
 
 .calculatePremium {
@@ -871,7 +871,7 @@ module.exports= {
 	display: inline-block;
 	width: 44.5%;
 	height: 400px;
-	min-width: 500px;
+	min-width: 445px;
 }
 
 .submitApplication {
@@ -879,7 +879,7 @@ module.exports= {
 	display: inline-block;
 	width: 44.5%;
 	height: 400px;
-	min-width: 500px;
+	min-width: 445px;
 }
 
 .divHide {
