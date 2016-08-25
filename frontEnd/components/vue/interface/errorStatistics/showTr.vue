@@ -96,7 +96,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 .search-hidden-infor {
     margin-left: -10px;
 }

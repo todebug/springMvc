@@ -155,7 +155,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 .queryBarError {
 	margin: 5px;
 	height: 36px;

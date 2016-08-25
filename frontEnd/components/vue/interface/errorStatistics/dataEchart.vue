@@ -371,7 +371,7 @@ module.exports= {
                         renderChart: function(dataChart,queryData,operate) {
                                      //showLoading
                                     operate.showLoading(dataChart); 
-                                    var url = config.host+'statistic/getErrorInfo';
+                                    var url = config.host+'statistic/addFollowUpInfo';
                                     var result = fetch(url,{
                                           method: 'post',
                                           mode: 'cors',
@@ -393,6 +393,7 @@ module.exports= {
                                     result.then(function(response) {
                                                 return response.json();
                                     }).then(function(j) {
+                                        j = {"reportData":{"gpic":{"timeSpan":[1472101920000,1472105520000],"dataTitle":null,"indicators":{},"items":{},"sumTitle":{"INSURER_ERROR":"保险公司错误","INSIDE_SYSTEM_ERROR":"我司系统错误","ERROR_COUNT":"错误数","USER_OPERATE_ERROR":"用户操作错误","UNKNOWN_ERROR":"未知错误"},"sumItems":{"INSURER_ERROR":[null],"INSIDE_SYSTEM_ERROR":[null],"ERROR_COUNT":[null],"USER_OPERATE_ERROR":[null],"UNKNOWN_ERROR":[null]}},"cpic":{"timeSpan":[1472101920000,1472105520000],"dataTitle":null,"indicators":{"INSURER_ERROR":"保险公司系统错误","NO_RECORD_ERROR":"未查询到结果"},"items":{"INSURER_ERROR":[1],"NO_RECORD_ERROR":[6]},"sumTitle":{"INSURER_ERROR":"保险公司错误","INSIDE_SYSTEM_ERROR":"我司系统错误","ERROR_COUNT":"错误数","USER_OPERATE_ERROR":"用户操作错误","UNKNOWN_ERROR":"未知错误"},"sumItems":{"INSURER_ERROR":[7],"INSIDE_SYSTEM_ERROR":[null],"ERROR_COUNT":[7],"USER_OPERATE_ERROR":[null],"UNKNOWN_ERROR":[null]}},"picc":{"timeSpan":[1472101920000,1472105520000],"dataTitle":null,"indicators":{},"items":{},"sumTitle":{"INSURER_ERROR":"保险公司错误","INSIDE_SYSTEM_ERROR":"我司系统错误","ERROR_COUNT":"错误数","USER_OPERATE_ERROR":"用户操作错误","UNKNOWN_ERROR":"未知错误"},"sumItems":{"INSURER_ERROR":[null],"INSIDE_SYSTEM_ERROR":[null],"ERROR_COUNT":[null],"USER_OPERATE_ERROR":[null],"UNKNOWN_ERROR":[null]}}}};
                                                 //console.log(j);
                                                 //实时设置其他vue数据
                                                 operate.dispatchDataLoad(j);
@@ -586,7 +587,7 @@ var errorOption = {
 };
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 .errorEchart {
         height: 710px;
         min-width: 990px;

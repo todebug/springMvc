@@ -183,11 +183,12 @@ module.exports= {
 		},
 		getProvinces: function() {
 			var _this = this;
-			var url = config.host+'statistic/getProvinces';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+				j = {"provincesInfo":[["110000","北京市"],["120000","天津市"],["130000","河北省"],["140000","山西省"],["150000","内蒙古自治区"],["210000","辽宁省"],["220000","吉林省"],["230000","黑龙江省"],["310000","上海市"],["320000","江苏省"],["330000","浙江省"],["340000","安徽省"],["350000","福建省"],["360000","江西省"],["370000","山东省"],["410000","河南省"],["420000","湖北省"],["430000","湖南省"],["440000","广东省"],["450000","广西壮族自治区"],["460000","海南省"],["500000","重庆市"],["510000","四川省"],["520000","贵州省"],["530000","云南省"],["540000","西藏自治区"],["610000","陕西省"],["620000","甘肃省"],["630000","青海省"],["640000","宁夏回族自治区"],["650000","新疆维吾尔自治区"],["710000","台湾省"],["810000","香港特别行政区"],["820000","澳门特别行政区"]]};
 				if(j.provincesInfo!==null && j.provincesInfo.length != 0){
 					_this.provincesFilter=[];
 			                	$.each(j.provincesInfo, function(i,val){    
@@ -202,11 +203,12 @@ module.exports= {
 		},
 		getInterfaceType: function() {
 			var _this = this;
-			var url = config.host+'statistic/getInterfaceType';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+				j = {"interfaceTypeInfo":[["nonAutoDutyPolicyApply","非车责任险保单提交"],["tempSaveApplication","投保单暂存"],["queryActualPrice","车辆实际价值查询"],["calculatePremium","保费计算"],["noCarPolicyApply","非车险保单提交"],["noCarPolicyQuery","非车险保单查询"],["noCarEpolicyInfoReprint","非车险电子保单补打"],["queryOrderApplication","订单状态查询"],["queryPolicyInfoByVin","按车架号查询保单信息"],["personalPolicyApply","人意险保单提交"],["personalEpolicyInfoReprint","人意险电子保单补打"],["queryBizApplication","商业险投保单查询"],["queryCtpApplication","交强险投保单查询"],["queryApplicationDetail","保单详细查询"],["queryVehicleModel","车型查询"],["queryVehicleModelPF","平台车型查询"],["nonAutoPersonalPolicyApply","非车人意险保单提交"],["printDocument","保单打印"],["vehicleQueryValidation","承保交管车辆查询校验"],["printPayNotice","打印缴款通知书"],["vehicleQueryConfirm","承保交管车辆查询确认"],["submitApplication","保单提交"],["applyPayNo","支付号申请"],["printInvoice","发票打印"],["personalPolicyQuery","人意险保单查询"],["4444","555"],["444","888777"],["88","998"]]};
 				if(j.interfaceTypeInfo!==null && j.interfaceTypeInfo.length != 0){
 					_this.interfaceTypeFilter=[];
 			                	$.each(j.interfaceTypeInfo, function(i,val){    
@@ -245,7 +247,7 @@ module.exports= {
 		},
 		getLogDetailInfo: function(logId) {
 			var _this = this;
-	            	var url = config.host+'statistic/getlogDetail';
+	            	var url = config.host+'statistic/addFollowUpInfo';
 			var result = fetch(url,{
 				method: 'post',
 				mode: 'cors',
@@ -260,6 +262,7 @@ module.exports= {
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+				j = {"res":{"messageId":null,"logid":659951,"serialNo":null,"messageType":null,"content1":"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n\n<response> \n  <head> \n    <partnerCode>SAIC</partnerCode>  \n    <transactionCode>106012</transactionCode>  \n    <messageId>LSVAB2BR8FN148461wsjg8QLz</messageId>  \n    <transactionEffectiveDate>2016-08-25 14:15:22</transactionEffectiveDate>  \n    <responseCompleteMessageStatus> \n      <messageStatusCode>111111</messageStatusCode>  \n      <messageStatusDescriptionList> \n        <messageStatusDescription> \n          <messageStatusSubCode>111111</messageStatusSubCode>  \n          <messageStatusSubDescription>未找到符合条件的保单信息。</messageStatusSubDescription> \n        </messageStatusDescription> \n      </messageStatusDescriptionList>  \n      <messageStatusDescriptionNumber>1</messageStatusDescriptionNumber> \n    </responseCompleteMessageStatus> \n  </head> \n</response>\n","content2":null,"content3":null,"content4":null,"createTime":null},"req":{"messageId":null,"logid":659951,"serialNo":null,"messageType":null,"content1":"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n\n<request> \n  <head> \n    <partnerCode>SAIC</partnerCode>  \n    <transactionCode>106012</transactionCode>  \n    <messageId>LSVAB2BR8FN148461wsjg8QLz</messageId>  \n    <transactionEffectiveDate>2016-08-25 14:15:22</transactionEffectiveDate>  \n    <user>SAIC</user>  \n    <password>UJNR/UNX9u7FiBqfaSRyoEiuOkHWbmbQQbOUOi6vNXn9B+ZeA2Z0INZlMv0DU+zGjI4GgC2UTPOOl/zJGPjpAQ==</password> \n  </head>  \n  <body> \n    <QueryPolicyDetailRequest> \n      <policyNo>AHEFHB1ZH915B005214U</policyNo>  \n      <applicationNo/>  \n      <agentCode>T6M</agentCode> \n    </QueryPolicyDetailRequest> \n  </body> \n</request>\n","content2":null,"content3":null,"content4":null,"createTime":null}};
 				//console.log(JSON.parse(JSON.stringify(j)));
 				_this.show = Object.assign(_this.show, j);
 				_this.$nextTick(function() {
@@ -277,7 +280,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 
 .listDiv {
 	margin-left: 5px;

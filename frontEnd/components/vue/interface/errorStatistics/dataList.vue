@@ -218,11 +218,12 @@ module.exports= {
                         },
 		getProvinces: function() {
 			var _this = this;
-			var url = config.host+'statistic/getProvinces';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+                                                j = {"provincesInfo":[["110000","北京市"],["120000","天津市"],["130000","河北省"],["140000","山西省"],["150000","内蒙古自治区"],["210000","辽宁省"],["220000","吉林省"],["230000","黑龙江省"],["310000","上海市"],["320000","江苏省"],["330000","浙江省"],["340000","安徽省"],["350000","福建省"],["360000","江西省"],["370000","山东省"],["410000","河南省"],["420000","湖北省"],["430000","湖南省"],["440000","广东省"],["450000","广西壮族自治区"],["460000","海南省"],["500000","重庆市"],["510000","四川省"],["520000","贵州省"],["530000","云南省"],["540000","西藏自治区"],["610000","陕西省"],["620000","甘肃省"],["630000","青海省"],["640000","宁夏回族自治区"],["650000","新疆维吾尔自治区"],["710000","台湾省"],["810000","香港特别行政区"],["820000","澳门特别行政区"]]};
 				if(j.provincesInfo!==null && j.provincesInfo.length != 0){
 				_this.provincesFilter=[];
 			                $.each(j.provincesInfo, function(i,val){    
@@ -237,11 +238,12 @@ module.exports= {
 		},
 		getInterfaceType: function() {
 			var _this = this;
-			var url = config.host+'statistic/getInterfaceType';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+                                                j= {"interfaceTypeInfo":[["nonAutoDutyPolicyApply","非车责任险保单提交"],["tempSaveApplication","投保单暂存"],["queryActualPrice","车辆实际价值查询"],["calculatePremium","保费计算"],["noCarPolicyApply","非车险保单提交"],["noCarPolicyQuery","非车险保单查询"],["noCarEpolicyInfoReprint","非车险电子保单补打"],["queryOrderApplication","订单状态查询"],["queryPolicyInfoByVin","按车架号查询保单信息"],["personalPolicyApply","人意险保单提交"],["personalEpolicyInfoReprint","人意险电子保单补打"],["queryBizApplication","商业险投保单查询"],["queryCtpApplication","交强险投保单查询"],["queryApplicationDetail","保单详细查询"],["queryVehicleModel","车型查询"],["queryVehicleModelPF","平台车型查询"],["nonAutoPersonalPolicyApply","非车人意险保单提交"],["printDocument","保单打印"],["vehicleQueryValidation","承保交管车辆查询校验"],["printPayNotice","打印缴款通知书"],["vehicleQueryConfirm","承保交管车辆查询确认"],["submitApplication","保单提交"],["applyPayNo","支付号申请"],["printInvoice","发票打印"],["personalPolicyQuery","人意险保单查询"],["4444","555"],["444","888777"],["88","998"]]};
 				if(j.interfaceTypeInfo!==null && j.interfaceTypeInfo.length != 0){
 				_this.interfaceTypeFilter=[];
 			                $.each(j.interfaceTypeInfo, function(i,val){    
@@ -256,11 +258,12 @@ module.exports= {
 		},
 		getErrorType: function() {
 			var _this = this;
-			var url = config.host+'statistic/getErrorType';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+                                                j = {"errorType":[["ACTUAL_DISCOUNT_ERROR","实际折扣率错误"],["AGENT_ERROR","代理点错误"],["AGREEMENT_CONFIG_ERROR","协议配置错误"],["BILL_ERROR","单证错误"],["FUNCTION_ERROR","出单权限错误"],["HANDLER_ERROR","经办人配置错误"],["INSIDE_SYSTEM_ERROR","我司系统错误"],["INSURER_ERROR","保险公司系统错误"],["ORG_CONFIG_ERROR","归属机构配置错误"],["PAYINFO_ERROR","支付信息错误"],["PERSONAL_ERROR","投被保人错误"],["POLICY_PERIOD_ERROR","保险期限错误"],["POLICY_STATUS_ERROR","保单状态错误"],["REPEAT_INSURANCE","重复投保"],["SPECIAL_TEXT_ERROR","特约错误"],["SUM_INSURED_ERROR","保额错误"],["TRAVEL_TAX_ERROR","车船税错误"],["VEHICLE_ERROR","车辆信息错误"],["VEHICLE_MODELS_ERROR ","车型错误"],["NO_RECORD_ERROR","未查询到结果"],["TRANSFER_QUESTION_ERROR","转保问卷错误"],["PRODUCT_CONFIG_ERROR","产品配置错误"],["TERMINAL_NO_ERROR","终端号无效"],["VEHICLE_OWNER_ERROR","车主信息错误"],["RISK_ERROR","子险错误"],["QUERY_CONDITION_ERROR","查询条件错误"],["CHECK_CODE_ERROR","校验码错误"],["CONNECT_ERROR","接口连接错误"],["PLATFORM_ERROR","行业平台系统错误"],["UNKNOWN","未知错误"],["999","999"],["00","001"],["UNKNOWN_ERROR1","未知错误1"]]};
 				if(j.errorType!==null && j.errorType.length != 0){
 					_this.errorTypeFilter=[];
 				            $.each(j.errorType, function(i,val){    
@@ -275,11 +278,12 @@ module.exports= {
 		},
 		getErrorSource: function() {
 			var _this = this;
-			var url = config.host+'statistic/getErrorSource';
+			var url = config.host+'statistic/get';
 			var result = fetch(url,{method: 'get',mode: 'cors',});
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+                                                j = {"errorSource":[["INSIDE_SYSTEM_ERROR","我司系统错误"],["INSURER_ERROR","保险公司错误"],["USER_OPERATE_ERROR","用户操作错误"],["UNKNOWN_ERROR","未知错误"],["88uu","uu88"],["UNKNOWN_ERROR1","未知错误adsf1"]]};
 				if(j.errorSource!==null && j.errorSource.length != 0){
 					_this.errorSourceFilter=[];
 				            $.each(j.errorSource, function(i,val){    
@@ -359,7 +363,7 @@ module.exports= {
 	            getDataList: function(queryData) {
 	            	this.judgePageForQueryData(queryData);
 	            	var _this = this;
-	            	var url = config.host+'statistic/getErrorInfoDetail';
+	            	var url = config.host+'statistic/addFollowUpInfo';
 			var result = fetch(url,{
 				method: 'post',
 				mode: 'cors',
@@ -383,6 +387,7 @@ module.exports= {
 			result.then(function(response) {
 				return response.json();
 			}).then(function(j) {
+                                                j = {"reportDetailData":{"columnNames":[["insurer","保险公司"],["period","时间"],["interfaceType","交易类型"],["province","承保地区"],["errorSource","错误来源"],["errorType","错误类型"],["errorCount","错误数"],["errorDesc","错误信息"]],"items":{"total":6,"content":[["cpic","2016/08/25 13:56","queryApplicationDetail","340000","INSURER_ERROR","NO_RECORD_ERROR",1,"没有查询到相应的数据"],["cpic","2016/08/25 13:58","queryApplicationDetail","340000","INSURER_ERROR","NO_RECORD_ERROR",3,"没有查询到相应的数据"],["cpic","2016/08/25 14:06","queryApplicationDetail","340000","INSURER_ERROR","INSURER_ERROR",1,"调用后端服务超时"],["cpic","2016/08/25 14:06","queryApplicationDetail","340000","INSURER_ERROR","NO_RECORD_ERROR",1,"没有查询到相应的数据"],["cpic","2016/08/25 14:08","queryApplicationDetail","340000","INSURER_ERROR","NO_RECORD_ERROR",1,"没有查询到相应的数据"],["cpic","2016/08/25 14:14","queryApplicationDetail","340000","INSURER_ERROR","NO_RECORD_ERROR",1,"没有查询到相应的数据"]],"pageNumber":0,"pageSize":1,"totalPage":0}}};
 				//console.log(JSON.parse(JSON.stringify(j)));
 				_this.errorInfo = Object.assign(_this.errorInfo, j);
 				//分页赋值处理
@@ -437,7 +442,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 .spanFloatDiv {
 	display: block;
 	color: #428bca;

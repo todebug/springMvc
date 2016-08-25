@@ -163,7 +163,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 .headBar {
 	margin: 5px;
 	height: 34px;

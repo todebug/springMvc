@@ -80,7 +80,7 @@ module.exports= {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css" >
 
 .dataUl {
 	min-width: 1000px;
