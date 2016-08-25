@@ -20,32 +20,15 @@ import java.util.List;
 public class DataInteractionController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // http://localhost:8080/statistic/getStatistic/1000
-    /**
-     * @title
-     * @description
-     * @author dongyang
-     * @Date 2016-05-25
-     * @param statisticMo
-     * @return StatisticMo
-     * @throws Exception
-     */
-//    @RequestMapping(value = "/getStatistic",method = RequestMethod.POST)
-//    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
-//        StatisticMo statistic = new StatisticMo();
-//        statistic.setStartDate(new Date());
-//        System.out.println(statisticMo);
-//        System.out.println("2222");
-//        return statistic;
-//    }
-//    @RequestMapping(value = "/getStatisticDetail",method = RequestMethod.POST)
-//    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
-//        StatisticMo statistic = new StatisticMo();
-//        statistic.setStartDate(new Date());
-//        System.out.println(statisticMo);
-//        System.out.println("2222");
-//        return statistic;
-//    }
+    @RequestMapping(
+            value  = "/get",
+            method = RequestMethod.GET
+    )
+    public @ResponseBody StatisticMo addFollowUpInfo() {
+        StatisticMo statistic = new StatisticMo();
+
+        return statistic;
+    }
     /**
      * @title  
      * @description 
