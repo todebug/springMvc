@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     shell = require('gulp-shell'),
-    uglify = require('gulp-uglify'),
+    //uglify = require('gulp-uglify'),
     cleanCss = require('gulp-clean-css'),
     copy = require('gulp-contrib-copy');
 var sourceFileLib = './components/lib/**/*';
@@ -29,15 +29,6 @@ gulp.task('setProdConfig', ['begin'], function() {
 gulp.task('webpack', ['setProdConfig'], shell.task([
     'webpack -p'
 ]));
-
-//压缩vueJS  实际貌似没有webpack -p压缩力度大,故先注释,待测试
-// gulp.task('minify', ['webpack'], function() {
-//     gulp
-//         .src('dist/router.js')
-//         .pipe(uglify())
-//         .pipe(gulp.dest('dist'))
-// });
-
 
 //copy文件 index.html
 gulp.task('copyFileHtml', ['webpack'], function() {

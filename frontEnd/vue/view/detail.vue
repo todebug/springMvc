@@ -1,49 +1,30 @@
 <template>
 <div id="detail">
         <aside class="sideBar">
-            <div class="profile-picture">
-            </div>
+             <div class="fullScreenTarget">
+                <a @click="fullScreen">全屏</a>
+            </div> 
             <div class="profile-bar">
                 <ul id="switchToggle" >
-                        <li style="display:none">
-                                <a id="analyTrend" @click="switchToggleTrendChild" class="plus">趋势分析</a>
-                                <ul id="analyTrendChild" class="displayClosed">
-                                        <li>
-                                            <a v-link="{ path: '/index' }">
-                                                    数据分析
-                                                </a>
-                                        </li>
-                                        <li>
-                                            <a v-link="{ path: '/user' }">
-                                                    用户分析
-                                                </a>
-                                        </li>
-                                </ul>
-                        </li>
                         <li>
-                                <a id="analyData" @click="switchToggleDataChild" class="minus">对接平台</a>
-                                <ul id="analyDataChild" class="displayOpen">
+                                    <a id="interface" @click="switchToggle" class="minus">保险对接平台</a>
+                                    <ul id="interfaceChild" class="displayOpen">
                                         <li class="active">
-                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
-                                                    交易统计及时效
-                                                </a>
-                                        </li>
-                                        <li>
-                                            <a v-link="{ path: '/errorStatistics' }" @click="choose">
+                                                <a v-link="{ path: '/errorStatistics' }" @click="choose">
                                                     错误统计
                                                 </a>
                                         </li>
                                         <li>
-                                            <a v-link="{ path: '/todayStatistics' }" @click="choose">
+                                                <a v-link="{ path: '/interfaceLog' }" @click="choose">
                                                     日志查询
                                                 </a>
                                         </li>
-                                </ul>
+                                    </ul>
                         </li>
                 </ul>
             </div>
         </aside>
-        <section class="main">
+        <section class="main" id="main">
             <router-view>
             </router-view>
         </section>
@@ -53,34 +34,44 @@
 <script>
 'use strict';
 module.exports = {
-    ready: function(){
-        //初始化事件
-        this.choose();
+    ready: function() {
+            //初始化事件
+            this.cancelFullScreen();
     },
     methods: {
-        choose: function() {
-            $('#switchToggle li ul li').click(function(){
-                $('#switchToggle li ul li').removeClass('active');
-                $(this).addClass('active');
-            })
-        },
-        switchToggleTrendChild: function() {
-                $('#analyTrendChild').toggle();
-                if($('#analyTrend').hasClass('minus')){
-                    $('#analyTrend').removeClass('minus').addClass('plus');
-                }else{
-                    $('#analyTrend').removeClass('plus').addClass('minus');
-                }
-                
-        },
-        switchToggleDataChild: function() {
-                  $('#analyDataChild').toggle();
-                  if($('#analyData').hasClass('minus')){
-                    $('#analyData').removeClass('minus').addClass('plus');
-                }else{
-                    $('#analyData').removeClass('plus').addClass('minus');
-                }
-        }
+            cancelFullScreen: function() {
+                    $( document ).bind('webkitfullscreenchange',function(){
+                        $('#main').toggleClass('fullscreen');
+                    });
+            },
+            fullScreen: function() {
+                    var elem = document.getElementById("main");
+                    if (elem.webkitRequestFullScreen) {
+                        elem.webkitRequestFullScreen();
+                    }              
+            },
+            choose: function(event) {
+                    $('#switchToggle li ul li').removeClass('active');
+                    $(event.target.parentNode).addClass('active');
+            },
+            displayOpenOrClosed: function(childId) {
+                    if($('#'+childId).hasClass('displayClosed')){
+                        $('#'+childId).removeClass('displayClosed').addClass('displayOpen');
+                    }else{
+                        $('#'+childId).removeClass('displayOpen').addClass('displayClosed');
+                    }
+            },
+            showMinusOrPlus: function(id) {
+                    if($('#'+id).hasClass('minus')){
+                        $('#'+id).removeClass('minus').addClass('plus');
+                    }else{
+                        $('#'+id).removeClass('plus').addClass('minus');
+                    } 
+            },
+            switchToggle: function(event) {
+                    this.showMinusOrPlus(event.target.id);
+                    this.displayOpenOrClosed(event.target.nextElementSibling.id);
+            }
     }
 }
 </script>
@@ -101,32 +92,31 @@ aside {
     border-radius: 5px;
 }
 
-.profile-picture {
-    background: white;
+.fullScreenTarget a {
     position: fixed;
-    left: 0;
     width: 180px;
     text-align: center;
-    bottom: 0;
-    top: 70px;
-    height: 200px;
-    background: url('../../components/lib/image/man.jpg') center no-repeat white;
-    background-position: 50 50;
-    background-size: 75px;
-    border: 0;
-    margin-left: 10px;
+    top: 40px;
+    left: 90%;
     vertical-align: middle;
+    z-index: 100;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 微软雅黑;
+    font-weight: blod;
+    color: #ffffff;
+    font-size: 12px;
 }
 
 .profile-bar {
     display: block;
-    padding: 50px 10px 30px 10px;
+    padding: 10px 10px 30px 10px;
     margin-left: 15px;
     position: fixed;
     left: 0;
     width: 180px;
     bottom: 0;
-    top: 200px;
+    top: 70px;
     background: #f8fbfa;
     border-radius: 5px;
 }
@@ -138,6 +128,7 @@ aside {
     text-decoration: none;
     font-size: 16px;
     width:180px;
+    line-height: 32px;
 }
 
 .profile-bar li a {
@@ -217,15 +208,17 @@ section {
 .plus {  
         background: url('../../components/lib/image/plus.png') center no-repeat #f8fbfa;
         background-size: 10px;
-        background-position: 90;
-        width: 100px;
+        background-position: 120px;
+        width: 150px;
 }
 
 .minus {
         background: url('../../components/lib/image/minus.png') center no-repeat #f8fbfa;
         background-size: 10px;
-        background-position: 90;
-        width: 100px;
+        background-position: 120px;
+        width: 150px;
 }
+
+section.fullscreen    { left: 0px; top:0px;}
 
 </style>

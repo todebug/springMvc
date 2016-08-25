@@ -30,22 +30,22 @@ public class DataInteractionController {
      * @return StatisticMo
      * @throws Exception
      */
-    @RequestMapping(value = "/getStatistic",method = RequestMethod.POST)
-    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
-        StatisticMo statistic = new StatisticMo();
-        statistic.setStartDate(new Date());
-        System.out.println(statisticMo);
-        System.out.println("2222");
-        return statistic;
-    }
-    @RequestMapping(value = "/getStatisticDetail",method = RequestMethod.POST)
-    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
-        StatisticMo statistic = new StatisticMo();
-        statistic.setStartDate(new Date());
-        System.out.println(statisticMo);
-        System.out.println("2222");
-        return statistic;
-    }
+//    @RequestMapping(value = "/getStatistic",method = RequestMethod.POST)
+//    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
+//        StatisticMo statistic = new StatisticMo();
+//        statistic.setStartDate(new Date());
+//        System.out.println(statisticMo);
+//        System.out.println("2222");
+//        return statistic;
+//    }
+//    @RequestMapping(value = "/getStatisticDetail",method = RequestMethod.POST)
+//    public @ResponseBody StatisticMo getCustomerInfo(@RequestBody StatisticMo statisticMo) throws Exception {
+//        StatisticMo statistic = new StatisticMo();
+//        statistic.setStartDate(new Date());
+//        System.out.println(statisticMo);
+//        System.out.println("2222");
+//        return statistic;
+//    }
     /**
      * @title  
      * @description 
