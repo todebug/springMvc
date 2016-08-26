@@ -13,7 +13,11 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.vue$/,
-            loader: "vue"
+            loader: vue.withLoaders({
+                // apply babel transform to all javascript
+                // inside *.vue files.
+                js: 'babel?optional[]=runtime&loose=all'
+            })
         }, {
             test: /\.css$/,
             loader: "style!css"

@@ -20,8 +20,8 @@ module.exports= {
         }, 
 	methods: {
                     initQueryData: function(){
-                            isHide=true;
-                    }
+                            this.isHide=true;
+                    },
 	},
 	events: {
 		'broadcast-loading-show': function(show) {
@@ -29,8 +29,8 @@ module.exports= {
 		},
 		'broadcast-loading-hide': function(hide) {
 			this.isHide=true;
-		}
-	}
+		},
+	},
 }
 </script>
 
@@ -38,10 +38,6 @@ module.exports= {
 .displayDivHide {
 	display: none;
 }
-/**
- * 自定义组件
- * 等待加载框 loading
- */
 .ui-loading-backdrop {
     display: block;
     width: 100%;
@@ -73,6 +69,6 @@ module.exports= {
 .ui-loading-text {
     padding: 0;
     margin: 0;
-    font-size: 14px
+    font-size: 14px;
 }
 </style>
