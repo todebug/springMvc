@@ -27,7 +27,7 @@ gulp.task('setProdConfig', ['begin'], function() {
 
 //vue打包处理
 gulp.task('webpack', ['setProdConfig'], shell.task([
-    'webpack -p'
+    'webpack --progress --hide-modules'
 ]));
 
 //copy文件 index.html
